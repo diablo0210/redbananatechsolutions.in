@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Red Banana Tech Solutions</title>
+<meta name="description" content="A New Delhi museum-technology studio: offline-first engineering, adversarial testing, bilingual by construction, standing by the install after opening day.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="Red Banana Tech Solutions — home">
+      <svg viewBox="-6 -8 164 148" aria-hidden="true">
+        <g fill="#e2422e">
+          <rect x="28" y="0"  width="15" height="15"/>
+          <rect x="12" y="14" width="15" height="15" fill="#c2362a"/>
+          <rect x="2"  y="30" width="15" height="15"/>
+          <rect x="0"  y="48" width="15" height="15" fill="#a92f21"/>
+          <rect x="2"  y="66" width="15" height="15"/>
+          <rect x="10" y="83" width="15" height="15" fill="#c2362a"/>
+          <rect x="24" y="97" width="15" height="15"/>
+          <rect x="41" y="107" width="15" height="15" fill="#a92f21"/>
+          <rect x="59" y="112" width="15" height="15"/>
+          <rect x="77" y="110" width="15" height="15" fill="#c2362a"/>
+          <rect x="94" y="102" width="15" height="15"/>
+          <rect x="108" y="89" width="15" height="15" fill="#a92f21"/>
+          <rect x="44" y="90" width="15" height="15" fill="#7a1f16"/>
+          <rect x="62" y="94" width="15" height="15" fill="#7a1f16"/>
+        </g>
+        <g fill="#e2422e">
+          <rect x="124" y="80" width="17" height="21" rx="2"/>
+          <rect x="141" y="83.5" width="11" height="4.5"/>
+          <rect x="141" y="92.5" width="11" height="4.5"/>
+        </g>
+      </svg>
+      <span><b>RED BANANA</b><span>TECH SOLUTIONS PVT. LTD.</span></span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="capabilities.html">Capabilities</a>
+      <a href="work.html">On View</a>
+      <a href="about.html" class="here">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap page-head">
+    <p class="eyebrow">About</p>
+    <h1>Technology that<br><em>disappears into the visit.</em></h1>
+    <p class="lede">A museum-technology studio based in New Delhi, building for
+    the realities of Indian public galleries.</p>
+  </div>
+
+  <section class="first">
+    <div class="wrap prose reveal">
+      <p class="statement"><span class="drop">The concept should explain the
+      form.</span> Every screen, sound and interaction we build exists to carry
+      the exhibition's idea — never to perform beside it.</p>
+
+      <h3>What we believe</h3>
+      <p>Most museum technology fails quietly: a frozen screen nobody restarts,
+      a speaker that died in week two, a "coming soon" that never comes. The
+      visitor doesn't file a complaint — they just stop trusting the room. So
+      we optimise for the thing nobody sees: <b>the ten-thousandth visitor's
+      experience being identical to the first's.</b></p>
+
+      <h3>How we are different</h3>
+      <ul>
+        <li><b>Offline is the architecture, not a fallback.</b> Galleries lose
+        internet, or never had it. Our apps ship with everything embedded and
+        treat the network as a stranger.</li>
+        <li><b>Testing is adversarial.</b> We plant deliberate failures to prove
+        our checks can say no. A test that cannot fail is decoration.</li>
+        <li><b>Bilingual by construction.</b> Hindi is not a translation pass at
+        the end; both languages are first-class from the first commit.</li>
+        <li><b>We stay after opening day.</b> Install, hardening, monitoring and
+        honest reporting are part of the work, not an upsell.</li>
+      </ul>
+
+      <h3>Where we work</h3>
+      <p>Based in <b>New Delhi</b>, registered in Ajmer, Rajasthan, and built
+      around India's cultural sector: ministries, foundations, private museums
+      and the studios that design for them. Our engineering sits comfortably
+      beside curators and exhibition designers — we speak both languages.</p>
+
+      <h3>The name</h3>
+      <p>Yes, red bananas are real — rarer, tougher-skinned and sweeter than
+      the yellow kind. It fit.</p>
+    </div>
+  </section>
+</main>
+<footer id="contact-cta">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2>Planning a gallery?<br><em>Bring us the hard part.</em></h2>
+        <div class="cta-row" style="margin-top:26px">
+          <a class="btn btn-red" href="mailto:redbananatechsolutions@gmail.com">Write to us</a>
+          <a class="btn btn-ghost" href="contact.html">How to brief us</a>
+        </div>
+      </div>
+      <div class="foot-meta">
+        RED BANANA TECH SOLUTIONS PVT. LTD.<br>
+        Based in New Delhi · Registered office: Ajmer, Rajasthan<br>
+        <a href="mailto:redbananatechsolutions@gmail.com">redbananatechsolutions@gmail.com</a><br><br>
+        REPLICAS · Red Banana Replicas
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Red Banana Tech Solutions Pvt. Ltd.</span>
+      <span>GSTIN 08AANCR8198J1ZE</span>
+    </div>
+  </div>
+</footer>
+<script>
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
