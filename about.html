@@ -5,10 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — Red Banana Tech Solutions</title>
 <meta name="description" content="A New Delhi museum-technology studio: offline-first engineering, adversarial testing, bilingual by construction, standing by the install after opening day.">
+<link rel="canonical" href="https://redbananatechsolutions.in/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Red Banana Tech Solutions">
+<meta property="og:title" content="About — Red Banana Tech Solutions">
+<meta property="og:description" content="A New Delhi museum-technology studio built around offline-first engineering, adversarial testing and long-term support.">
+<meta property="og:url" content="https://redbananatechsolutions.in/about.html">
+<meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="/privacy-analytics.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <header>
   <div class="wrap bar">
     <a class="brand" href="index.html" aria-label="Red Banana Tech Solutions — home">
@@ -40,12 +49,12 @@
     <nav aria-label="Sections">
       <a href="capabilities.html">Capabilities</a>
       <a href="work.html">On View</a>
-      <a href="about.html" class="here">About</a>
+      <a href="about.html" class="here" aria-current="page">About</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
-<main>
+<main id="main-content">
   <div class="wrap page-head">
     <p class="eyebrow">About</p>
     <h1>Technology that<br><em>disappears into the visit.</em></h1>
@@ -110,15 +119,20 @@
     </div>
     <div class="legal">
       <span>© 2026 Red Banana Tech Solutions Pvt. Ltd.</span>
-      <span>GSTIN 08AANCR8198J1ZE</span>
+      <span>GSTIN 08AANCR8198J1ZE · <a href="privacy.html">Privacy</a></span>
     </div>
   </div>
 </footer>
 <script>
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
 </script>
 </body>
 </html>

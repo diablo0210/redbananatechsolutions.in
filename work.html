@@ -5,10 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On View — Red Banana Tech Solutions</title>
 <meta name="description" content="Live museum-technology work: the six interactive stations of Handloom Haat, Janpath; Sewri Fort Museum; and Red Banana Replicas.">
+<link rel="canonical" href="https://redbananatechsolutions.in/work.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Red Banana Tech Solutions">
+<meta property="og:title" content="On View — Red Banana Tech Solutions">
+<meta property="og:description" content="Museum technology running in public: Handloom Haat interactive galleries, Sewri Fort Museum and Red Banana Replicas.">
+<meta property="og:url" content="https://redbananatechsolutions.in/work.html">
+<meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="/privacy-analytics.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <header>
   <div class="wrap bar">
     <a class="brand" href="index.html" aria-label="Red Banana Tech Solutions — home">
@@ -39,13 +48,13 @@
     </a>
     <nav aria-label="Sections">
       <a href="capabilities.html">Capabilities</a>
-      <a href="work.html" class="here">On View</a>
+      <a href="work.html" class="here" aria-current="page">On View</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
-<main>
+<main id="main-content">
   <div class="wrap page-head">
     <p class="eyebrow">On view now</p>
     <h1>Work in the wild,<br><em>running today.</em></h1>
@@ -84,7 +93,9 @@
 
       <div class="table-scroll reveal">
         <table class="stations">
-          <tr><th>Station</th><th>Panel</th><th>What a visitor does</th></tr>
+          <caption>Six interactive stations at Handloom Haat</caption>
+          <thead><tr><th scope="col">Station</th><th scope="col">Panel</th><th scope="col">What a visitor does</th></tr></thead>
+          <tbody>
           <tr><td>The Handloom Quiz</td><td>32" touch</td>
               <td>An adaptive ten-question quiz that climbs in difficulty as you
               answer, weaves live cloth beside every question, and sets your
@@ -104,6 +115,7 @@
           <tr><td>Sounds of the Loom</td><td>22" portrait</td>
               <td>The rhythms of weaving — a listening room for the loom
               itself.</td></tr>
+          </tbody>
         </table>
       </div>
 
@@ -182,15 +194,20 @@
     </div>
     <div class="legal">
       <span>© 2026 Red Banana Tech Solutions Pvt. Ltd.</span>
-      <span>GSTIN 08AANCR8198J1ZE</span>
+      <span>GSTIN 08AANCR8198J1ZE · <a href="privacy.html">Privacy</a></span>
     </div>
   </div>
 </footer>
 <script>
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
 </script>
 </body>
 </html>

@@ -5,10 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact — Red Banana Tech Solutions</title>
 <meta name="description" content="Commission Red Banana Tech Solutions: gallery builds, kiosks, AV, archives and replicas. Based in New Delhi, on site anywhere in India.">
+<link rel="canonical" href="https://redbananatechsolutions.in/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Red Banana Tech Solutions">
+<meta property="og:title" content="Contact — Red Banana Tech Solutions">
+<meta property="og:description" content="Commission Red Banana for gallery builds, kiosks, immersive AV, digital archives, replicas and installation support across India.">
+<meta property="og:url" content="https://redbananatechsolutions.in/contact.html">
+<meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="/privacy-analytics.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <header>
   <div class="wrap bar">
     <a class="brand" href="index.html" aria-label="Red Banana Tech Solutions — home">
@@ -41,11 +50,11 @@
       <a href="capabilities.html">Capabilities</a>
       <a href="work.html">On View</a>
       <a href="about.html">About</a>
-      <a href="contact.html" class="here">Contact</a>
+      <a href="contact.html" class="here" aria-current="page">Contact</a>
     </nav>
   </div>
 </header>
-<main>
+<main id="main-content">
   <div class="wrap page-head">
     <p class="eyebrow">Contact</p>
     <h1>Commission us.<br><em>Or just ask.</em></h1>
@@ -100,15 +109,20 @@
     </div>
     <div class="legal">
       <span>© 2026 Red Banana Tech Solutions Pvt. Ltd.</span>
-      <span>GSTIN 08AANCR8198J1ZE</span>
+      <span>GSTIN 08AANCR8198J1ZE · <a href="privacy.html">Privacy</a></span>
     </div>
   </div>
 </footer>
 <script>
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
 </script>
 </body>
 </html>
