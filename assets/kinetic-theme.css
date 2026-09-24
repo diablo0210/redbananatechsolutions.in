@@ -1,0 +1,120 @@
+/*
+ * kinetic-theme.css — Wave 2 kinetic retheme, shared chrome layer.
+ * Written by the INTEGRATOR merging the approved hero prototype
+ * ("The Walk-Through", v2-kinetic/redbanana/hero-prototype/DIRECTION.md)
+ * into this tree. Loaded AFTER styles.css, lit-plan.css and
+ * sheet-pages.css on every page (index.html included, for the chrome
+ * outside the hero itself) so it only needs to override the custom
+ * property values those files already consume — not rewrite their layout
+ * rules. This is deliberate: the integrator's job is to make interior
+ * pages share the hero's nav, fonts, palette and footer, not to redesign
+ * their bodies (LANE-BOARD.md; builders own the body content).
+ *
+ * Palette and fonts match the hero exactly (assets/hero.css :root and
+ * DIRECTION.md's measured contrast table):
+ *   --sheet / --plan   -> dark ground (was cream / navy)
+ *   --ink / --ink-on-plan -> light ink on dark ground (was near-black)
+ *   --live / --live-ink -> brand vermilion #e2422e, unchanged hue — it was
+ *     already the site's accent before this rebuild, so identity carries
+ *     over; --live-ink no longer needs a deeper variant because #e2422e
+ *     itself measures 4.82:1 on the new dark ground (DIRECTION.md
+ *     Revision 2), clearing 4.5:1 directly, where before it only cleared
+ *     3.8:1 on the light sheet and needed a darker stand-in for text use.
+ *   --rule / --grid    -> dark hairlines instead of light ones
+ *   --display / --body / --mono -> Bricolage Grotesque / Familjen Grotesk
+ *     / IBM Plex Mono, self-hosted, per v2-kinetic/TYPOGRAPHY.md's ruling
+ *     for this site (Unbounded explicitly rejected there).
+ */
+
+/* ---------- fonts: identical @font-face block to assets/hero.css, so a
+   page that loads only this file (every interior page) still gets real
+   type instead of a fallback. Browsers de-duplicate an identical
+   @font-face declared twice, so this is not a double-download on
+   index.html, which loads both files. ---------- */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url("fonts/redbanana/bricolage-grotesque-var.woff2") format("woff2-variations"),
+       url("fonts/redbanana/bricolage-grotesque-var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Familjen Grotesk";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/redbanana/familjen-grotesk-var.woff2") format("woff2-variations"),
+       url("fonts/redbanana/familjen-grotesk-var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/redbanana/ibm-plex-mono-500.woff2") format("woff2");
+}
+
+:root {
+  /* interior "sheet" ground + footer/header "plan" ground: both dark now,
+     same near-black as the hero's --bg, so there is no seam at the point
+     where the hero's canvas hands off to the Capabilities section below
+     it and no seam between pages. */
+  --sheet: #0d0f13;
+  --plan: #07080b;
+  --grid: rgba(244, 245, 247, 0.12);
+
+  --ink: #f4f5f7;
+  --ink-on-plan: #f4f5f7;
+  --ink-muted: #a9aebb;
+
+  --live: #e2422e;
+  --live-ink: #e2422e;
+
+  --rule: #232830;
+
+  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body: "Familjen Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* styles.css predates lit-plan.css (it is the original "gallery after
+     dark" wood theme) and several of its selectors — notably the footer's
+     .foot-meta/.legal text, borders and links — were never re-pointed at
+     lit-plan.css's tokens, so they still resolve against styles.css's own
+     :root. Retoned here to the same near-black/vermilion pair rather than
+     the old warm-wood palette, so the footer (shared verbatim across all
+     seven pages) matches the hero instead of sitting in a third colour
+     scheme of its own. --red / --red-deep were already #e2422e / #a92f21
+     — this site's accent has been vermilion since before this rebuild. */
+  --wall: #07080b;
+  --wall-2: #0d0f13;
+  --wall-3: #121419;
+  --light: #f4f5f7;
+  --dim: #a9aebb;
+  --faint: #6b707c;
+  --hairline: #232830;
+  --red: #e2422e;
+  --red-deep: #e2422e;
+  --serif: var(--body);
+  --sans: var(--display);
+
+  color-scheme: dark;
+}
+
+/* lit-plan.css sets header.sheet-bar's default (pre-scroll) text colour to
+   var(--ink-on-plan) and its .scrolled state to var(--ink) on var(--sheet)
+   — both now resolve to the same dark-ground/light-ink pair, so the header
+   reads correctly transparent-then-solid on index.html and permanently
+   solid on interior pages (sheet-pages.css's own header.sheet-bar rule),
+   with no rule in this file needed beyond the token flip above. */
+
+/* Selection colour: was tuned for light sheets (--live-ink text on
+   --sheet); on a dark ground the inverse reads correctly. */
+::selection { background: var(--live); color: var(--sheet); }
+
+/* lit-plan.css declares `html { background:var(--sheet); color-scheme:light; }`
+   directly on the html element. The :root token flip above already wins
+   on specificity ((0,1,0) beats (0,0,1)), but stated explicitly here too
+   so a reader doesn't have to reason about specificity to trust it. */
+html { color-scheme: dark; }

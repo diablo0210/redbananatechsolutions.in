@@ -1,0 +1,166 @@
+/*!
+ * motion.css: companion styles for motion.js
+ * Only the structural CSS each primitive needs to function. Site-level
+ * theming (colours, fonts) stays out of this file on purpose: the house
+ * motion LANGUAGE lives here, the house VISUAL identity lives per-site.
+ */
+
+/* ---------------------------------------------------------------------- */
+/* 0. Base: every animated primitive assumes transform/opacity only        */
+/* ---------------------------------------------------------------------- */
+
+[data-motion-env] {
+  /* marker attribute only, no rule needed: see motion.js state.dev */
+}
+
+/* ---------------------------------------------------------------------- */
+/* 1. revealText / revealOnScroll                                          */
+/* ---------------------------------------------------------------------- */
+
+/* SplitType inserts inline-block spans; keep them from breaking layout
+   mid-word and give the browser a GPU-friendly compositing hint only while
+   the element actually has a transform applied (see motion.js will-change
+   hygiene: this class is a fallback for non-JS contexts, not a permanent
+   will-change: it is intentionally omitted here). */
+.motion-split .char,
+.motion-split .word,
+.motion-split .line {
+  display: inline-block;
+}
+
+/* A word wrapper must not let its own characters wrap onto separate lines:
+   the word breaks against other words, never internally. */
+.motion-split .word {
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 2. marquee                                                              */
+/* ---------------------------------------------------------------------- */
+
+.motion-marquee-live {
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
+
+.motion-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform; /* the marquee runs continuously while mounted;
+                              this is the one primitive where will-change
+                              legitimately stays on for its lifetime */
+}
+
+.motion-marquee-static {
+  display: block;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 3. counter                                                              */
+/* ---------------------------------------------------------------------- */
+
+.motion-counter {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 4. cursor                                                               */
+/* ---------------------------------------------------------------------- */
+
+.motion-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: var(--motion-cursor-color, currentColor);
+  mix-blend-mode: var(--motion-cursor-blend, difference);
+  pointer-events: none; /* never blocks a click, by construction */
+  z-index: 2147483647;
+  will-change: transform;
+}
+
+/* Only hides the native cursor once JS has successfully initialised the
+   custom one (class is added by cursor() after init, never in markup): a
+   script failure leaves the OS cursor intact rather than invisible. */
+html.motion-cursor-active,
+html.motion-cursor-active * {
+  cursor: none !important;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 5. glow                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.motion-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.motion-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    480px circle at var(--motion-glow-x, 50%) var(--motion-glow-y, 50%),
+    var(--motion-glow-color, rgba(255, 255, 255, 0.14)),
+    transparent 70%
+  );
+  opacity: var(--motion-glow-opacity, 1);
+}
+
+.motion-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 6. grain                                                                 */
+/* ---------------------------------------------------------------------- */
+
+canvas[data-motion-grain] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 7. tilt                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.motion-tilt {
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transform: perspective(800px);
+  will-change: auto; /* motion.js sets/clears will-change per interaction */
+}
+
+/* ---------------------------------------------------------------------- */
+/* 8. Reduced-motion global safety                                         */
+/* ---------------------------------------------------------------------- */
+
+/* Belt-and-suspenders CSS-only net: if motion.js never runs at all (script
+   blocked, CSP, JS disabled), no primitive's initial JS-set opacity:0 exists
+   in the first place: every primitive sets its own "before" state via JS,
+   never via a CSS class shipped in markup. This block exists only to force
+   any element a builder mistakenly pre-hid in markup back to visible under
+   reduced motion, as a last resort. */
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-hidden] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,317 @@
+/*
+ * skeleton.css — homepage OWNER regions below the hero.
+ * Written by the INTEGRATOR (Bob 25, Wave 2 merge) as a baseline for the
+ * six builders named in LANE-BOARD.md: On View, case study, about, contact
+ * each get real markup, real verified copy and a real link out to their
+ * full page, styled just enough to be legible and on-register with the
+ * hero, but not art-directed further — that is each builder's own job.
+ * The capabilities grid itself is the hero prototype's own markup/CSS
+ * (assets/hero.css .capabilities/.cap-grid/.cap-card) and is not restyled
+ * here.
+ *
+ * Uses the hero's own token names (--bg-alt, --ink, --ink-muted, --signal,
+ * --font-display, --font-text, --font-mono, --space-*, --line, --container)
+ * from assets/hero.css, which is always loaded alongside this file on
+ * index.html — not the legacy --sheet/--display token names that
+ * kinetic-theme.css maps for the six interior pages.
+ */
+
+.skeleton-section {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  padding: var(--space-6) var(--space-3);
+}
+.skeleton-section .inner {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.skeleton-section h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  margin-bottom: var(--space-3);
+}
+.skeleton-section .kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: var(--space-2);
+}
+.skeleton-section p {
+  max-width: 62ch;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-2);
+}
+.skeleton-section .facts {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.9;
+  margin: var(--space-2) 0 var(--space-3);
+}
+.skeleton-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--signal);
+  text-decoration: none;
+}
+.skeleton-more:hover,
+.skeleton-more:focus-visible { text-decoration: underline; }
+
+/* on-view */
+/* Six real photographs from the Handloom Haat gallery floor, as a
+   horizontal scroll-snap strip — the "walk through" grammar the hero
+   already uses, applied to photography instead of WebGL. Plain CSS
+   overflow-x + scroll-snap: this scrolls and reads with no JS at all,
+   so the structure itself is the reduced-motion / no-script floor.
+   Torque (window.motion) only layers on top, via the inline script
+   right after #on-view in index.html: revealOnScroll steps each card
+   in, tilt/glow respond to pointer — both already no-op under reduced
+   motion or a coarse pointer inside motion-lib itself (assets/vendor/
+   motion.umd.min.js), so nothing here needs to special-case touch. */
+#on-view .onview-gallery {
+  margin: var(--space-3) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: var(--signal) transparent;
+  scrollbar-width: thin;
+}
+#on-view .onview-gallery:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+#on-view .onview-gallery::-webkit-scrollbar { height: 6px; }
+#on-view .onview-gallery::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+#on-view .onview-track {
+  display: flex;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 4px 4px var(--space-2);
+  scroll-snap-type: x mandatory;
+}
+#on-view .onview-card {
+  flex: 0 0 auto;
+  width: min(78vw, 420px);
+  scroll-snap-align: start;
+}
+#on-view .onview-card figure {
+  margin: 0;
+  background: var(--bg-alt);
+}
+/* Fixed 3:2 box on every card, object-fit: cover — the brief's own rule
+   that a photograph must never distort. This is also the element Torque's
+   tilt/glow primitives target (see the inline script), since tilting the
+   caption along with the image reads wrong. */
+#on-view .onview-frame {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+#on-view .onview-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+#on-view .onview-card figcaption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint, var(--ink-muted));
+  padding: 8px 2px 0;
+}
+
+/* Entrance state for Torque's revealOnScroll. Belt-and-braces, same
+   pattern as #case-study .cs-step below: three independent paths all
+   resolve to fully visible, because a scroll reveal is decoration, not
+   a gate on real content that must survive no-JS and reduced-motion. */
+#on-view .onview-card {
+  opacity: 0;
+  transform: translateY(24px);
+}
+@media (prefers-reduced-motion: reduce) {
+  #on-view .onview-card { opacity: 1; transform: none; }
+}
+.reduced-motion #on-view .onview-card,
+.no-js #on-view .onview-card { opacity: 1 !important; transform: none !important; }
+
+@media (max-width: 640px) {
+  #on-view .onview-card { width: min(84vw, 340px); }
+}
+
+/* case-study */
+/* One honest sheet, no invented narrative: a title block (the facts,
+   already verified elsewhere on this site) followed by a numbered ledger
+   of the real decisions made, in order, then one real photograph. Rows
+   step in via window.motion.revealOnScroll (Torque, see the inline
+   script after the section in index.html); every rule below also has to
+   hold with that script never running, so nothing here depends on a
+   class JS would add. */
+
+#case-study .cs-title-block {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-3) 0 var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+#case-study .cs-title-block dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+}
+#case-study .cs-title-block dd {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+  margin: 0;
+}
+
+#case-study .cs-ledger {
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+}
+#case-study .cs-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line);
+  /* JS-only entrance state: revealOnScroll animates from here back to
+     opacity 1 / translateY(0). If the script below never runs (no gsap,
+     no motion-lib), the overrides at the end of this block force the
+     same visible, static result. */
+  opacity: 0;
+  transform: translateY(24px);
+}
+#case-study .cs-step:last-child { border-bottom: none; }
+#case-study .cs-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--signal);
+  padding-top: 2px;
+}
+#case-study .cs-step-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 6px;
+}
+#case-study .cs-step-body p {
+  margin: 0;
+  max-width: 56ch;
+  color: var(--ink-muted);
+}
+
+#case-study .cs-figure {
+  margin: 0 0 var(--space-3);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+#case-study .cs-figure img { width: 100%; height: auto; display: block; }
+#case-study .cs-figure figcaption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  padding: 8px 0 0;
+}
+
+/* Reduced motion / no-JS: same belt-and-braces pattern hero.css uses for
+   .cap-card, three independent paths that all resolve to fully visible,
+   because a scroll reveal is decoration, not a gate on the content. */
+@media (prefers-reduced-motion: reduce) {
+  #case-study .cs-step { opacity: 1; transform: none; }
+}
+.reduced-motion #case-study .cs-step,
+.no-js #case-study .cs-step { opacity: 1 !important; transform: none !important; }
+
+@media (max-width: 640px) {
+  #case-study .cs-title-block { grid-template-columns: 1fr; }
+  #case-study .cs-step { grid-template-columns: 40px 1fr; }
+}
+
+/* about */
+/* Built by builder-about (Wave 2). Two paragraphs quoted verbatim from
+   about.html: its own <p class="lede"> (the studio line) followed by its
+   <p class="statement"> (the "concept should explain the form" line), in
+   the order they appear on that page. Nothing here is composed copy. */
+#about-teaser h2 {
+  /* Bricolage Grotesque's wdth axis, same convention as .hero-h1: rest
+     state is 100 (correct finished type) so reduced-motion/no-JS never
+     shows a stuck compressed state; the entrance script (index.html,
+     after this section) tweens 75 -> 100 only when it actually runs. */
+  --wdth: 100;
+  font-variation-settings: "wdth" var(--wdth);
+}
+#about-teaser p.lede-quote {
+  font-family: var(--font-text);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  color: var(--ink);
+  max-width: 46ch;
+}
+#about-teaser p.lede-quote + p.lede-quote {
+  margin-top: var(--space-2);
+  color: var(--ink-muted);
+}
+#about-teaser .skeleton-more {
+  /* magnetic() moves the element on transform: give it its own stacking
+     context so it never clips against a sibling while it travels. */
+  will-change: transform;
+}
+
+/* contact — the walk's exit, styled as one final lit station in this
+   site's own grammar rather than a plain form-page teaser. The dot below
+   the kicker reuses .wordmark's own lit-dot treatment (assets/hero.css:
+   var(--signal) fill, var(--signal-soft) glow) verbatim; the thin glowing
+   rule above the section replaces the flat --line border every other
+   .skeleton-section gets, so this is the one section on the page that
+   visibly lights up rather than just starts. Mono kicker and Bricolage h2
+   are the shared .skeleton-section rules above, unchanged. Torque
+   revealText on #contact-heading and magnetic on #contact-mailto are
+   wired by the inline script that sits inside this section in index.html,
+   scoped to #contact only. */
+#contact { position: relative; }
+#contact::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--signal) 50%, transparent);
+  box-shadow: 0 0 16px 1px var(--signal-soft);
+  pointer-events: none;
+}
+#contact .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+#contact .lit-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 10px 2px var(--signal-soft);
+  flex: none;
+}
+#contact .cta-row { margin-top: var(--space-2); }
+
+@media (max-width: 640px) {
+  .skeleton-section { padding: var(--space-4) var(--space-2); }
+}

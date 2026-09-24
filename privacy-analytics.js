@@ -1,8 +1,9 @@
+// COLLECTOR constant for analytics endpoint
+var COLLECTOR = 'https://cultre-website-analytics.hh-web.workers.dev'; // Vivek will point this at a Red Banana hostname after the Cloudflare cutover
 (function () {
   'use strict';
 
-  var collectorOrigin = 'https://cultre-website-analytics.hh-web.workers.dev';
-  if (!/^https:\/\/[^/?#]+$/.test(collectorOrigin)) return;
+  if (!/^https:\/\/[^/?#]+$/.test(COLLECTOR)) return;
 
   function parseUrl(value) {
     try {
@@ -36,7 +37,7 @@
   function send(event) {
     event.page = pagePath(location.href);
     event.device = coarseDevice();
-    fetch(collectorOrigin + '/v1/collect', {
+    fetch(COLLECTOR + '/v1/collect', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(event),
@@ -78,3 +79,4 @@
     }
   }, { capture: true, passive: true });
 }());
+

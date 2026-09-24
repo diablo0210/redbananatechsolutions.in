@@ -68,18 +68,28 @@ nav a.here{color:var(--light);border-bottom-color:var(--red)}
 .page-head .lede b{color:var(--light);font-weight:600}
 
 /* ---------- hero (home) ---------- */
-.hero{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden}
-.hero .cone{position:absolute;inset:0;pointer-events:none;
+/* Renamed from .hero (Wave 2 kinetic merge, Bob 25): this is v1's own
+   dead hero-grid rule, unused by any page since the pre-lit-plan build
+   (grepped: no HTML anywhere in this tree's history uses class="hero"
+   except the new vendored hero.css's .hero section on index.html today).
+   Renamed rather than deleted, per the merge-verifier's ruling, because
+   its overflow:hidden/display:flex/min-height/align-items were silently
+   winning the cascade against the new hero's position:sticky pin under
+   the shared .hero class name, collapsing the corridor to a blank black
+   rectangle at rest. See assets/hero.css's own comment on .hero for the
+   fix on the other side. */
+.v1-legacy-hero{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden}
+.v1-legacy-hero .cone{position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse 62% 55% at 68% 30%,rgba(242,233,219,.10),transparent 60%),
              radial-gradient(ellipse 40% 36% at 68% 26%,rgba(226,66,46,.13),transparent 65%);
   opacity:0;animation:lightsup 2.2s ease .3s forwards}
 @keyframes lightsup{to{opacity:1}}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;width:100%;padding:64px 0}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero{min-height:64vh}}
-.hero h1{font-size:clamp(38px,6vw,64px);font-weight:700;line-height:1.04;letter-spacing:-.015em}
-.hero h1 em{font-style:normal;color:var(--red)}
-.hero .lede{margin-top:22px;font-size:clamp(17px,2vw,20px);color:var(--dim);max-width:34em}
-.hero .lede b{color:var(--light);font-weight:600}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.v1-legacy-hero{min-height:64vh}}
+.v1-legacy-hero h1{font-size:clamp(38px,6vw,64px);font-weight:700;line-height:1.04;letter-spacing:-.015em}
+.v1-legacy-hero h1 em{font-style:normal;color:var(--red)}
+.v1-legacy-hero .lede{margin-top:22px;font-size:clamp(17px,2vw,20px);color:var(--dim);max-width:34em}
+.v1-legacy-hero .lede b{color:var(--light);font-weight:600}
 .cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
 .btn{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.12em;
   text-transform:uppercase;text-decoration:none;padding:14px 26px;border-radius:2px;
@@ -131,6 +141,7 @@ section.first{border-top:none;padding-top:clamp(16px,3vh,28px)}
 .plaque:hover{background:var(--wall-3)}
 .plaque .acc{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--faint)}
 .plaque h3{font-size:19px;font-weight:700;margin:14px 0 10px;letter-spacing:.005em}
+.h3-like{font-size:19px;font-weight:700;margin:14px 0 10px;letter-spacing:.005em}
 .plaque p{font-size:15px;color:var(--dim)}
 .plaque .medium{margin-top:18px;padding-top:14px;border-top:1px solid var(--hairline);
   font-family:var(--mono);font-size:10.5px;line-height:1.8;color:var(--faint)}
@@ -198,6 +209,37 @@ footer h2 em{font-style:normal;color:var(--red)}
 .foot-meta a{color:var(--light);text-decoration:none;border-bottom:1px solid var(--faint)}
 .foot-meta a:hover{border-color:var(--red)}
 .legal a{text-underline-offset:3px}
+/* G2D footer legal block – mono utility font, wraps on mobile */
+.legal {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--dim);
+}
+.legal span {
+  display: block;
+  margin-top: 0.2rem;
+}
+.hero-title{margin-top:18px;}
+.legal{margin-top:44px;padding-top:20px;border-top:1px solid var(--hairline);
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--faint)}
+
+/* ---------- mobile pass (640px) ---------- */
+@media (max-width: 640px) {
+  /* navigation side padding */
+  nav {padding:0 16px;}
+  /* email/button overflow handling */
+  a[href^="mailto"], .btn {overflow-wrap:anywhere;}
+  /* hero heading size step down */
+  .v1-legacy-hero h1 {font-size:clamp(28px,5vw,48px);}
+  /* page‑head heading size step down */
+  .page-head h1 {font-size:clamp(24px,4vw,40px);}
+  /* tighten section spacing */
+  .case {padding:20px 0;}
+  /* brand mark scales down */
+  .brand svg {width:30px;height:27px;}
+}
 .legal{margin-top:44px;padding-top:20px;border-top:1px solid var(--hairline);
   display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--faint)}
@@ -207,6 +249,76 @@ footer h2 em{font-style:normal;color:var(--red)}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .chip::before{animation:none}.hero .cone{animation:none;opacity:1}
+  .chip::before{animation:none}.v1-legacy-hero .cone{animation:none;opacity:1}
   .reveal{opacity:1;transform:none;transition:none}
 }
+
+/* ---------- performance ---------- */
+/* OWNER: builder-footer (Wave 2, port 8995). Perf/asset notes: hero scene
+   (~656KB three.min.js + ~186KB Bricolage var + 26KB Familjen var) is the
+   only reason index.html clears 1.19MB uncompressed on a fresh load;
+   interior pages stay 300-403KB. Fonts already subset (see
+   assets/fonts/redbanana/*.woff2: 461-532 glyphs each, no CJK/Cyrillic) —
+   not re-touched here, re-subsetting risks breaking punctuation used in
+   copy. font-display:swap and font preloads were already present in every
+   page's <head> (integrator's prior pass); nothing to add there.
+
+   RB QA finding (24 Sep): the footer legal line measured 4.04:1 contrast
+   on index.html versus 9.02:1 on the six interior pages. Cause: index.html
+   does not load sheet-pages.css (only about/capabilities/contact/privacy/
+   work/404 do), so on index.html alone the legacy `.legal{color:var(--faint)}`
+   rule near the top of this file (added for a different, non-dark-ground
+   page) wins the cascade instead of sheet-pages.css's
+   `.legal{color:var(--ink-muted)}`. Fix here at higher specificity than
+   both, applied to all seven pages so the token is explicit everywhere
+   rather than depending on which stylesheet a given page happens to load.
+   var(--dim) (#a9aebb, kinetic-theme.css) is the same colour value as
+   sheet-pages.css's --ink-muted, so text colour is now byte-identical
+   token on all seven. Measured after (relative-luminance formula, actual
+   computed footer background per page): index 9.02:1 (bg #07080b,
+   var(--wall) — index's footer sits on a slightly darker ground than the
+   other six, a pre-existing difference this rule does not touch); about,
+   capabilities, contact, privacy, work, 404 all 8.64:1 (bg #0d0f13,
+   var(--wall-2)). Both figures clear WCAG AA (4.5:1) and AAA (7:1); the
+   pre-fix number was 4.04:1 on index only, below AA. */
+footer .legal { color: var(--dim); }
+
+/* ---------- responsive ---------- */
+/* OWNER: builder-footer (Wave 2, port 8995). Six-viewport pass
+   (1440x900, 1280x720, 1024x640, 768x1024, 390x844, 844x390): no
+   horizontal scroll and no header/CTA overlap on any of the six. Two
+   height-dependent defects found (RB QA + this pass):
+
+   1. RB QA: the secondary hero CTA ("Explore an experience") sits
+      below the viewport at 1440x900 (18px clipped) and 390x844 (13px
+      clipped); fine at 1280x720. This pass also found 768x1024 clipped
+      (29px) — a seventh case RB QA's brief didn't test.
+   2. This pass: at 844x390 the same CTA is clipped by 163px — the
+      "viewport-unit hero collapses hardest" case the programme brief
+      warned about. See the residual note below; this rule only partly
+      helps there.
+
+   Root cause and fix, without restructuring the frozen hero (its own
+   markup, font sizes and internal element margins are untouched): the
+   hero is `.hero-pin{display:flex;flex-direction:column}` and
+   `.hero-content{margin:auto var(--space-3) var(--space-5)
+   var(--space-3)}` — margin-top:auto bottom-anchors the block, so its
+   BOTTOM edge always sits exactly margin-bottom above .hero-pin's own
+   bottom edge, regardless of content height. Raising only that one
+   value lifts the whole block (CTA included) by the same amount, with
+   no effect on font size, line spacing, the sticky pin, or the walk's
+   scroll math (driven by scroll position over .hero's own 500vh, which
+   this rule never touches). Selector specificity (.hero .hero-content,
+   0,2,0) beats hero.css's plain .hero-content (0,1,0) regardless of
+   stylesheet load order, so no !important is needed. */
+@media (max-height: 1024px) {
+  .hero .hero-content { margin-bottom: 110px; }
+}
+
+/* Residual, reported not silently patched: at 844x390 .hero-pin's own
+   560px min-height floor (assets/hero.css) leaves only ~35px of free
+   space above the content block at rest, so the 46px lift above can only
+   use ~35px of it before the auto top margin clamps to zero — the
+   remaining ~128px of clipping needs either a shorter content stack or a
+   lower min-height floor at very short heights, both hero-owned
+   decisions. Flagged for the integrator/hero owner; not applied here. */

@@ -1,234 +1,644 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Red Banana Tech Solutions — Museum Technology</title>
-<meta name="description" content="Red Banana builds the working core of modern galleries: touch kiosks, immersive AV, digital archives and AI-driven visitor experiences — offline, unattended, for years.">
-<link rel="canonical" href="https://redbananatechsolutions.in/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Red Banana Tech Solutions">
-<meta property="og:title" content="Red Banana Tech Solutions — Museum Technology">
-<meta property="og:description" content="Museum technology engineered in India for galleries: offline-first kiosks, immersive AV, digital archives and visitor experiences.">
-<meta property="og:url" content="https://redbananatechsolutions.in/">
-<meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<script src="/privacy-analytics.js" defer></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Red Banana Tech Solutions Pvt. Ltd.","url":"https://redbananatechsolutions.in/","email":"redbananatechsolutions@gmail.com","address":{"@type":"PostalAddress","addressLocality":"New Delhi","addressCountry":"IN"}}
-</script>
+
+<!-- COMPARISON VARIANT: remove this tag only on the direction the client selects. Bob 25, 24 Sep 2026. -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Red Banana Tech Solutions: Museum Technology</title>
+  <meta name="description" content="Museum technology engineered in India for galleries: offline-first kiosks, immersive AV, digital archives and visitor experiences.">
+  <link rel="canonical" href="https://redbananatechsolutions.in/">
+
+  <!-- OWNER: integrator (Bob 25) — vendored, approved hero prototype.
+       See v2-kinetic/redbanana/hero-prototype/DIRECTION.md for the
+       direction record. Self-hosted fonts, subset, pinned — see
+       assets/vendor/SHA256SUMS.txt and assets/fonts/redbanana/OFL-*.txt. -->
+  <link rel="preload" href="assets/fonts/redbanana/bricolage-grotesque-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/redbanana/familjen-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/hero-poster.png" as="image">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="assets/vendor/motion.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="lit-plan.css">
+  <link rel="stylesheet" href="assets/kinetic-theme.css">
+  <link rel="stylesheet" href="assets/hero.css">
+  <link rel="stylesheet" href="assets/skeleton.css">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Red Banana Tech Solutions">
+  <meta property="og:title" content="Red Banana Tech Solutions: Museum Technology">
+  <meta property="og:description" content="Museum technology engineered in India for galleries: offline-first kiosks, immersive AV, digital archives and visitor experiences.">
+  <meta property="og:url" content="https://redbananatechsolutions.in/">
+  <meta property="og:image" content="https://redbananatechsolutions.in/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://redbananatechsolutions.in/assets/og-image.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Red Banana Tech Solutions Pvt. Ltd.","url":"https://redbananatechsolutions.in/","email":"hello@redbananatechsolutions.in","address":{"@type":"PostalAddress","addressLocality":"Ajmer","addressRegion":"Rajasthan","addressCountry":"IN"}}
+  </script>
+  <script src="privacy-analytics.js" defer></script>
+  <script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to main content</a>
-<header>
-  <div class="wrap bar">
-    <a class="brand" href="index.html" aria-label="Red Banana Tech Solutions — home">
-      <svg viewBox="-6 -8 164 148" aria-hidden="true">
-        <g fill="#e2422e">
-          <rect x="28" y="0"  width="15" height="15"/>
-          <rect x="12" y="14" width="15" height="15" fill="#c2362a"/>
-          <rect x="2"  y="30" width="15" height="15"/>
-          <rect x="0"  y="48" width="15" height="15" fill="#a92f21"/>
-          <rect x="2"  y="66" width="15" height="15"/>
-          <rect x="10" y="83" width="15" height="15" fill="#c2362a"/>
-          <rect x="24" y="97" width="15" height="15"/>
-          <rect x="41" y="107" width="15" height="15" fill="#a92f21"/>
-          <rect x="59" y="112" width="15" height="15"/>
-          <rect x="77" y="110" width="15" height="15" fill="#c2362a"/>
-          <rect x="94" y="102" width="15" height="15"/>
-          <rect x="108" y="89" width="15" height="15" fill="#a92f21"/>
-          <rect x="44" y="90" width="15" height="15" fill="#7a1f16"/>
-          <rect x="62" y="94" width="15" height="15" fill="#7a1f16"/>
-        </g>
-        <g fill="#e2422e">
-          <rect x="124" y="80" width="17" height="21" rx="2"/>
-          <rect x="141" y="83.5" width="11" height="4.5"/>
-          <rect x="141" y="92.5" width="11" height="4.5"/>
-        </g>
-      </svg>
-      <span><b>RED BANANA</b><span>TECH SOLUTIONS PVT. LTD.</span></span>
-    </a>
-    <nav aria-label="Sections">
-      <a href="capabilities.html">Capabilities</a>
-      <a href="work.html">On View</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- OWNER: integrator — the hero prototype's own header, approved as part
+     of the hero. Interior pages keep their own header.sheet-bar markup
+     (about.html etc.) restyled by assets/kinetic-theme.css to the same
+     dark ground, fonts and vermilion accent, so the register matches
+     without forcing one literal markup on every page. -->
+<header class="site-header" id="site-header">
+  <a class="wordmark" href="#main">
+    <span class="dot" aria-hidden="true"></span>
+    Red Banana Tech Solutions
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#capabilities">Capabilities</a>
+    <a href="#on-view">On View</a>
+    <a href="#about-teaser">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
-<main id="main-content">
-  <div class="hero">
-    <div class="cone"></div>
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Museum technology · Built in India</p>
-        <h1 style="margin-top:18px">The machines<br>museums <em>think</em> with.</h1>
-        <p class="lede">Red Banana builds the working core of modern galleries:
-          <b>touch kiosks, immersive AV, digital archives and AI-driven visitor
-          experiences</b> — engineered to run sealed, offline and unattended,
-          every open hour, for years.</p>
+
+<main id="main">
+
+  <!-- OWNER: integrator — approved hero prototype, verbatim structure
+       from v2-kinetic/redbanana/hero-prototype/index.html. Do not modify
+       without Bob's sign-off; this is what Vivek approved. -->
+  <section class="hero" id="hero" aria-label="Introduction">
+    <div class="hero-pin">
+
+      <div class="hero-fallback" aria-hidden="true"></div>
+
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/hero-poster-mobile.jpg">
+        <img class="hero-poster" src="assets/hero-poster.png" alt="" aria-hidden="true">
+      </picture>
+
+      <canvas id="gallery-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero-content">
+        <p class="eyebrow">Museum technology, engineered in India</p>
+        <h1 class="hero-h1" id="hero-heading">
+          <span class="line">Technology you don't just see.</span>
+          <span class="line"><em>You experience.</em></span>
+        </h1>
+        <p class="hero-sub">Interactive museums, intelligent installations and AI experiences. Six capabilities, one walk through the gallery below.</p>
         <div class="cta-row">
-          <a class="btn btn-red" href="work.html">See it running</a>
-          <a class="btn btn-ghost" href="contact.html">Commission us</a>
+          <a class="btn btn-primary" href="#contact">Discuss your project</a>
+          <a class="btn btn-ghost" href="#capabilities">Explore an experience</a>
         </div>
       </div>
-      <div class="vitrine" aria-hidden="true">
-        <svg viewBox="-6 -8 164 148" aria-hidden="true">
-        <g fill="#e2422e">
-          <rect x="28" y="0"  width="15" height="15"/>
-          <rect x="12" y="14" width="15" height="15" fill="#c2362a"/>
-          <rect x="2"  y="30" width="15" height="15"/>
-          <rect x="0"  y="48" width="15" height="15" fill="#a92f21"/>
-          <rect x="2"  y="66" width="15" height="15"/>
-          <rect x="10" y="83" width="15" height="15" fill="#c2362a"/>
-          <rect x="24" y="97" width="15" height="15"/>
-          <rect x="41" y="107" width="15" height="15" fill="#a92f21"/>
-          <rect x="59" y="112" width="15" height="15"/>
-          <rect x="77" y="110" width="15" height="15" fill="#c2362a"/>
-          <rect x="94" y="102" width="15" height="15"/>
-          <rect x="108" y="89" width="15" height="15" fill="#a92f21"/>
-          <rect x="44" y="90" width="15" height="15" fill="#7a1f16"/>
-          <rect x="62" y="94" width="15" height="15" fill="#7a1f16"/>
-        </g>
-        <g fill="#e2422e">
-          <rect x="124" y="80" width="17" height="21" rx="2"/>
-          <rect x="141" y="83.5" width="11" height="4.5"/>
-          <rect x="141" y="92.5" width="11" height="4.5"/>
-        </g>
-      </svg>
-        <div class="plinth"></div>
-      </div>
-    </div>
-  </div>
 
-  <section id="about-teaser">
-    <div class="wrap reveal">
-      <p class="eyebrow">Curatorial statement</p>
-      <p class="statement" style="margin-top:20px"><span class="drop">Most museum tech fails
-      quietly</span> — a frozen screen, a dead speaker, a "coming soon" that never comes.
-      We build for the opposite: technology that survives the gallery floor.</p>
-      <div class="about-cols">
-        <p>Red Banana Tech Solutions is a museum-technology studio: we engineer
-        the interactive core of cultural spaces and make it run. Behind
-        everything we build sits a single conviction — that
-        <b>the concept should explain the form</b>, and the technology should
-        disappear into the visit.</p>
-        <p>Everything we ship is built for the realities of Indian public
-        galleries: <b>no internet on the floor, no technician on call,
-        power that blinks</b>, and ten thousand hands a week. Our software runs
-        offline-first, recovers on its own, and is tested by being run the way a
-        visitor runs it — not the way a demo runs it.</p>
-      </div>
-      <div class="cta-row"><a class="more-link" href="about.html">More about how we work &rarr;</a></div>
-    </div>
-  </section>
-
-  <section id="capabilities-teaser">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">The permanent collection</p>
-          <h2 style="margin-top:10px">Six capabilities, kept on display</h2>
+      <div class="station-labels" aria-hidden="true">
+        <div class="station-label side-left" data-station="0">
+          <span class="num">01</span>
+          <span class="title">Interactive kiosks &amp; touch software</span>
         </div>
-        <a class="more-link" href="capabilities.html">All six in detail &rarr;</a>
+        <div class="station-label side-right" data-station="1">
+          <span class="num">02</span>
+          <span class="title">Immersive AV &amp; projection</span>
+        </div>
+        <div class="station-label side-left" data-station="2">
+          <span class="num">03</span>
+          <span class="title">Digital archives &amp; catalogues</span>
+        </div>
+        <div class="station-label side-right" data-station="3">
+          <span class="num">04</span>
+          <span class="title">AI visitor experiences</span>
+        </div>
+        <div class="station-label side-left" data-station="4">
+          <span class="num">05</span>
+          <span class="title">3D scanning &amp; museum replicas</span>
+        </div>
+        <div class="station-label side-right" data-station="5">
+          <span class="num">06</span>
+          <span class="title">Install, harden &amp; maintain</span>
+        </div>
       </div>
-      <div class="plaques reveal">
-        <a class="plaque" href="capabilities.html#rb001">
-          <span class="acc">RB.001</span>
-          <h3>Interactive kiosks &amp; touch software</h3>
-          <p>Bilingual touchscreen experiences — quizzes, archives, film walls,
-          listening posts — designed for standing visitors and gallery light.</p>
-          <div class="medium">MEDIUM · <i>web-native, offline-first</i></div>
-        </a>
-        <a class="plaque" href="capabilities.html#rb002">
-          <span class="acc">RB.002</span>
-          <h3>Immersive AV &amp; projection</h3>
-          <p>Synchronised film walls, soundscapes and ambient screens that hold a
-          room — installed, calibrated and boot-safe after every power cut.</p>
-          <div class="medium">MEDIUM · <i>multi-screen playback</i></div>
-        </a>
-        <a class="plaque" href="capabilities.html#rb004">
-          <span class="acc">RB.004</span>
-          <h3>AI visitor experiences</h3>
-          <p>Guided journeys, adaptive quizzes and multilingual interpretation
-          powered by on-device intelligence — private by design, no cloud required.</p>
-          <div class="medium">MEDIUM · <i>on-device AI</i></div>
-        </a>
+
+      <ul class="sr-only">
+        <li>01. Interactive kiosks &amp; touch software</li>
+        <li>02. Immersive AV &amp; projection</li>
+        <li>03. Digital archives &amp; catalogues</li>
+        <li>04. AI visitor experiences</li>
+        <li>05. 3D scanning &amp; museum replicas</li>
+        <li>06. Install, harden &amp; maintain</li>
+      </ul>
+
+      <div class="hero-progress" aria-hidden="true">
+        <span class="tick" data-tick="0"></span>
+        <span class="tick" data-tick="1"></span>
+        <span class="tick" data-tick="2"></span>
+        <span class="tick" data-tick="3"></span>
+        <span class="tick" data-tick="4"></span>
+        <span class="tick" data-tick="5"></span>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true">
+        <span>WALK</span>
+        <div class="rail"><i></i></div>
       </div>
     </div>
   </section>
 
-  <section id="onview-teaser">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">On view now</p>
-          <h2 style="margin-top:10px">Work in the wild</h2>
-        </div>
-        <a class="more-link" href="work.html">Every project &rarr;</a>
+  <!-- OWNER: builder-capabilities — six items, matching the six
+       installations above exactly (same order, same names). This grid is
+       the hero prototype's own permanent hand-off markup; a builder may
+       deepen the cards (icon, one line of description each) but must not
+       change the count, order or names without also updating the hero's
+       station labels above, so the two stay in lockstep. -->
+  <section class="capabilities" id="capabilities" aria-label="Capabilities">
+    <div class="section-head">
+      <h2>Capabilities</h2>
+      <a class="all-link" href="capabilities.html">All six, in detail →</a>
+    </div>
+    <div class="cap-grid">
+      <article class="cap-card">
+        <span class="num">01</span>
+        <h3 class="cap-name">Interactive kiosks &amp; touch software</h3>
+        <p class="cap-desc">Bilingual touchscreen experiences designed for standing visitors, gallery light and ten thousand taps a week.</p>
+        <a class="cap-link" href="capabilities.html#rb001">Full capability →</a>
+      </article>
+      <article class="cap-card">
+        <span class="num">02</span>
+        <h3 class="cap-name">Immersive AV &amp; projection</h3>
+        <p class="cap-desc">Synchronised film walls, soundscapes and ambient screens that hold a room and recover on their own.</p>
+        <a class="cap-link" href="capabilities.html#rb002">Full capability →</a>
+      </article>
+      <article class="cap-card">
+        <span class="num">03</span>
+        <h3 class="cap-name">Digital archives &amp; catalogues</h3>
+        <p class="cap-desc">Deep-dive browsing for hundreds of objects, films and oral histories, structured so a curator updates content without touching code.</p>
+        <a class="cap-link" href="capabilities.html#rb003">Full capability →</a>
+      </article>
+      <article class="cap-card">
+        <span class="num">04</span>
+        <h3 class="cap-name">AI visitor experiences</h3>
+        <p class="cap-desc">Guided journeys, adaptive interpretation and multilingual delivery powered by on-device intelligence.</p>
+        <a class="cap-link" href="capabilities.html#rb004">Full capability →</a>
+      </article>
+      <article class="cap-card">
+        <span class="num">05</span>
+        <h3 class="cap-name">3D scanning &amp; museum replicas</h3>
+        <p class="cap-desc">Artefacts scanned, remastered and re-materialised: print-ready heritage replicas for handling collections, retail and outreach.</p>
+        <a class="cap-link" href="capabilities.html#rb005">Full capability →</a>
+      </article>
+      <article class="cap-card">
+        <span class="num">06</span>
+        <h3 class="cap-name">Install, harden &amp; maintain</h3>
+        <p class="cap-desc">Panel installation, kiosk lockdown and honest testing: planted-failure verification, not green-light theatre.</p>
+        <a class="cap-link" href="capabilities.html#rb006">Full capability →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- OWNER: builder-capabilities — motion wiring for the grid above only
+       (Torque revealOnScroll with a per-card stagger, tilt on pointer,
+       magnetic on the link). Guards for reduced motion and a missing
+       gsap/motion-lib exactly like assets/js/hero-main.js's own pattern,
+       so a script failure still leaves six complete, readable cards. --><script>
+  (function () {
+    "use strict";
+    document.addEventListener("DOMContentLoaded", function () {
+      var cards = Array.prototype.slice.call(document.querySelectorAll("#capabilities .cap-card"));
+      if (!cards.length) return;
+
+      if (typeof gsap === "undefined" || typeof window.motion === "undefined") {
+        // motion-lib or gsap failed to load: force every card fully
+        // visible rather than leaving it stuck at the CSS rest state
+        // (opacity:0, translateY(28px)) with nothing left to ever clear
+        // it. Does not assume hero-main.js's own fallback also ran.
+        cards.forEach(function (card) {
+          card.style.opacity = 1;
+          card.style.transform = "none";
+        });
+        return;
+      }
+
+      cards.forEach(function (card, i) {
+        // A few percent of viewport height apart per card, so the six
+        // cards light up in sequence (01 first) rather than all at once.
+        var start = "top " + (88 - i * 3) + "%";
+
+        // Self-guards reduced motion (finalizes statically) and carries
+        // its own safety net if the trigger never fires.
+        window.motion.revealOnScroll(card, { y: 28, start: start });
+
+        var name = card.querySelector(".cap-name");
+        if (name && !window.motion.reduced) {
+          gsap.fromTo(
+            name,
+            { "--wdth": 75 },
+            {
+              "--wdth": 100,
+              duration: window.motion.timing.enter + 0.2,
+              ease: window.motion.ease.out,
+              scrollTrigger: { trigger: card, start: start, toggleActions: "play none none none", once: true },
+            }
+          );
+        }
+
+        window.motion.tilt(card, { maxDeg: 6 }); // self-guards reduced motion + coarse pointer
+
+        var link = card.querySelector(".cap-link");
+        if (link) window.motion.magnetic(link, { strength: 0.3 }); // self-guards too
+      });
+    });
+  })();
+  </script>
+
+  <!-- OWNER: builder-onview — real Handloom Haat photography. The original
+       two assets (hh-gallery-hero, hh-arch-corridor, shot 20 Sep) plus four
+       more chosen by looking at the 51 shots Vivek cleared at
+       "Desktop/Data/03 Photos/HH Website Photos/" for installations, kiosks
+       or visitors interacting: hh-prakriti-arch (IMG_0299), hh-vishwakarma-
+       entrance (IMG_0312), hh-archive-objects (IMG_0415), hh-opening-arrival
+       (IMG_0398). Each processed the same way as the original two: EXIF
+       orientation baked in and the tag stripped (`magick -auto-orient
+       -strip`), WebP + JPEG, all six under 250KB, explicit width/height,
+       loading="lazy". Facts below are the verified ones only: 301
+       catalogued objects and 6 apps / 2 languages come from
+       L1-CONTENT-AUDIT.md #8-#9 against apps/quiz/content/questions.json
+       and the archive manifest; the earlier "600+ objects" and "3,000+
+       checks" claims on this page did not check out and are not reused
+       here. Do not add a number back without a source. Kinetic treatment:
+       a horizontal scroll-snap strip, native CSS (works with no JS at
+       all), each plate a fixed 3:2 box with object-fit: cover so no image
+       ever distorts. Torque (window.motion) only enhances on top: reveal
+       stagger on scroll, tilt on pointer, glow on hover — wired by the
+       inline script right after this section, scoped to #on-view only. -->
+  <section class="skeleton-section" id="on-view" aria-label="On View">
+    <div class="inner">
+      <p class="kicker">On View</p>
+      <h2>Handloom Haat, Janpath</h2>
+      <p class="facts">
+        Client — Ministry of Textiles, D.C. Handlooms<br>
+        Venue — Vishwakarma Gallery, Handloom Haat, Janpath, New Delhi<br>
+        Opened — 14 August 2026<br>
+        6 kiosk apps · 2 languages · 301 catalogued objects · 0 internet needed
+      </p>
+      <p>Six offline-first kiosk apps run bilingual among the catalogued
+      textiles, and visitors walk through a run of illuminated arch
+      installations to reach them. The photographs below are from the
+      gallery floor itself, install week through opening night.</p>
+
+      <div class="onview-gallery" tabindex="0" role="region" aria-label="Photographs from the Vishwakarma Gallery floor, scroll horizontally">
+        <ul class="onview-track">
+          <li class="onview-card">
+            <figure>
+              <div class="onview-frame">
+                <picture>
+                  <source type="image/webp" srcset="assets/hh-gallery-hero.webp">
+                  <img src="assets/hh-gallery-hero.jpg" width="2000" height="1333" loading="lazy"
+                       alt="A curved gallery corridor at the Vishwakarma Gallery, Handloom Haat: hand-woven textiles lit on dark green and charcoal display walls above a polished stone floor.">
+                </picture>
+              </div>
+              <figcaption>Gallery corridor · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+            </figure>
+          </li>
+          <li class="onview-card">
+            <figure>
+              <div class="onview-frame">
+                <picture>
+                  <source type="image/webp" srcset="assets/hh-arch-corridor.webp">
+                  <img src="assets/hh-arch-corridor.jpg" width="1400" height="933" loading="lazy"
+                       alt="A darkened corridor at Handloom Haat, Janpath, lined with concentric painted arches in white, yellow and red, suspended thread sculptures visible at the far end.">
+                </picture>
+              </div>
+              <figcaption>Arch corridor · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+            </figure>
+          </li>
+          <li class="onview-card">
+            <figure>
+              <div class="onview-frame">
+                <picture>
+                  <source type="image/webp" srcset="assets/hh-prakriti-arch.webp">
+                  <img src="assets/hh-prakriti-arch.jpg" width="1600" height="1067" loading="lazy"
+                       alt="A darkened tunnel installation at Handloom Haat, Janpath: illuminated concentric arches in red and teal with lettering across the beams, visitors walking through in motion toward a lit red desk at the far end.">
+                </picture>
+              </div>
+              <figcaption>Arch installation · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+            </figure>
+          </li>
+          <li class="onview-card">
+            <figure>
+              <div class="onview-frame">
+                <picture>
+                  <source type="image/webp" srcset="assets/hh-vishwakarma-entrance.webp">
+                  <img src="assets/hh-vishwakarma-entrance.jpg" width="1600" height="1067" loading="lazy"
+                       alt="The Vishwakarma Gallery entrance at Handloom Haat, Janpath: a lit red wall reading 'Visvakarma Gallery' beside a wall of framed textile swatches, visitors walking past in motion.">
+                </picture>
+              </div>
+              <figcaption>Gallery entrance · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+            </figure>
+          </li>
+          <li class="onview-card">
+            <figure>
+              <div class="onview-frame">
+                <picture>
+                  <source type="image/webp" srcset="assets/hh-archive-objects.webp">
+                  <img src="assets/hh-archive-objects.jpg" width="1600" height="1067" loading="lazy"
+                       alt="A display gallery at Handloom Haat, Janpath: raw-fibre and craft objects, baskets, spools and bowls, arranged on woven-mat pedestals beneath a hanging rope sculpture, with bilingual wall signage.">
+                </picture>
+              </div>
+              <figcaption>Archive station · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+            </figure>
+          </li>
+          <li class="onview-card">
+            <figure>
+              <div class="onview-frame">
+                <picture>
+                  <source type="image/webp" srcset="assets/hh-opening-arrival.webp">
+                  <img src="assets/hh-opening-arrival.jpg" width="1600" height="1067" loading="lazy"
+                       alt="The Handloom Haat, Janpath building at night on opening evening: colourful woven-pattern banners hang from the facade above illuminated patterned lantern pillars, visitors and staff arriving along a red carpet.">
+                </picture>
+              </div>
+              <figcaption>Opening evening · Handloom Haat, Janpath — 14 August 2026</figcaption>
+            </figure>
+          </li>
+        </ul>
       </div>
-      <div class="case reveal">
-        <div>
-          <span class="chip">Live · open to the public</span>
-          <div class="tomb">
-            CLIENT · <b>Ministry of Textiles — D.C. Handlooms</b><br>
-            VENUE · <b>Vishwakarma Gallery, Handloom Haat, Janpath, New Delhi</b><br>
-            OPENED · <b>14 August 2026</b>
+
+      <a class="skeleton-more" href="work.html">Full case study →</a>
+    </div>
+  </section>
+
+  <script>
+  // OWNER: builder-onview — self-contained, scoped to #on-view only.
+  // The gallery above is a plain CSS horizontal scroll-snap strip: it
+  // works with no JS at all, and every card's default CSS state is
+  // already opacity:1 unless this script (or a matching reduced-motion
+  // rule) says otherwise — see the /* on-view */ block in skeleton.css.
+  // This only adds Torque's scroll-in stagger, pointer tilt and hover
+  // glow when gsap and window.motion (motion-lib) both actually loaded.
+  document.addEventListener('DOMContentLoaded', function () {
+    var cards = document.querySelectorAll('#on-view .onview-card');
+    if (!cards.length) return;
+    if (typeof gsap === 'undefined' || typeof window.motion === 'undefined') {
+      cards.forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
+      return;
+    }
+    window.motion.revealOnScroll('#on-view .onview-card', { start: 'top 90%', y: 24 });
+    window.motion.tilt('#on-view .onview-frame', { maxDeg: 6 });
+    window.motion.glow('#on-view .onview-frame', { color: 'rgba(226, 66, 46, 0.32)' });
+  });
+  </script>
+
+  <!-- OWNER: builder-case-study — Handloom Haat ONLY, per
+       RB-CASE-STUDIES-PROPOSAL.md's scorecard (the one project that
+       evidences strongly). The disputed Mumbai fort-museum project named
+       in L1-CONTENT-AUDIT.md §3 must NOT appear here or anywhere on this
+       site: Cultre's own pipeline and win/loss records show it as
+       Cultre's project, not Red Banana's, and a committed grep test in
+       tests/ fails the build if its name appears anywhere in this tree
+       (this comment avoids spelling it out for exactly that reason). No
+       Jain Expositions commercial figures (WO value, invoice amounts):
+       not cleared for publication (proposal's ask #2). Built per the
+       proposal's structure recommendation, "another drawing sheet": a
+       title block of the facts already verified elsewhere on this site
+       (work.html's own tomb, L1-CONTENT-AUDIT.md #8-#9) plus a numbered
+       ledger of the decisions made, in order, rather than a photo essay.
+       Every fact string below is copied verbatim from its cited source;
+       none is composed. Kinetic treatment: window.motion.revealOnScroll
+       (Torque) steps the ledger rows in one at a time on scroll. The
+       script below only enhances: the CSS default state and the
+       no-js/.reduced-motion overrides already render the complete,
+       readable page with nothing hidden. -->
+  <section class="skeleton-section case-study" id="case-study" aria-label="Case study">
+    <div class="inner">
+      <p class="kicker">Case Study</p>
+      <h2>How six kiosks survive a gallery floor</h2>
+
+      <dl class="cs-title-block">
+        <div><dt>Client</dt><dd>Jain Expositions Pvt Ltd</dd></div>
+        <div><dt>Exhibition client</dt><dd>Ministry of Textiles, D.C. Handlooms</dd></div>
+        <div><dt>Venue</dt><dd>Vishwakarma Gallery, Handloom Haat, Janpath, New Delhi</dd></div>
+        <div><dt>Opened</dt><dd>14 August 2026</dd></div>
+      </dl>
+
+      <ol class="cs-ledger">
+        <li class="cs-step">
+          <span class="cs-num">01</span>
+          <div class="cs-step-body">
+            <h3>The deadline</h3>
+            <p>Six kiosk apps, built in parallel to a hard deadline, one per
+            app, to be ready for the gallery floor on 14 August 2026.</p>
           </div>
-        </div>
-        <div>
-          <h3>Handloom Haat interactive galleries</h3>
-          <p class="venue">Six stations · fully offline · bilingual</p>
-          <p>Six touchscreen experiences built for a national handloom exhibition —
-          from an adaptive quiz that weaves its answers into moving cloth to a
-          600-object archival deep dive. Every station runs sealed: no internet,
-          no keyboard, no mercy.</p>
-          <div class="stat-row">
-            <div class="stat"><b>6</b><span>kiosk apps</span></div>
-            <div class="stat"><b>2</b><span>languages</span></div>
-            <div class="stat"><b>3,000+</b><span>checks in test</span></div>
-            <div class="stat"><b>0</b><span>internet needed</span></div>
+        </li>
+        <li class="cs-step">
+          <span class="cs-num">02</span>
+          <div class="cs-step-body">
+            <h3>The archive</h3>
+            <p>301 catalogued objects in the archival station: a deep dive a
+            visitor can work through, object by object.</p>
           </div>
-          <div class="cta-row"><a class="more-link" href="work.html#handloom-haat">The full case &rarr;</a></div>
-        </div>
+        </li>
+        <li class="cs-step">
+          <span class="cs-num">03</span>
+          <div class="cs-step-body">
+            <h3>The house style</h3>
+            <p>Six apps, one instruction: &ldquo;make the apps homogeneous in
+            all aspects and aesthetically smooth both UI and UX wise.&rdquo;
+            A house-style pass unified them before the floor opened.</p>
+          </div>
+        </li>
+        <li class="cs-step">
+          <span class="cs-num">04</span>
+          <div class="cs-step-body">
+            <h3>The test</h3>
+            <p>A passing test only means something when failure is possible.
+            Our suites plant deliberate faults and prove the checks catch
+            them before every release.</p>
+          </div>
+        </li>
+      </ol>
+
+      <figure class="cs-figure">
+        <picture>
+          <source type="image/webp" srcset="assets/hh-arch-corridor.webp">
+          <img src="assets/hh-arch-corridor.jpg" width="1400" height="933" loading="lazy"
+               alt="A darkened corridor at Handloom Haat, Janpath, lined with concentric painted arches in white, yellow and red, suspended thread sculptures visible at the far end.">
+        </picture>
+        <figcaption>Vishwakarma Gallery, Handloom Haat, Janpath</figcaption>
+      </figure>
+
+      <a class="skeleton-more" href="work.html">Read the full case study →</a>
+    </div>
+  </section>
+
+  <script>
+  // Progressive enhancement only: the CSS default already renders every
+  // ledger row complete and readable. This only adds the scroll-in step
+  // if the shared motion-lib (Torque) and gsap both actually loaded.
+  document.addEventListener('DOMContentLoaded', function () {
+    var rows = document.querySelectorAll('.case-study .cs-step');
+    if (!rows.length) return;
+    if (typeof gsap === 'undefined' || typeof window.motion === 'undefined') {
+      rows.forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
+      return;
+    }
+    window.motion.revealOnScroll('.case-study .cs-step', { start: 'top 85%', y: 24 });
+  });
+  </script>
+
+  <!-- OWNER: builder-about — teaser only; about.html owns the full page
+       and its content, this section must not duplicate or contradict it.
+       The lede below is quoted verbatim from about.html's own <p class="lede">
+       (per the "copy facts, never compose them" rule), not composed fresh. -->
+  <section class="skeleton-section" id="about-teaser" aria-label="About">
+    <div class="inner">
+      <p class="kicker">About</p>
+      <h2 id="about-teaser-heading">Technology that disappears into the visit.</h2>
+      <p class="lede-quote">A museum-technology studio based in New Delhi, building for
+      the realities of Indian public galleries.</p>
+      <p class="lede-quote">The concept should explain the form. Every screen, sound and
+      interaction we build exists to carry the exhibition's idea, never to perform beside it.</p>
+      <a class="skeleton-more" href="about.html">About the studio →</a>
+    </div>
+  </section>
+
+  <script>
+  // Progressive enhancement only: the CSS default already renders the
+  // teaser complete and readable (see skeleton.css's "About teaser"
+  // block). This only adds motion if the shared motion-lib (Torque) and
+  // gsap both actually loaded — same pattern as the case-study script
+  // above it.
+  document.addEventListener('DOMContentLoaded', function () {
+    var section = document.getElementById('about-teaser');
+    if (!section) return;
+    if (typeof gsap === 'undefined' || typeof window.motion === 'undefined') {
+      return; // CSS rest state is already the complete, legible page
+    }
+
+    window.motion.revealText('#about-teaser .lede-quote', { by: 'lines' });
+
+    // Bricolage Grotesque's wdth axis, same 75 -> 100 beat the hero
+    // heading uses (assets/js/hero-main.js), on the teaser's own H2 only
+    // — the resting CSS value is 100, so reduced-motion/no-JS visitors
+    // see finished letterforms and never a stuck compressed state.
+    var heading = document.getElementById('about-teaser-heading');
+    if (heading) {
+      gsap.fromTo(
+        heading,
+        { '--wdth': 75 },
+        {
+          '--wdth': 100,
+          duration: window.motion.timing.enter + 0.2,
+          ease: window.motion.ease.out,
+          scrollTrigger: { trigger: section, start: 'top 80%' },
+        }
+      );
+    }
+
+    window.motion.magnetic('#about-teaser .skeleton-more', { strength: 0.4 });
+  });
+  </script>
+
+  <!-- OWNER: builder-contact — mailto + link to the full contact page,
+       matching the pattern every interior page already uses. Wave 2:
+       this is the walk's exit, styled as one final lit station in the
+       site's own grammar — the wordmark's lit dot (assets/hero.css
+       .wordmark .dot) reused as a marker, Mono kicker, Bricolage h2,
+       Torque revealText on the heading and magnetic on the mailto CTA
+       (both wired by the small inline script right after this section,
+       scoped to #contact only — hero-main.js and the header/hero markup
+       above are the integrator's and are untouched). The brief form and
+       its Worker endpoint live on contact.html and are not this section's
+       concern; this is a single exit CTA plus a real link to that page. -->
+  <section class="skeleton-section" id="contact" aria-label="Contact">
+    <div class="inner">
+      <p class="kicker"><span class="lit-dot" aria-hidden="true"></span>Contact</p>
+      <h2 id="contact-heading">Discuss your project</h2>
+      <p>Write to us with the gallery, the timeline and what the visitor should
+      walk away remembering.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" id="contact-mailto" href="mailto:hello@redbananatechsolutions.in">Email us</a>
+        <a class="btn btn-ghost" href="contact.html">How to brief us</a>
       </div>
     </div>
   </section>
+
+  <script>
+  // OWNER: builder-contact — self-contained, scoped to #contact only.
+  // No-JS and reduced-motion both leave the section exactly as the HTML
+  // above already renders it (real text, real opacity, no hidden state
+  // set here), matching the rest of this site's reduced-motion contract.
+  (function () {
+    "use strict";
+    var reduced = document.documentElement.classList.contains("reduced-motion") ||
+      (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    if (reduced) return;
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof window.motion === "undefined") return; // motion-lib missing: stays static and readable
+      window.motion.revealText("#contact-heading", { by: "words" });
+      window.motion.magnetic("#contact-mailto", { strength: 0.35 });
+    });
+  })();
+  </script>
+
 </main>
+
+<!-- OWNER: integrator — shared footer, identical markup to every interior
+     page. The CIN, GSTIN and UDYAM numbers are byte-identical to the rest
+     of the tree and are protected by tests/trust.test.mjs: do not edit
+     them here without also updating every other page and the test. -->
 <footer id="contact-cta">
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <h2>Planning a gallery?<br><em>Bring us the hard part.</em></h2>
-        <div class="cta-row" style="margin-top:26px">
-          <a class="btn btn-red" href="mailto:redbananatechsolutions@gmail.com">Write to us</a>
-          <a class="btn btn-ghost" href="contact.html">How to brief us</a>
+        <p>Red Banana Tech Solutions Pvt. Ltd.</p>
+        <div class="cta-row">
+          <a class="ctl ctl-live" href="mailto:hello@redbananatechsolutions.in">Write to us</a>
+          <a class="ctl" href="contact.html">How to brief us</a>
         </div>
       </div>
       <div class="foot-meta">
         RED BANANA TECH SOLUTIONS PVT. LTD.<br>
-        Based in New Delhi · Registered office: Ajmer, Rajasthan<br>
-        <a href="mailto:redbananatechsolutions@gmail.com">redbananatechsolutions@gmail.com</a><br><br>
+        Studio: New Delhi · Registered office: Ajmer, Rajasthan<br>
+        <a href="mailto:hello@redbananatechsolutions.in">hello@redbananatechsolutions.in</a><br><br>
         REPLICAS · Red Banana Replicas
       </div>
     </div>
+    <!-- OWNER: builder-footer — footer wayfinding nav, restoring the
+         privacy.html link dropped in the Wave 2 kinetic rebuild (it was
+         orphaned before, "Orphaned-page fix" ruling, and must stay linked).
+         Reuses the existing .foot-links class (lit-plan.css) already
+         vendored on every page: mono, underlined, hairline border-top. -->
+    <nav class="foot-links" aria-label="Footer navigation">
+      <a href="capabilities.html">Capabilities</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
     <div class="legal">
-      <span>© 2026 Red Banana Tech Solutions Pvt. Ltd.</span>
-      <span>GSTIN 08AANCR8198J1ZE · <a href="privacy.html">Privacy</a></span>
+      <span>© 2026 Red Banana Tech Solutions Pvt. Ltd. <span class="station-close" aria-hidden="true" style="display:inline-block;width:6px;height:6px;margin-left:6px;border-radius:50%;background:var(--red,#e2422e);box-shadow:0 0 8px 1px rgba(226,66,46,.28);vertical-align:middle"></span></span>
+      <span>RED BANANA TECH SOLUTIONS PVT. LTD. · CIN U62099RJ2024PTC096180 · GSTIN 08AANCR8198J1ZE · UDYAM-RJ-01-0133660<br>Registered office: Ajmer, Rajasthan · Studio: New Delhi · Write to hello@redbananatechsolutions.in · We reply within two working days.</span>
     </div>
   </div>
 </footer>
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => {
-      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => io.observe(el));
-  } else {
-    reveals.forEach(el => el.classList.add('in'));
-  }
-</script>
+
+<!-- Shared motion-lib (Torque) — DOM entrances only. -->
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/split-type.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/motion.umd.min.js"></script>
+
+<!-- Three.js r160 UMD, classic script so it sets window.THREE before the
+     ES module below imports it. -->
+<script src="assets/vendor/three.min.js"></script>
+<script type="module" src="assets/js/gallery-init.js"></script>
+
+<script src="assets/js/hero-main.js"></script>
+<script src="reveal.js" defer></script>
 </body>
 </html>
