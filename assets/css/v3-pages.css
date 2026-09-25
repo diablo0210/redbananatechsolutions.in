@@ -521,3 +521,68 @@
   [data-slot="founder-on-view"] { padding-bottom: 32px; }
   [data-slot="founder-contact"] { padding-top: 32px; }
 }
+
+/* ------------------------------------------------------------
+   WORK CASES (work.html #work-cases, 25 Sep 2026) — five further
+   article.case studies under the Handloom Haat case. Reuses .case
+   (grid), .kicker, .h3-like and .cs-tomb as they are. Phone: one
+   column, figure above text (DOM order). Desktop: two equal columns,
+   the figure side alternating left/right per article. The figure
+   carries the same museum-label chamfer box as .founder-portrait
+   above (identical clip-path, frame and fill; declared again here
+   only because that rule is sticky and 3:4, this one is 16:10 and
+   in flow). No vermilion.
+   ------------------------------------------------------------ */
+.case--study {
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: clamp(32px, 5vw, 64px) 0;
+  border-top: 1px solid var(--grey-2);
+}
+.case--study:first-child { border-top: 0; padding-top: 0; }
+.case--study:nth-of-type(even) .case-figure { order: 2; }
+.case--study.case--no-figure { grid-template-columns: 1fr; }
+.case-figure {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--grey-1);
+  border: 1px solid var(--grey-3);
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+.case-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.case-body .kicker { margin-bottom: 0.8em; }
+.case-body h2 { margin-bottom: 0.6em; }
+.case-body p { color: var(--grey-6); }
+.case-body .cs-tomb { margin-top: 20px; }
+.case-body .cs-tomb dd { color: var(--ink); }
+.case-link a, .case-credit {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+}
+.case-link a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--grey-4);
+  padding-bottom: 0.1em;
+}
+.case-link a:hover, .case-link a:focus-visible { border-bottom-color: var(--ink); }
+.case-credit { color: var(--grey-6); }
+@media (max-width: 880px) {
+  .case--study { grid-template-columns: 1fr; align-items: start; }
+  .case--study:nth-of-type(even) .case-figure { order: 0; }
+}
+/* work.html only: the generic --section-pad-y rhythm stacks between the
+   last case and the Replicas block into a dead void (rb-v3/qa/work-cases-3
+   .png); cap both edges, same fix founder.html carries above. */
+[data-slot="work-cases"] { padding-bottom: 48px; }
+[data-slot="replicas"] { padding-top: 48px; }
+@media (max-width: 760px) {
+  [data-slot="work-cases"] { padding-bottom: 32px; }
+  [data-slot="replicas"] { padding-top: 32px; }
+}

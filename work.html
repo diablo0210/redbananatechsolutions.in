@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On View · Red Banana Tech Solutions</title>
@@ -89,7 +88,7 @@
 
   <section class="v3-section first" id="handloom-haat" data-slot="handloom-haat">
     <div class="wrap inner">
-      <div class="case reveal">
+      <article class="case reveal">
         <div>
           <span class="chip">Live · open to the public</span>
           <div class="tomb">
@@ -121,7 +120,7 @@
             <div class="stat"><b>3,000+</b><span>checks in test</span></div>
           </div>
         </div>
-      </div>
+      </article>
 
       <div class="table-scroll reveal">
         <table class="stations">
@@ -183,6 +182,126 @@
       </picture>
       <figcaption>Handloom Haat, Janpath: six offline stations, opened August 2026</figcaption>
     </figure>
+  </section>
+
+  <!-- OWNER: work-cases build, 25 Sep 2026. Five further cases. Every sentence
+       below is byte-copied from content/WORK-CASES.md (first line "APPROVED BY
+       VIVEK", copy-guard truth source for this page) or is a structural label
+       named with its reason in tests/fixtures/v3/copy-allow.txt. Nothing is
+       composed. Screenshots of our own live sites sit in assets/work/. -->
+  <section class="v3-section" id="work-cases" data-slot="work-cases">
+    <div class="wrap inner">
+
+      <!-- Photograph: assets/hh/MANIFEST.md documents no frame showing a
+           kiosk or touchscreen station. The closest documented frame is the
+           "Vishwakarma Gallery" wall signage (IMG_0320), the gallery these
+           six stations run in; used here without a caption, none invented. -->
+      <article class="case case--study reveal" id="hh-kiosk-apps">
+        <figure class="case-figure">
+          <picture>
+            <source type="image/webp" srcset="assets/hh/chapter/vishwakarma-signage-1600.webp">
+            <img src="assets/work/hh-vishwakarma-signage-1600.jpg" width="1600" height="1067" alt="Handloom Haat kiosk apps" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="case-body">
+          <span class="kicker">Kiosk apps</span>
+          <h2 class="h3-like">Handloom Haat kiosk apps</h2>
+          <p>Six touchscreen kiosk apps engineered for the Vishwakarma Gallery at Handloom Haat, Janpath: The Handloom Quiz (32" touch), Films of the Loom (15.6" + wall screen), Voices of the Loom (32" touch), Living Traditions (32" touch), Stories from the Archive (22" portrait) and Sounds of the Loom (22" portrait). Built for Windows and Android, running fully offline. 3,000+ checks in test across a 12-suite regression, including a 47-minute soak test.</p>
+          <dl class="cs-tomb">
+            <div><dt>Client</dt><dd>Ministry of Textiles, D.C. Handlooms</dd></div>
+            <div><dt>Venue</dt><dd>Vishwakarma Gallery, Handloom Haat, Janpath, New Delhi</dd></div>
+            <div><dt>Built</dt><dd>Six touchscreen kiosk apps</dd></div>
+            <div><dt>Platforms</dt><dd>Windows and Android</dd></div>
+            <div><dt>Scale</dt><dd>3,000+ checks in test</dd></div>
+            <div><dt>Opened</dt><dd>14 August 2026</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="case case--study reveal" id="handloomhaat-in">
+        <figure class="case-figure">
+          <picture>
+            <source type="image/webp" srcset="assets/work/handloomhaat.in-desktop.webp">
+            <img src="assets/work/handloomhaat.in-desktop.jpg" width="1600" height="1000" alt="handloomhaat.in" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="case-body">
+          <span class="kicker">Website</span>
+          <h2 class="h3-like">handloomhaat.in</h2>
+          <p>"Handloom Haat · हैंडलूम हाट." "Handloom Haat at Janpath, New Delhi, set up by the Ministry of Textiles to market and showcase handloom from across India. Its Vishwakarma Gallery holds an exhibition of India's handloom traditions in film, voice, photograph and sound." Built and hosted by Red Banana on Cloudflare, bilingual (English/Hindi), with a documentary film player, transcript panel, weave finder and a public quiz leaderboard.</p>
+          <dl class="cs-tomb">
+            <div><dt>Client</dt><dd>Ministry of Textiles, D.C. Handlooms</dd></div>
+            <div><dt>Built</dt><dd>Handloom Haat website</dd></div>
+            <div><dt>Technology</dt><dd>Cloudflare Worker handloomhaat-site</dd></div>
+            <div><dt>Languages</dt><dd>English/Hindi</dd></div>
+          </dl>
+          <p class="case-link"><a href="https://handloomhaat.in/" rel="noopener" target="_blank">handloomhaat.in</a></p>
+        </div>
+      </article>
+
+      <article class="case case--study reveal" id="museum-mosaic">
+        <figure class="case-figure">
+          <picture>
+            <source type="image/webp" srcset="assets/work/museummosaic.in-desktop.webp">
+            <img src="assets/work/museummosaic.in-desktop.jpg" width="1600" height="1000" alt="Museum Mosaic" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="case-body">
+          <span class="kicker">Digital archive</span>
+          <h2 class="h3-like">Museum Mosaic</h2>
+          <!-- Credit line: the approved text read "Red Banana/Cultre"; Vivek's
+               ruling 25 Sep 2026 credits Museum Mosaic to Red Banana only.
+               That one sentence drops "/Cultre"; nothing else changed. -->
+          <p>"Stories worth stepping into — Museum Mosaic." "Explore people, places and ideas shaping museums in India. Read individual Museum Mosaic stories online." A three-edition digital archive (868 pages total) built and hosted by Red Banana at museummosaic.in, with in-reader search, resumable reading and shareable page links.</p>
+          <dl class="cs-tomb">
+            <div><dt>Built</dt><dd>Three editions</dd></div>
+            <div><dt>Scale</dt><dd>868 PDF pages</dd></div>
+            <div><dt>Features</dt><dd>in-reader search, resumable reading and shareable page links</dd></div>
+          </dl>
+          <p class="case-link"><a href="https://museummosaic.in/" rel="noopener" target="_blank">museummosaic.in</a></p>
+        </div>
+      </article>
+
+      <article class="case case--study reveal" id="ashlinmathew-com">
+        <figure class="case-figure">
+          <picture>
+            <source type="image/webp" srcset="assets/work/ashlinmathew.com-desktop.webp">
+            <img src="assets/work/ashlinmathew.com-desktop.jpg" width="1600" height="1000" alt="ashlinmathew.com" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="case-body">
+          <span class="kicker">Website</span>
+          <h2 class="h3-like">ashlinmathew.com</h2>
+          <p>"Ashlin Mathew — Senior Associate Editor, Outlook." A site built and hosted by Red Banana at ashlinmathew.com. "Ashlin Mathew is Senior Associate Editor at Outlook. Explore her reporting, interviews and analysis on politics, human rights, health, gender and culture." 153 articles, publication and year filters, and nine linked video interviews.</p>
+          <dl class="cs-tomb">
+            <div><dt>Scale</dt><dd>153 articles</dd></div>
+            <div><dt>Features</dt><dd>publication and year filters</dd></div>
+            <div><dt>Features</dt><dd>nine linked video interviews</dd></div>
+          </dl>
+          <p class="case-link"><a href="https://ashlinmathew.com/" rel="noopener" target="_blank">ashlinmathew.com</a></p>
+        </div>
+      </article>
+
+      <!-- STM & Associates: no image and no link yet. The live domain
+           (stmandassociates.in) currently serves a design chooser, noindex.
+           Link and screenshot are added once the chosen version goes live.
+           Copy below is only the firm's own title phrase and meta description
+           from /home/vivek/Cultre/fleet/stm-site/build/index.html, verbatim
+           (ICAI advertising rules: no superlatives, fees or testimonials). -->
+      <article class="case case--study case--no-figure reveal" id="stm-associates">
+        <div class="case-body">
+          <span class="kicker">Chartered Accountants</span>
+          <h2 class="h3-like">STM &amp; Associates</h2>
+          <p>STM &amp; Associates, New Delhi. Explore our audit, taxation, risk assurance, CSR, corporate advisory and accounting services.</p>
+          <dl class="cs-tomb">
+            <div><dt>Client</dt><dd>STM &amp; Associates</dd></div>
+            <div><dt>Location</dt><dd>New Delhi</dd></div>
+          </dl>
+          <p class="case-credit">Website by Red Banana</p>
+        </div>
+      </article>
+
+    </div>
   </section>
 
   <section class="v3-section" id="replicas" data-slot="replicas">
