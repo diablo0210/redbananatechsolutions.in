@@ -65,7 +65,9 @@
      gsap.ticker drives lenis.raf, lagSmoothing(0)
      ============================================================ */
   var lenis = null;
-  if (HAS_LENIS) {
+  // Bob 47, 25 Sep 2026 (second audit R01): no smooth-scroll under
+  // prefers-reduced-motion; every later use already guards on `lenis`.
+  if (HAS_LENIS && !REDUCED) {
     lenis = new Lenis({ duration: 1.6, wheelMultiplier: 1.25 });
 
     if (HAS_SCROLLTRIGGER) {

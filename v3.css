@@ -1189,6 +1189,12 @@ html.js:not(.reduced-motion) .ring-fallback { display: none; }
     max-width: none;
     bottom: calc(var(--section-pad-y) + 16px); /* Bob 47 fix C2 */
   }
+  /* Bob 47, 25 Sep 2026 (second audit B04): the scrim's -24px right inset
+     reached 4px past the phone viewport (scrollWidth 394 at 390) and gave
+     the home page a sideways wobble. Keep it inside the 20px gutter. */
+  html.js:not(.reduced-motion) .engineering-captions::before {
+    inset: -28px -16px -28px -12px;
+  }
 }
 
 /* Short/landscape contract viewport (844x390 measured: h2 61px +
