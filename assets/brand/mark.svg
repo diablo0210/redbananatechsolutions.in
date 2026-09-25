@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -8 164 148" role="img" aria-label="Red Banana mark">
+  <!-- Red Banana pixel-mosaic mark. 14 crescent tiles + 1 plug group.
+       Colours measured pixel-for-pixel from red_banana_lockup.png (100% match, zero deviation):
+       #e2422e (light), #c2362a, #a92f21, #7a1f16 (dark accent).
+       data-order = assembly sequence for the loader, stem end (top) to plug (tail), per LOGO-MOTION.md. -->
+  <g id="rb-tiles">
+    <rect id="tile-1"  data-order="1"  x="28"  y="0"   width="15" height="15" fill="#e2422e"/>
+    <rect id="tile-2"  data-order="2"  x="12"  y="14"  width="15" height="15" fill="#c2362a"/>
+    <rect id="tile-3"  data-order="3"  x="2"   y="30"  width="15" height="15" fill="#e2422e"/>
+    <rect id="tile-4"  data-order="4"  x="0"   y="48"  width="15" height="15" fill="#a92f21"/>
+    <rect id="tile-5"  data-order="5"  x="2"   y="66"  width="15" height="15" fill="#e2422e"/>
+    <rect id="tile-6"  data-order="6"  x="10"  y="83"  width="15" height="15" fill="#c2362a"/>
+    <rect id="tile-7"  data-order="7"  x="24"  y="97"  width="15" height="15" fill="#e2422e"/>
+    <rect id="tile-8"  data-order="8"  x="41"  y="107" width="15" height="15" fill="#a92f21"/>
+    <rect id="tile-9"  data-order="9"  x="44"  y="90"  width="15" height="15" fill="#7a1f16"/>
+    <rect id="tile-10" data-order="10" x="59"  y="112" width="15" height="15" fill="#e2422e"/>
+    <rect id="tile-11" data-order="11" x="77"  y="110" width="15" height="15" fill="#c2362a"/>
+    <rect id="tile-12" data-order="12" x="62"  y="94"  width="15" height="15" fill="#7a1f16"/>
+    <rect id="tile-13" data-order="13" x="94"  y="102" width="15" height="15" fill="#e2422e"/>
+    <rect id="tile-14" data-order="14" x="108" y="89"  width="15" height="15" fill="#a92f21"/>
+  </g>
+  <g id="tile-plug" data-order="15" fill="#e2422e">
+    <rect x="124" y="80" width="17" height="21" rx="2"/>
+    <rect x="141" y="83.5" width="11" height="4.5"/>
+    <rect x="141" y="92.5" width="11" height="4.5"/>
+  </g>
+</svg>

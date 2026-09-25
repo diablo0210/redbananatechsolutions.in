@@ -1,0 +1,1299 @@
+/* ============================================================
+   v3.css — Red Banana v3 "THE OBJECT"
+   Written by the INTEGRATOR, Thursday 24 September 2026, on branch
+   rb-bg/v3-object, per RB-V3-DIRECTION-CONTRACT.md §4-5.
+
+   This file owns: tokens, type scale, section rhythm, pill buttons,
+   the nav chrome, reduced-motion rules and scripts-off rules. Four
+   builder lanes (HERO, WALL AND LIST, CHAPTERS, ASSET) add their own
+   files (assets/js/v3-hero.css, assets/css/v3-wall.css,
+   assets/css/v3-chapters.css) which load AFTER this one and may use
+   every token below. See parts/SLOTS.md for the full contract.
+
+   Ground #080808, ink #E1E5E5, --red #e2422e copied byte-for-byte from
+   styles.css's own :root (this site's accent since before this
+   rebuild). Type is a placeholder pick — see the TYPE section below
+   and DESIGN.md — exposed as --font-display so a one-line swap covers
+   the whole site once the WALL AND LIST lane rules on the real face.
+   ============================================================ */
+
+/* ---------- fonts: self-hosted, already vendored at
+   assets/fonts/redbanana/. Familjen Grotesk is the INTEGRATOR's
+   placeholder pick (contract §4 names it explicitly as the "use now"
+   choice); IBM Plex Mono is the numerals/figures face for both display
+   and body use per contract. Bricolage Grotesque is also vendored and
+   available to the type lane as an alternative without a new fetch. ---------- */
+@font-face {
+  font-family: "Familjen Grotesk";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("assets/fonts/redbanana/familjen-grotesk-var.woff2") format("woff2-variations"),
+       url("assets/fonts/redbanana/familjen-grotesk-var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url("assets/fonts/redbanana/bricolage-grotesque-var.woff2") format("woff2-variations"),
+       url("assets/fonts/redbanana/bricolage-grotesque-var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/redbanana/ibm-plex-mono-500.woff2") format("woff2");
+}
+
+/* ============ TOKENS ============ */
+:root {
+  /* Ground + ink, contract §4, exact values */
+  --ground: #080808;
+  --ink: #E1E5E5;
+
+  /* Grey ramp, six steps, our own values (Moto's LOGIC — a ramp from
+     ground to ink — not its numbers). Lightness measured with
+     colorsys.rgb_to_hls on each hex, roughly geometric:
+       ground  #080808  L 3.1%
+       grey-1  #141414  L 7.8%
+       grey-2  #212121  L 12.9%
+       grey-3  #333333  L 20.0%
+       grey-4  #525252  L 32.2%
+       grey-5  #7d7d7d  L 49.0%
+       grey-6  #aeaeae  L 68.2%
+       ink     #E1E5E5  L 89.0%
+     grey-1..grey-3 sit near the ground for hairlines, card fills and
+     dividers; grey-4..grey-6 sit toward the ink for muted text and
+     disabled states. See DESIGN.md for the documented ramp. */
+  --grey-1: #141414;
+  --grey-2: #212121;
+  --grey-3: #333333;
+  --grey-4: #525252;
+  --grey-5: #7d7d7d;
+  --grey-6: #aeaeae;
+
+  /* Vermilion, copied byte for byte from styles.css's :root. One
+     colour, appears only where Red Banana's name appears and on the
+     live state of one control (contract §2). */
+  --red: #e2422e;
+  --red-deep: #a92f21;
+
+  /* Radii */
+  --radius-pill: 99vw;
+  --radius: 2px;
+
+  /* ---------- TYPE ----------
+     Placeholder pick, INTEGRATOR's choice for a working shell: Familjen
+     Grotesk for both display and body (it is a grotesk built with a
+     display-weight upper range, legible at both h1 and body sizes).
+     IBM Plex Mono for figures. The real display/body pairing is the
+     WALL AND LIST lane's call (DESIGN.md note) between Instrument Sans,
+     Hanken Grotesk, Familjen Grotesk or Bricolage Grotesque, all
+     already vendored — swapping --font-display and --font-body below
+     is the entire migration; no selector elsewhere in this file names
+     a font-family directly. */
+  --font-display: "Familjen Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Familjen Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* Type scale, contract §4 */
+  --size-h1: clamp(3rem, 8vw, 6.4rem);
+  --size-h2: clamp(2rem, 5vw, 3.6rem);
+  --size-h3: clamp(1.25rem, 2.4vw, 1.75rem);
+  --size-body: clamp(1rem, 1vw + 0.85rem, 1.125rem);
+  --size-eyebrow: 0.8125rem;
+
+  --tracking-display: -0.02em;
+
+  /* Section rhythm */
+  --section-pad-y: clamp(72px, 12vw, 160px);
+  --section-pad-x: clamp(20px, 5vw, 64px);
+  --content-max: 1240px;
+
+  color-scheme: dark;
+}
+
+/* ============ RESET ============ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: auto; } /* Lenis drives smoothing; native smooth-scroll would fight it */
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--ink); color: var(--ground); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  margin: 0;
+  text-wrap: balance;
+}
+h1 { font-size: var(--size-h1); line-height: 0.98; }
+h2 { font-size: var(--size-h2); line-height: 1.02; }
+h3 { font-size: var(--size-h3); line-height: 1.15; }
+p { margin: 0 0 1em; max-width: 62ch; }
+p:last-child { margin-bottom: 0; }
+
+.mono, .num, .kicker, [data-figure] {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- skip link ---------- */
+.skip-link {
+  position: fixed; top: 8px; left: 8px; z-index: 200;
+  padding: 10px 14px;
+  background: var(--ink); color: var(--ground);
+  font-family: var(--font-display); font-weight: 700;
+  transform: translateY(-160%);
+  border-radius: var(--radius);
+}
+.skip-link:focus { transform: none; }
+.skip-link:focus-visible, a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--ink); outline-offset: 3px;
+}
+
+/* ============ LAYOUT PRIMITIVES ============ */
+.wrap {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--section-pad-x);
+  position: relative;
+  z-index: 1;
+}
+
+/* Every v3 spine section shares this rhythm; slot CSS files add their
+   own interior layout without needing to re-declare padding. */
+.v3-section {
+  padding: var(--section-pad-y) 0;
+  position: relative;
+}
+.v3-section .kicker {
+  font-size: var(--size-eyebrow);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  /* NOT vermilion: SIGNATURE-MOMENTS.md's "vermilion budget" reserves
+     --red for exactly three places (wordmark dot, the live capability
+     row's number, the footer primary button fill) plus one open
+     amendment — a kicker is none of those. */
+  color: var(--grey-6);
+  margin-bottom: 1.2em;
+  display: block;
+}
+
+/* The one inverted section (NUMBERS WALL, contract §3.3): light
+   ground, dark ink. Flip via a single class so the token chain stays
+   intact for anything nested inside it. */
+.v3-section--inverted {
+  background: var(--ink);
+  color: var(--ground);
+}
+.v3-section--inverted .kicker { color: var(--grey-4); }
+
+/* ============ PILL BUTTONS ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.85em 1.6em;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  border: 1px solid var(--grey-3);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  min-height: 44px;
+}
+.btn-primary {
+  /* NOT vermilion by default: SIGNATURE-MOMENTS.md reserves --red for
+     exactly three places, and the ONLY one of them that is a button
+     fill is "the fill of the primary footer button" (moment 7) — see
+     the #footer-statement override below. Every other .btn-primary
+     (the hero's CTA included) gets the neutral ink-on-ground pill. */
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ground);
+}
+.btn-primary:hover, .btn-primary:focus-visible { background: var(--grey-6); border-color: var(--grey-6); }
+#footer-statement .btn-primary {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--ground);
+}
+#footer-statement .btn-primary:hover, #footer-statement .btn-primary:focus-visible {
+  /* A11Y FIX defect 2 (RB-V3-QA-A11Y.md DEFECT 2): rest state keeps
+     --ground text on --red = 4.818:1, passes. Hover/focus-visible were
+     leaving that same dark text on --red-deep = 2.971:1, a real AA fail
+     that got WORSE than rest on hover or keyboard focus. Text swaps to
+     --ink here (rgb(225,229,229) on --red-deep rgb(169,47,33) =
+     5.309:1, measured via .hover()/.focus() live, not CSS math) so all
+     three states -- rest, hover, focus-visible -- clear 4.5:1. */
+  background: var(--red-deep); border-color: var(--red-deep); color: var(--ink);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--grey-4);
+}
+.btn-ghost:hover, .btn-ghost:focus-visible { border-color: var(--ink); }
+.v3-section--inverted .btn-ghost { border-color: var(--grey-5); color: var(--ground); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+/* ============ NAV, backdrop blur ============ */
+.v3-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px var(--section-pad-x);
+  background: rgba(8, 8, 8, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  /* No border-bottom / background band: Bob's ruling (shell-1440x900.png
+     review) is that the nav is ONLY a backdrop-blur strip floating over
+     the black gallery room, nothing else — see also .hero.v3-section's
+     padding:0 override below, which removes the flat grey band that
+     used to sit under this nav before the room's own black reached it. */
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+/* JS toggles this above 992px on scroll-down; see v3-core.js */
+.v3-nav.is-hidden { transform: translateY(-100%); }
+
+/* ============ WORDMARK / LOGO, LOGO-MOTION.md wiring, 25 Sep 2026 ============
+   The nav wordmark is now the inline mosaic mark + "RED BANANA" outlined
+   path (assets/brand/mark.svg tile geometry + assets/brand/lockup-dark.svg's
+   rb-word-redbanana path, tagline dropped per the spec's own 28px legibility
+   test — LOGO-MOTION.md "Nav legibility at 28px, tested"). The mark's own
+   vermilion tiles now spend contract Sec8 A2's nav vermilion place — the
+   logo IS the brand's own colour and counts as the name — so the old plain
+   ".dot" span is gone, not merely restyled. */
+.v3-nav .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.wordmark-lockup {
+  /* 25 Sep 2026, Bob's logo-loader-fit-1440x900.png defect: at the old
+     28px box height the mosaic mark itself rendered only ~21px tall (the
+     icon does not fill the full lockup viewBox) and "RED BANANA" read at
+     well under 9px cap height — unreadable. 42.19px is the box height
+     that makes the mark exactly 32px tall (measured via
+     .wordmark-tiles.getBoundingClientRect(), 21.24px mark per 28px box ->
+     28 * 32/21.24). The mobile override below re-derives the same ratio
+     for a 28px mark. The svg is a single flex item in .v3-nav (which is
+     align-items:center), so growing this box keeps it vertically centred
+     with the nav links automatically. */
+  height: 42.19px;
+  width: auto;
+  display: block;
+  /* The scaled word (below) now runs past this box's own viewBox width —
+     the root <svg> defaults to overflow:hidden, which was silently
+     clipping "RED BANANA" to "RED BANA". The box's own width (used for
+     nav flex spacing) is unchanged; this only stops the paint-clip. */
+  overflow: visible;
+}
+/* Ripple: hover/:focus-visible set ONE class, .is-live, on the <a> (wired in
+   v3-core.js) — contract law 2, one class both inputs. Each of the 14 tiles
+   (the plug excluded, per LOGO-MOTION.md (b)) lifts translateY(-2px) and
+   back, 20ms apart in data-order sequence via the inline --i custom
+   property, snap ease, 200ms per tile — full ripple 14x20+200=480ms. The
+   wordmark path itself never moves. Transform only, fill-box/center so the
+   lift reads as a per-tile bounce, not a shared-origin skew. */
+.wordmark-tiles rect[data-order] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.wordmark.is-live .wordmark-tiles rect[data-order] {
+  animation: v3-wordmark-ripple 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc((var(--i) - 1) * 20ms);
+}
+@keyframes v3-wordmark-ripple {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+/* Scroll-past-hero collapse (index.html only, wired in v3-core.js by
+   testing for .hero's presence — interior pages have no hero and keep the
+   full lockup per the brief). clip-path + opacity only, never an animated
+   width, so it costs compositor work only (LOGO-MOTION.md (b)). */
+.wordmark-word-wrap {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transition: clip-path 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Same 25 Sep fix: the mark and the word share one viewBox, so growing
+     the box (above) to fit the 32px mark only lifted the word to ~8.3px
+     cap height, still short of the 11px floor. Scaled independently here,
+     fill-box/left-center so it grows off its own left edge (into the
+     nav's open space) rather than climbing over the mark. Measured
+     result: 11.6px cap height at 1440x900. */
+  transform-box: fill-box;
+  transform-origin: left center;
+  transform: scale(1.4);
+}
+.v3-nav.is-past-hero .wordmark-word-wrap {
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
+}
+
+.v3-nav-links {
+  display: flex;
+  gap: 28px;
+}
+.v3-nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grey-6);
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.v3-nav-links a:hover, .v3-nav-links a:focus-visible, .v3-nav-links a.is-current {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.v3-menu-toggle {
+  display: none;
+  background: none; border: 0; color: var(--ink);
+  font-family: var(--font-mono); font-size: 0.8125rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  min-height: 44px; min-width: 44px;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .v3-nav-links { display: none; }
+  .v3-nav-links.is-open {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    top: 60px;
+    flex-direction: column;
+    gap: 0;
+    background: var(--ground);
+    padding: 24px var(--section-pad-x);
+  }
+  .v3-nav-links.is-open a { padding: 16px 0; border-bottom: 1px solid var(--grey-2); width: 100%; }
+  .v3-menu-toggle { display: block; }
+  /* 25 Sep 2026, same defect, phone target: mark 28px (up from ~21px),
+     word >=9px cap height. 36.92px is 28 * 32/21.24's mobile equivalent
+     (28 * 28/21.24) -- same mark-fraction ratio, smaller target height.
+     1.3x word scale measured to ~9.4px cap height, and it still clears
+     the menu button with room at 390px (measured, no wrap). */
+  .wordmark-lockup { height: 36.92px; }
+  .wordmark-word-wrap { transform: scale(1.3); }
+}
+
+/* ============ LOADER, first-visit only ============
+   LOGO-MOTION.md (a): the tiles assemble along the curve from the stem end,
+   Torque snap ease, 28ms apart, plug last after a 90ms pause, the two word
+   lines blur-in with 40ms stagger, then the assembled mark hands off to the
+   EXISTING curtain/lighting sequence (window.V3.onArrival, unchanged) —
+   v3-core.js adds these beats onto the SAME arrivalTimeline at new absolute
+   positions (0 to 1.224s) alongside, not instead of, Moment 1's own
+   house/work/show/headline/curtain beats. */
+.v3-loader {
+  position: fixed; inset: 0; z-index: 300;
+  background: var(--ground);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.5s ease;
+}
+.v3-loader[hidden] { display: none; }
+/* Scripts-off floor: the loader has no way to ever remove itself without
+   v3-core.js (runLoader() sets [hidden]), so it must never paint at all
+   when JS cannot run — otherwise it would sit fixed/inset:0 forever. */
+html:not(.js) .v3-loader { display: none; }
+
+/* CLOSER fix, 25 Sep (RB-V3-QA-VISUAL.md logo-loader-size-1440x900-1.2s.png):
+   the previous fix sized and centred the MARK (.loader-tiles, the
+   assembling mosaic icon) alone, off a translate(-18.9695%,-46.8875%) hack
+   keyed to the icon's own position inside the lockup SVG's viewBox (0 0
+   1050 360) — that left the lockup box itself running wider than the
+   viewport, clipping "RED BANANA / TECH SOLUTIONS PVT. LTD." off the right
+   edge. Fixed by sizing and centring the WHOLE lockup (icon + both text
+   lines, one SVG) instead: width clamp(320px,42vw,640px) desktop /
+   clamp(240px,82vw,340px) phone keeps both edges inside the viewport with
+   real margin at every width in between, and a plain translate(-50%,-50%)
+   off the left:50%/top:50% anchor centres the lockup's own box — not the
+   icon — on the viewport centre, both axes. The icon-centring translate
+   hack and .v3-loader's overflow:hidden (added only to contain that
+   spill) are removed: nothing overflows now, so nothing needs hiding.
+   Text lines still scale with the icon because it stays one SVG scaled as
+   a single unit by this one width rule — no separate transform on
+   .loader-tiles or the word paths — and the tile-snap keyframes/timing/
+   order below, and v3-core.js's own curtain clip-path (a separate reveal
+   effect, not a spill fix), are untouched. */
+.loader-lockup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(320px, 42vw, 640px);
+  height: auto;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 760px) {
+  .loader-lockup {
+    width: clamp(240px, 82vw, 340px);
+  }
+}
+/* Rest state while JS is present and reduced-motion is not set: tiles and
+   plug start collapsed/invisible, words start blurred/invisible. v3-core.js
+   animates FROM this state. will-change is added by v3-core.js only for
+   the loader's active window (mount to curtain-end) and removed the
+   instant the curtain finishes — never left standing (LOGO-MOTION.md (e)). */
+html.js:not(.reduced-motion) .loader-tiles rect[data-order],
+html.js:not(.reduced-motion) .loader-plug {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
+}
+/* Tiles/plug animate via THIS CSS @keyframes rule (below), triggered by
+   v3-core.js adding .is-in at each beat's exact GSAP timeline position --
+   not a GSAP .to() tween on these elements. Found live: GSAP 3.13's own
+   scale+transformOrigin tween on more than one SVG geometry element
+   sharing a transformed parent <g> collapses ALL of them onto the SAME
+   rendered bounding box (every tile lands on tile-14's position) --
+   reproduced in isolation with gsap.to(), svgOrigin, transformOrigin,
+   with/without the parent transform, timeline or independent tweens, all
+   identical wrong result. Plain CSS animation (this rule) renders each
+   tile at its own correct position, transform/opacity only, same snap
+   ease and duration the spec asks for -- GSAP still owns the TIMING
+   (v3-core.js's arrivalTimeline.call()), only the interpolation moved. */
+html.js:not(.reduced-motion) .loader-tiles rect[data-order].is-in,
+html.js:not(.reduced-motion) .loader-plug.is-in {
+  animation: v3-tile-snap-in 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+html.js:not(.reduced-motion) .loader-plug.is-in {
+  animation-duration: 0.22s; /* plug's own duration, spec-exact */
+}
+html.js:not(.reduced-motion) .loader-word1,
+html.js:not(.reduced-motion) .loader-word2 {
+  opacity: 0;
+  filter: blur(6px);
+}
+/* No-js (unreachable in practice, since the whole loader is display:none
+   above — belt and braces) and reduced-motion: the static assembled lockup,
+   no keyframes, per LOGO-MOTION.md's "Reduced motion" line. */
+html:not(.js) .loader-tiles rect[data-order],
+html:not(.js) .loader-plug,
+html.reduced-motion .loader-tiles rect[data-order],
+html.reduced-motion .loader-plug {
+  transform: none;
+  opacity: 1;
+}
+html:not(.js) .loader-word1,
+html:not(.js) .loader-word2,
+html.reduced-motion .loader-word1,
+html.reduced-motion .loader-word2 {
+  opacity: 1;
+  filter: none;
+}
+@keyframes v3-tile-snap-in {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes v3-word-blur-in {
+  0% { opacity: 0; filter: blur(6px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+/* ============ REVEAL PRIMITIVE, CSS rest state ============
+   window.V3.reveal (v3-core.js) animates FROM this rest state TO the
+   visible state (blur 0, yPercent 0, opacity 1). Scripts-off rule: this
+   rest state only applies once <html> carries .js (set by an inline
+   script in <head>, same pattern as the v2 tree's no-js class) AND the
+   visitor has not asked for reduced motion. With no JS, or with
+   reduced motion, every [data-reveal] element is fully visible from
+   first paint — see the two override blocks below. */
+html.js:not(.reduced-motion) [data-reveal] {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(110%);
+}
+/* Plain-CSS-transition path for content already in view at load
+   (see v3-core.js reveal()'s "alreadyInView" branch): removing the
+   [data-reveal] attribute lets this element fall through to the
+   plain, un-hidden state below, and this transition animates that
+   change without ever going through GSAP's yPercent/transform
+   pipeline, which proved unreliable for triggers already past their
+   ScrollTrigger start point at creation time. */
+html.js:not(.reduced-motion) .v3-reveal-in-view {
+  transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    filter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+/* no-js: never hide content */
+html:not(.js) [data-reveal],
+html.reduced-motion [data-reveal] {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+/* ============ REDUCED MOTION ============
+   Belt-and-braces: also honour the media query directly, in case the
+   .reduced-motion class (set by v3-core.js from matchMedia, so CSS and
+   JS agree on one source of truth) has not been applied yet — e.g. a
+   visitor whose stylesheet loads before v3-core.js runs. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; filter: none !important; transform: none !important; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* ============ SCRIPTS-OFF FLOOR ============
+   No rule anywhere in this file (or any v3-*.css a lane adds) may set
+   opacity:0 on real content without gating it behind html.js — the two
+   blocks above are the only such gate. A canvas or scene mount is
+   always paired with a <picture> poster in front of it (contract §3.1,
+   §6) so a script failure still shows a complete frame. */
+canvas { background: var(--grey-1); }
+
+/* ============ FOOTER ============ */
+/* Bare class, not ID-scoped: the two footers on this site use different
+   ids (#footer-statement on index.html, #contact-cta on the seven interior
+   pages) but share this one static lockup, LOGO-MOTION.md (c) — 36px,
+   static, no listeners, no animation classes, above the company-name line. */
+.foot-lockup {
+  height: 36px;
+  width: auto;
+  display: block;
+  margin: 0 0 14px;
+}
+#contact-cta {
+  background: var(--grey-1);
+  border-top: 1px solid var(--grey-2);
+  padding: var(--section-pad-y) 0 40px;
+}
+#contact-cta .foot-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+}
+#contact-cta h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); margin-bottom: 0.6em; }
+#contact-cta h2 em { font-style: normal; color: var(--grey-6); }
+#contact-cta .foot-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--grey-6);
+  line-height: 1.8;
+}
+#contact-cta .foot-meta a { color: var(--ink); border-bottom: 1px solid var(--grey-4); }
+.foot-links {
+  display: flex; flex-wrap: wrap; gap: 24px;
+  border-top: 1px solid var(--grey-2);
+  padding-top: 24px; margin-top: 24px;
+  font-family: var(--font-mono); font-size: 0.8125rem;
+}
+.foot-links a { text-decoration: underline; text-underline-offset: 3px; color: var(--grey-6); }
+.foot-links a:hover, .foot-links a:focus-visible { color: var(--ink); }
+.legal {
+  margin-top: 24px;
+  display: flex; flex-direction: column; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  /* A11Y FIX defect 1 (RB-V3-QA-A11Y.md DEFECT 1): was --grey-5
+     rgb(125,125,125), measured 4.475:1 on #contact-cta's rgb(20,20,20)
+     ground -- fails the 4.5:1 AA floor on 6 of 7 pages (index.html's
+     own footer sits on the darker --ground and already passed at
+     4.865:1, but .legal is one shared rule for both footers, so this
+     single-token change is what fixes every page identically). --grey-6
+     rgb(174,174,174) measures 8.30:1 on rgb(20,20,20) and 9.03:1 on
+     --ground -- both comfortably clear AA, computed via the audit's own
+     relative-luminance method, not read from the hex. */
+  color: var(--grey-6);
+}
+@media (max-width: 760px) {
+  #contact-cta .foot-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ RESPONSIVE type/section floor ============ */
+@media (max-width: 760px) {
+  :root { --section-pad-y: clamp(56px, 14vw, 96px); }
+}
+
+/* ============================================================
+   SLOT LAYOUT — basic stacking/rhythm for each of the nine sections,
+   so the shell reads correctly before any lane's own CSS lands. A
+   lane's stylesheet (loaded after this one, see index.html's hand-off
+   comments) may override any of this per-property.
+   ============================================================ */
+
+/* ---------- 1. hero ----------
+   RE-COMPOSED by the DIRECTOR, 24 Sep, per Bob's ruling on
+   shell-1440x900.png (the object was sitting behind/overlapping the
+   headline). New shape, desktop (see the >760px default below) and
+   phone (@media max-width:760px, this file's one real breakpoint —
+   matches the nav breakpoint's own convention):
+     - .hero .inner is exactly one viewport tall (min-height:100vh,
+       and nothing in normal flow to push it taller — every child
+       below is position:absolute against it, see the note under
+       .hero .inner).
+     - .hero.v3-section itself gets padding:0 (below, in the section
+       rules), not this block, so .inner's black stage starts flush
+       under the fixed nav with no gap — that gap was the flat grey
+       band Bob flagged: the general `.v3-section{padding:var(
+       --section-pad-y) 0}` rule was pushing .inner (and so the
+       stage's own #000 background) down by --section-pad-y (160px at
+       1440px) before it started, leaving that much of the section's
+       plain --ground fill showing above it, under the nav.
+     - .hero-content is now a second full-bleed absolute layer (same
+       inset:0 as .v3-hero-stage), laid out as a column flexbox so it
+       can place .hero-text (kicker+h1+p) and .cta-row independently
+       without either being pushed around by the other's height —
+       see the .hero-text/.cta-row rules below for why. It is
+       pointer-events:none so pointer/hover events still reach the
+       canvas underneath for the hero lane's parallax (contract §3.1)
+       everywhere except the two children that need clicks. */
+.hero .inner {
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 0;
+}
+/* .v3-hero-stage itself, and the poster/canvas fill rule inside it,
+   are v3-hero.css's own job per parts/WIRING.md ("v3-hero.css's
+   .v3-hero-stage fills whatever box it is given (height:100%)"). This
+   fallback rule only guarantees the stage still fills the section and
+   the poster/canvas still stack sanely if v3-hero.css has not loaded
+   (e.g. 404) — v3-hero.css, loaded after this file, is expected to own
+   the real styling.
+   Composition change: the stage box is now the LOWER TWO-THIRDS of
+   .inner (top:33.333% / bottom:0) instead of the full 0-100% bleed —
+   contract's new ruling puts the object in the lower two-thirds,
+   headline in the top third, never overlapping. The hero lane's own
+   scene "auto-fits by bounding box" (RB-V3-DIRECTION-CONTRACT.md §8
+   A1), i.e. it already reframes the object to whatever box/aspect
+   this stage element resolves to, so narrowing the box vertically is
+   suficient on its own, CSS-only, to move the object (and its plinth
+   top surface + reflection, both part of the same framed scene) into
+   the lower two-thirds — no v3-hero.js change needed for this.
+
+   bottom:112px (DIRECTOR fix, 24 Sep, defect B round 2): was bottom:0
+   before this fix, which let the stage's own CSS box (not just the
+   object's pixels) run all the way to the viewport edge — and
+   .cta-row (below) floats to that same edge via margin-top:auto, so
+   the two rects always overlapped at every desktop-shaped contract
+   viewport regardless of height (measured: round1's QA only checked
+   1440x900/768x1024, both tall enough that this read fine by eye;
+   1280x720/1024x640/844x390 all failed a real getBoundingClientRect
+   overlap check). 112px = .cta-row's own footprint at this breakpoint
+   (button row ~47px + its 56px margin-bottom, below) plus a real
+   clear gap, so .cta-row's rect now sits entirely below this box's
+   bottom edge — "buttons beneath the plinth," not just "beneath the
+   headline." The auto-fit object itself (v3-hero.js, untouched here)
+   re-fits to whatever fraction of this box's own height it is given,
+   same as the top:33.333% change already relied on. */
+.hero .v3-hero-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 33.333%;
+  bottom: 112px;
+  height: auto;
+  z-index: 0;
+}
+.hero .v3-hero-poster,
+.hero canvas.v3-hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero canvas.v3-hero-canvas { z-index: 1; background: transparent; }
+
+.hero .hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--section-pad-x);
+  pointer-events: none; /* re-enabled on .cta-row below; the empty
+    middle two-thirds must stay click/hover-through for the hero
+    canvas's own pointer parallax. */
+}
+/* .hero-text: the kicker+h1+p group, centered as one column in the
+   TOP THIRD of the hero viewport (flex:0 0 33.333% of .hero-content,
+   which is itself 100% of .inner, i.e. 100vh) — never the full-bleed
+   column .hero-content used to be. max-width:42rem keeps the kicker
+   and body copy at a readable measure; the h1 gets its own tighter
+   14ch column below, per Bob's ruling, nested inside this wider one
+   so both stay on the one shared centre line. */
+.hero .hero-text {
+  flex: 0 0 33.333%;
+  min-height: 0; /* DIRECTOR fix, 24 Sep, defect B round 2: flex items
+    get an automatic min-height:auto floor from their own content by
+    default, which OVERRODE flex-shrink:0/flex-basis:33.333% the
+    moment kicker+h1+p's combined height exceeded 300px (at 1440x900
+    this box was actually rendering 353px tall, not 300 — measured via
+    getBoundingClientRect, not assumed) — silently pushing the whole
+    text block down INTO the stage's top:33.333% edge below, which is
+    the real reason the h1/p overlap moved around between viewports no
+    matter how much the font sizes below were tightened: the box
+    itself, not just its content, was the thing growing. min-height:0
+    makes the 33.333% a real ceiling again; the font-size/margin
+    reductions in this block and the short-viewport query below now
+    have a fixed target to fit inside instead of a moving one. */
+  width: 100%;
+  max-width: 42rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 88px; /* clears the fixed nav (measured ~81px tall) with room to spare */
+}
+.hero .hero-text > * {
+  flex-shrink: 0; /* DIRECTOR fix, 24 Sep, defect B round 2: without
+    this, the kicker/h1/p flex items (default flex-shrink:1) were
+    being compressed below their own content height whenever the
+    three together needed more than .hero-text's now-capped 300px-ish
+    box (see min-height:0 above) — which doesn't clip the extra text,
+    it lets it overflow the shrunk box, and because each item's own
+    reported box was ALSO the shrunk figure, measurements of one
+    fix looked like they barely moved and, worse, h1/p rects started
+    reading as overlapping EACH OTHER (p.top before h1.bottom) — not
+    just overlapping the stage below. flex-shrink:0 makes each item
+    render and report its true content height, so the font-size/
+    margin trims elsewhere in this block now measure predictably. */
+}
+.hero .hero-content h1 {
+  margin-bottom: 0.22em; /* tightened alongside the min-height:0/font-size fix above, same reason */
+  /* Scoped override of the site's general h1 clamp(3rem,8vw,6.4rem)
+     (contract §4, still the default for every other h1 on the site).
+     This hero's real, copied headline is two full sentences — measured
+     with canvas.measureText against the live font: "Technology you
+     don't just see." alone needs ~1363px at the contract's max
+     6.4rem/102.4px. This smaller clamp keeps each .line closer to one
+     physical row. TODO (type/wall lane): confirm this against the
+     real Bricolage Grotesque metrics once v3-type.css's pairing is
+     final — this was tuned against that same font.
+     max-width:14ch + text-align:center: Bob's composition ruling,
+     24 Sep (shell-1440x900.png review) — the h1 is now a narrow,
+     centred column rather than the wide one the font-size clamp was
+     originally tuned for, so each .line wraps across more physical
+     rows than before; .hero-text's own justify-content:center (and
+     .hero .inner's full 100vh box) gives that wrapping room to grow
+     into without colliding with the object below (verified by
+     bounding-box measurement, see the QA report for this fix).
+
+     min(4vw, 6vh) (DIRECTOR fix, 24 Sep, defect B round 2): the
+     original 4vw-only preferred value tracks viewport WIDTH only, so
+     at a fixed width the rendered size (and so the block's own
+     height) never shrinks for a SHORTER viewport — exactly the three
+     contract viewports round 1's QA didn't check (1280x720,
+     1024x640, 844x390 landscape), where the two-line h1 measured
+     tall enough to spill past .hero-text's own 33.333%-of-viewport
+     box into the stage box below (confirmed by
+     getBoundingClientRect: h1.bottom past stage.top by 30-40px at
+     each). Taking whichever of 4vw/6vh is smaller makes the
+     preferred size shrink on short/landscape viewports without
+     changing it at all on the normal portrait-ish ones this was
+     already tuned against. */
+  font-size: clamp(1.75rem, min(3.4vw, 5.2vh), 2.75rem);
+  line-height: 1.05;
+  max-width: 16ch;
+  text-align: center;
+}
+.hero .hero-content h1 .line { display: block; }
+.hero .hero-content h1 em { font-style: normal; color: var(--grey-6); }
+.hero .hero-content p:not(.kicker) { max-width: 42rem; } /* body copy keeps a readable measure even though the heading above it does not */
+.hero .hero-content .kicker { margin-bottom: 0.5em; } /* tightened alongside the min-height:0 fix above, same reason */
+/* font-size/margin-bottom tightened here (DIRECTOR fix, 24 Sep, defect
+   B round 2): the subhead was still the site default --fs-body (1rem)
+   with a 1.4em margin, and at 1440x900 — a viewport round 1's QA did
+   check, and reported clean — this alone pushed the block's rendered
+   bottom 65px past stage.top (measured with getBoundingClientRect,
+   not eyeballed this time). Not scoped to a breakpoint: this reduction
+   is small enough to read fine at every width, and the overlap it
+   fixes showed up at both a tall (900) and a very short (390)
+   viewport, so no single height threshold covers both without this
+   base change too. */
+.hero .hero-content p:not(.kicker) { font-size: 0.9375rem; line-height: 1.3; margin-bottom: 0.5em; color: var(--grey-6); }
+
+/* Short-viewport override (DIRECTOR fix, 24 Sep, defect B round 2):
+   min(4vw,6vh) on the h1 alone was not enough at 1280x720 (11px still
+   past stage.top), 1024x640 (23px) and especially 844x390 landscape
+   (73px) — min(vw,vh) only reaches its vh branch below a certain
+   width:height ratio, and even there the clamp's own 1.75rem FLOOR
+   was overriding it back up past what these three boxes have room
+   for. Scoped to width>760 (the phone breakpoint below already
+   handles narrow viewports its own way) and max-height:820 (covers
+   exactly these three contract viewports — 720/640/390 — and leaves
+   1440x900/768x1024, both already measured clean, untouched). Lower
+   floor + tighter line-height + smaller vh coefficient + reduced nav-
+   clearance padding, so the whole kicker+h1+p block has real room
+   inside .hero-text's own 33.333%-of-viewport box. */
+@media (min-width: 761px) and (max-height: 820px) {
+  .hero .hero-text { padding-top: 64px; } /* CLOSER fix 24 Sep: 26px left the
+    kicker's own top edge 5.4px (1280x720) to 14.3px (1024x640) behind the
+    fixed nav bottom (80px) -- a real, visible clip (kicker letters cut off
+    at the top, screenshotted), not previously flagged because VISUAL QA's
+    own defect only measured the h1. Bumped to clear the kicker at both
+    viewports with margin; the more specific max-height:420px query below
+    (844x390 only) sets its own larger value on top of this one. */
+  .hero .hero-content .kicker { margin-bottom: 0.2em; font-size: 0.75rem; }
+  .hero .hero-content h1 {
+
+    font-size: clamp(0.85rem, min(2.6vw, 3.6vh), 3.25rem);
+    line-height: 1;
+    margin-bottom: 0.12em;
+  }
+  .hero .hero-content p:not(.kicker) { font-size: 0.75rem; line-height: 1.2; margin-bottom: 0.3em; }
+}
+
+/* CLOSER fix, 24 Sep, VISUAL QA ranked defect 3 (RB-V3-QA-VISUAL.md):
+   at 844x390 the H1's second line ("DON'T JUST SEE.") rendered
+   partially behind the fixed nav bar at the page's natural, unscrolled
+   rest state (scrollY 0, not a scroll artefact — the QA report's own
+   isolated re-load confirms it, and this fix re-measured it directly
+   with getBoundingClientRect() before touching anything: nav bottom
+   edge 80px, h1 top 56.09px, overlap 23.9px, headed real GPU,
+   DISPLAY=:0, http.server 8957). The block above's padding-top:26px
+   is shared by all three viewports in the (max-height:820px) query
+   (1280x720, 1024x640, 844x390) and the comment on that block says the
+   other two were already measured clean there — raising it for all
+   three risks pushing the two taller ones' h1 further down than
+   necessary, so this is its own narrower query, max-height:420px,
+   which only 844x390 among the contract's six viewports satisfies (390
+   and 720/640 do not: 390 <= 420, 640/720 > 420). padding-top raised
+   26px -> 62px (the measured 23.9px overlap plus a ~12px safety
+   margin, rounded). Re-measured after the change: nav bottom 80px, h1
+   top 92.09px, clearance +12.09px, zero overlap — bounding-box
+   assertion, not a screenshot guess (screenshot taken too, for the
+   record: wave-closer-hero-844x390-after.png). */
+@media (min-width: 761px) and (max-height: 420px) {
+  .hero .hero-text { padding-top: 104px; }
+  .hero .hero-content .kicker { font-size: 0.6875rem; margin-bottom: 0.15em; }
+  .hero .hero-content h1 {
+    font-size: clamp(0.8rem, min(2.3vw, 3.1vh), 2.6rem);
+    line-height: 0.95;
+    margin-bottom: 0.08em;
+  }
+  .hero .hero-content p:not(.kicker) { font-size: 0.6875rem; line-height: 1.1; margin-bottom: 0.15em; }
+  .hero .v3-hero-stage { top: 39%; }
+}
+
+/* .cta-row: floating bottom-centre of the hero viewport (Bob's
+   ruling offers this as the explicit alternative to "centred beneath
+   the plinth" when it reads better — it does here, since the plinth's
+   own vertical position inside the lower-two-thirds stage box is the
+   hero lane's call, not fixed by this file). margin-top:auto on a
+   column-flex child consumes 100% of the remaining free space above
+   it, so it always lands flush at the bottom of .hero-content (i.e.
+   the bottom of the hero viewport) regardless of how tall .hero-text
+   ends up. margin-bottom clears .scroll-cue's own bottom:32px (left-
+   aligned, so no horizontal collision either). */
+.hero .hero-content .cta-row {
+  margin-top: auto;
+  margin-bottom: 56px;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.hero .scroll-cue {
+  position: absolute;
+  left: var(--section-pad-x);
+  bottom: 32px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--grey-5);
+}
+.hero .scroll-cue .rail { width: 1px; height: 32px; background: var(--grey-3); position: relative; overflow: hidden; }
+.hero .scroll-cue .rail i { position: absolute; top: 0; left: 0; width: 100%; height: 40%; background: var(--ink); animation: v3-rail 1.6s ease-in-out infinite; }
+@keyframes v3-rail { 0% { transform: translateY(-100%); } 100% { transform: translateY(250%); } }
+
+/* .hero.v3-section itself: padding:0 (overrides the generic
+   .v3-section rule's padding:var(--section-pad-y) 0, which is what
+   created the flat grey band under the nav — see the .hero .inner
+   comment above). Every other .v3-section keeps the generic rhythm;
+   this override is scoped to the hero only. */
+.hero.v3-section { padding: 0; }
+
+@media (max-width: 760px) {
+  /* Phone composition, Bob's ruling: headline above, object canvas
+     fills the lower 55% of the hero viewport height. .hero-text goes
+     back to auto height (top-aligned under the nav, not centred in a
+     fixed third — there is no third on phone) and .cta-row moves out
+     of the bottom-float and sits directly under the headline instead,
+     so it can never be covered by the object's own 55%-tall box.
+     Every margin/padding below is compacted from the desktop values
+     for exactly one reason: measured against the real hero object at
+     390x844 (this fix's own QA screenshot), the desktop spacing left
+     .cta-row's bottom edge about 72px INSIDE the top of the object's
+     55%-tall stage box — a real, measured overlap, not a guess — so
+     the whole kicker/h1/p/cta stack is tightened here until
+     .cta-row's bottom sits above the stage's top with headroom to
+     spare (verified: see this fix's QA report for the two bounding
+     boxes). */
+  .hero .hero-text {
+    flex: 0 0 auto;
+    padding-top: 84px;
+    padding-bottom: 0;
+  }
+  .hero .hero-content .kicker { margin-bottom: 0.25em; }
+  .hero .hero-content h1 {
+    font-size: clamp(1.25rem, 6vw, 1.8rem);
+    margin-bottom: 0.2em;
+  }
+  .hero .hero-content p:not(.kicker) {
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    margin-bottom: 0.25em;
+  }
+  .hero .hero-content .cta-row {
+    margin-top: 4px;
+    margin-bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 280px;
+  }
+  .hero .hero-content .cta-row .btn { padding: 0.55em 1.4em; }
+  .hero .v3-hero-stage {
+    top: auto;
+    bottom: 0;
+    height: 55%;
+  }
+}
+
+/* ---------- 2. engineering ---------- */
+#engineering .inner { position: relative; }
+/* #engineering canvas below is INERT by design — no canvas element is
+   ever placed inside #engineering (see index.html's slot:engineering
+   comment); the section reuses the ONE hero canvas from slot:hero
+   instead. Kept rather than deleted: a leftover from an earlier plan,
+   harmless (matches nothing), and this lane doesn't own removing
+   pre-existing rules outside what this fix touches. */
+#engineering canvas { position: sticky; top: 0; width: 100%; height: 60vh; z-index: 0; }
+/* .hero .v3-hero-stage.is-engineering-live — DIRECTOR fix, 24 Sep,
+   defect A (walk-around missing). v3-hero.js's bindScroll() (called
+   with no argument, see index.html's end-of-body script) pins
+   #v3-engineering-pin for real now, but a GSAP pin only fixes the
+   element it is given — it cannot pull a DIFFERENT, already-scrolled-
+   past section's box back into view. The hero canvas physically lives
+   in .hero .v3-hero-stage (slot:hero), so that same script also
+   toggles this class for the identical scroll window (a second,
+   non-pinning ScrollTrigger watching "#engineering" / "top top" /
+   "+=250%"). Only `position` changes here: .v3-hero-stage's existing
+   top:33.333%/left:0/right:0/bottom:0 (see "1. hero" above) resolve
+   against the viewport once fixed, which is numerically identical to
+   what they resolved against inside 100vh-tall .hero .inner before —
+   so the object keeps its hero framing (lower two-thirds) with no new
+   position values needed. z-index left low (0) on purpose so
+   .engineering-captions (z-index:1 below) still paints on top of the
+   turning object, matching how .hero-content sits over the canvas in
+   slot:hero. */
+.hero .v3-hero-stage.is-engineering-live {
+  position: fixed;
+  z-index: 0;
+}
+/* DIRECTOR fix, 24 Sep, round 2b (Bob's caption-layout ruling): ONE
+   caption slot, not a grid. All six <li data-station> share the same
+   position; assets/js/v3-hero.js's own caption controller (untouched
+   here -- see its "Moment 3 captions" block, ~line 1203) toggles
+   .is-live/.is-dead on them with its own hysteresis/handover timing,
+   this file only decides what each class looks like. Base rule below
+   applies unconditionally (scripts-off floor: a plain, fully-visible
+   vertical list, no stacking, no absolute positioning -- matches every
+   other progressive-enhancement default on this page). The single-slot
+   stack itself is opt-in, gated html.js:not(.reduced-motion) same as
+   the REVEAL PRIMITIVE/.ring-fallback rules above: under reduced
+   motion, v3-hero.js's own renderReducedMotionFrame() marks all six
+   is-live simultaneously (no pin/scrub at all), so falling through to
+   this same plain list for .reduced-motion is correct, not just a
+   fallback of convenience. */
+.engineering-captions {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+.engineering-captions li { border-top: 1px solid var(--grey-2); padding-top: 14px; margin-top: 28px; }
+.engineering-captions li:first-child { margin-top: 0; }
+.engineering-captions .num { color: var(--grey-6); display: block; margin-bottom: 6px; } /* not vermilion: not one of the three budgeted places, SIGNATURE-MOMENTS.md */
+
+/* Single-slot stack, desktop. Positioned against #v3-engineering-pin
+   itself (the GSAP pin target, position:relative from "#engineering
+   .inner" above) which -- confirmed live via getBoundingClientRect
+   while pinned, not assumed -- becomes position:fixed with its OWN
+   top offset equal to var(--section-pad-y) (the section's own
+   padding-top, since the pin target is the section's first and only
+   child) and keeps its authored height (250vh, matching this same
+   file's index.html min-height and v3-hero.js's CONFIG.pinEnd
+   "+=250%" -- the two must stay in sync, this is not a new coupling).
+   So "bottom-left of the pinned viewport slice" is NOT bottom:0 on
+   this box (that lands 150vh below the visible slice, off-screen) --
+   it is anchored from the box's own bottom edge at
+   150vh + var(--section-pad-y), which is exactly the distance up to
+   the real viewport-bottom point, plus a 48px breathing margin above
+   the literal edge. */
+html.js:not(.reduced-motion) .engineering-captions {
+  display: grid;
+  position: absolute;
+  left: 0;
+  bottom: calc(150vh + var(--section-pad-y) + 48px);
+  max-width: 34ch;
+  margin: 0;
+}
+html.js:not(.reduced-motion) .engineering-captions li {
+  grid-area: 1 / 1;
+  margin-top: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+html.js:not(.reduced-motion) .engineering-captions li.is-live {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Explicitly NOT display:none / visibility:hidden (Bob's own words:
+   "so the settled-state audit and screen readers still see them") --
+   opacity:0 keeps every dead caption in the DOM and the accessibility
+   tree, just not visually apparent.
+   !important, confirmed necessary live (not a defensive guess):
+   v3-hero.js's own outgoing handover tween (untouched here) animates a
+   caption TO opacity:0.18, not 0, and leaves that value sitting in the
+   element's inline style once the tween completes -- inline style
+   otherwise beats a plain class rule, so without !important a "dead"
+   caption settles at a visible 18%, and after several handovers
+   several such ghosts stack in the same grid cell at once (reproduced:
+   at 1024x640, mid-scrub, two captions read opacity>0 simultaneously
+   before this rule). This does not fight the ANIMATION itself --
+   .is-dead is added synchronously at the start of the handover, before
+   the tween's opacity value has moved away from 1, so the visible
+   motion becomes a CSS-driven fade (the transition below) straight to
+   the true rest state instead of GSAP's own curve; the class toggling,
+   timing and hysteresis in v3-hero.js are completely unchanged. */
+html.js:not(.reduced-motion) .engineering-captions li.is-dead {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+/* A11Y FIX defect 5 / structural risk (RB-V3-QA-A11Y.md "Structural
+   risk, not a confirmed failure"): the audit's live gl.readPixels()
+   sweep found every sampled caption-over-ring frame still cleared AA
+   (worst observed 5.06:1), but only ~6 of 23 scroll steps caught a
+   caption mid-transition, and the ratio depends entirely on which part
+   of which orbiting photograph sits behind the text at a given instant
+   -- the CSS cannot control that, so it recommended a scrim as
+   defence-in-depth even with today's numbers passing. This is scoped to
+   the SAME html.js:not(.reduced-motion) gate as the absolute-position
+   single-slot stack above it (that is the only state where the caption
+   overlays the live turning object; the plain in-flow list used
+   scripts-off/reduced-motion sits on the page's own flat --ground with
+   no ring behind it, so it needs no scrim). Only two properties: a
+   radial gradient (soft, no hard edge) positioned behind the <li> text
+   (z-index -1 inside .engineering-captions' own stacking context,
+   which stays above the canvas because the parent's z-index:1 > the
+   canvas' z-index:0, so it never covers the object itself -- confirmed
+   by screenshot, see qa/a11y-fix-scrim-*.png) fading from --ground's own
+   rgb(8,8,8) at 0.85 alpha to fully transparent, extending only a
+   little past the text's own box, never full-bleed. rgba() used
+   directly (this codebase has no color-mix() precedent anywhere in
+   v3*.css) so the alpha stays exact regardless of --ground ever
+   changing. */
+html.js:not(.reduced-motion) .engineering-captions::before {
+  content: "";
+  position: absolute;
+  inset: -28px -24px -28px -12px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 120% 135% at 32% 45%,
+    rgba(8, 8, 8, 0.85) 0%, rgba(8, 8, 8, 0.55) 48%, rgba(8, 8, 8, 0) 80%);
+}
+.ring-fallback {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.ring-fallback img { border-radius: var(--radius); aspect-ratio: 3 / 2; object-fit: cover; }
+.ring-fallback figcaption { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--grey-5); margin-top: 6px; }
+/* Scripts-off / no-motion progressive-enhancement fallback (contract's
+   own honest-no-JS grid, per the slot:engineering comment in
+   index.html) — was rendering UNCONDITIONALLY before this fix, i.e.
+   even with JS running and motion allowed, stacking underneath/beside
+   the real pinned scene with no pin ever engaging (defect A's other
+   symptom: "three photos stacked with captions" was actually this six-
+   photo grid, always visible, mistaken for the section's real design).
+   Hidden here the same way every other v3 progressive-enhancement
+   state on this page already is (see html.js:not(.reduced-motion)
+   [data-reveal] above) — no new pattern invented. */
+html.js:not(.reduced-motion) .ring-fallback { display: none; }
+@media (max-width: 760px) {
+  .ring-fallback { grid-template-columns: repeat(2, 1fr); }
+
+  /* Single-slot stack, phone: "below the object, not overlapping it"
+     (Bob's ruling). The base mobile hero-stage rule above puts the
+     object's own box flush at bottom:0/height:55% -- literally the
+     viewport edge, leaving no room below it for anything. Shifting
+     bottom up (height:55% untouched, so v3-hero.js's own 44%-of-box
+     auto-fit fraction -- HERO-POLISH's measured number -- is
+     unaffected; only this box's vertical position moves) opens a
+     clear band at the true bottom for the caption. Only while pinned
+     (.is-engineering-live); the normal (non-pinned) hero stage on
+     phone is untouched. */
+  .hero .v3-hero-stage.is-engineering-live {
+    bottom: 152px;
+  }
+  html.js:not(.reduced-motion) .engineering-captions {
+    left: var(--section-pad-x);
+    right: var(--section-pad-x);
+    max-width: none;
+    bottom: calc(150vh + var(--section-pad-y) + 16px);
+  }
+}
+
+/* Short/landscape contract viewport (844x390 measured: h2 61px +
+   kicker, pinned, bottom at y=209 of a 390px-tall box -- only 181px
+   left below it) -- the desktop caption typography (h3 ~49px measured)
+   cannot fit in the space left under h2/kicker at this height without
+   colliding with it (confirmed live: h3 read INSIDE the h2's own rect
+   before this rule). width>760 so the max-width:760px phone block
+   above does not apply and would be the wrong shape here anyway (this
+   is landscape, not narrow); only height is the constraint. 1280x720
+   and 1024x640 (also caught by min-width:761 but comfortably tall)
+   measured clean without this -- selectors below are specific enough
+   (.engineering-captions li h3/p, not bare h3/p) to beat v3-type.css's
+   own h3/p rules regardless of load order. */
+@media (min-width: 761px) and (max-height: 500px) {
+  html.js:not(.reduced-motion) .engineering-captions {
+    bottom: calc(150vh + var(--section-pad-y) + 12px);
+    max-width: 40ch;
+  }
+  .engineering-captions li { padding-top: 8px; }
+  .engineering-captions li .num { font-size: 0.6875rem; margin-bottom: 3px; }
+  .engineering-captions li h3 { font-size: clamp(1rem, 5vh, 1.375rem); line-height: 1.1; margin-bottom: 0.2em; }
+  .engineering-captions li p { font-size: 0.75rem; line-height: 1.25; }
+}
+
+/* ---------- 3. numbers-wall ---------- */
+.wall-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+}
+.wall-tile { border-top: 1px solid var(--grey-3); padding-top: 14px; }
+.v3-section--inverted .wall-tile { border-top-color: rgba(8, 8, 8, 0.15); }
+.wall-figure { display: block; font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.wall-label { display: block; font-size: 0.875rem; color: inherit; opacity: 0.7; }
+@media (max-width: 760px) {
+  .wall-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- 4. photo-chapters ---------- */
+.photo-chapter { position: relative; margin-bottom: 4px; }
+.photo-chapter img { width: 100%; height: 80vh; object-fit: cover; }
+.photo-chapter .chapter-line {
+  position: absolute;
+  left: var(--section-pad-x);
+  bottom: 40px;
+  max-width: 34ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 5. capabilities ---------- */
+.all-link { display: inline-block; margin: 12px 0 40px; color: var(--grey-6); text-decoration: underline; text-underline-offset: 3px; }
+.cap-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--grey-2); }
+.cap-item { border-bottom: 1px solid var(--grey-2); }
+.cap-item a { display: grid; grid-template-columns: 3rem 1fr; gap: 20px; padding: 22px 0; align-items: baseline; }
+.cap-item .num { color: var(--grey-6); }
+/* Vermilion here only on the LIVE row (moment 6, SIGNATURE-MOMENTS.md
+   "the number of the live capability row") -- the WALL AND LIST LANE's
+   hover/scroll-swap JS toggles .is-live; :hover/:focus-within give the
+   same state to a mouse or keyboard user until that JS lands. */
+.cap-item.is-live .num, .cap-item:hover .num, .cap-item:focus-within .num { color: var(--red); }
+.cap-item h3 { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+.cap-item .cap-desc { grid-column: 2; color: var(--grey-6); margin-top: 6px; max-width: 56ch; }
+.cap-item:hover, .cap-item:focus-within { background: var(--grey-1); }
+
+/* ---------- 6/7. case-study, replicas (shared tombstone pattern) ---------- */
+.cs-tomb { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; margin: 24px 0; padding: 20px; border: 1px solid var(--grey-2); border-radius: var(--radius); }
+.cs-tomb dt { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-5); }
+.cs-tomb dd { margin: 2px 0 0; font-weight: 600; }
+.stat-row { display: flex; flex-wrap: wrap; gap: 28px; margin: 24px 0; }
+.stat-row .stat { display: flex; flex-direction: column; }
+.stat-row .stat b { font-size: 1.75rem; color: var(--ink); } /* not vermilion: not one of the three budgeted places */
+.stat-row .stat span { font-size: 0.75rem; color: var(--grey-6); }
+.cs-figure { margin: 32px 0 0; }
+.cs-figure img { width: 100%; border-radius: var(--radius); }
+.cs-figure figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--grey-5); margin-top: 8px; }
+.replicas-poster { margin-top: 32px; max-width: 420px; border-radius: var(--radius); }
+.skeleton-more { display: inline-block; margin-top: 24px; color: var(--grey-6); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- 8. faq ---------- */
+.faq-list { margin: 32px 0 0; padding: 0; }
+.faq-row { border-top: 1px solid var(--grey-2); padding: 20px 0; }
+.faq-q { font-weight: 700; margin-bottom: 8px; }
+.faq-a { margin: 0; color: var(--grey-6); }
+
+/* ---------- BUILD 1: page transition (SIGNATURE-MOMENTS.md §8) ----------
+   INTEGRATOR/DIRECTOR's half (index.html); INTERIOR lane's assets/css/
+   v3-pages.css carries a byte-identical copy for the six interior pages
+   (their own WIRING.md note asked for this file to win if they drift --
+   this is the literal source, copied verbatim into v3-pages.css). Browsers
+   without View Transitions support fall back to an ordinary instant
+   navigation, no detection needed. */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation: v3-vt-fade-to-black 0.22s cubic-bezier(0.7, 0, 0.84, 0) both;
+}
+::view-transition-new(root) {
+  animation: v3-vt-fade-from-black 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes v3-vt-fade-to-black {
+  to { opacity: 0; }
+}
+@keyframes v3-vt-fade-from-black {
+  from { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) {
+    animation: none;
+  }
+}

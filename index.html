@@ -1,8 +1,6 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
-
-<!-- COMPARISON VARIANT: remove this tag only on the direction the client selects. Bob 25, 24 Sep 2026. -->
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,20 +8,88 @@
   <meta name="description" content="Museum technology engineered in India for galleries: offline-first kiosks, immersive AV, digital archives and visitor experiences.">
   <link rel="canonical" href="https://redbananatechsolutions.in/">
 
-  <!-- OWNER: integrator (Bob 25) — vendored, approved hero prototype.
-       See v2-kinetic/redbanana/hero-prototype/DIRECTION.md for the
-       direction record. Self-hosted fonts, subset, pinned — see
-       assets/vendor/SHA256SUMS.txt and assets/fonts/redbanana/OFL-*.txt. -->
-  <link rel="preload" href="assets/fonts/redbanana/bricolage-grotesque-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/redbanana/familjen-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/hero-poster.png" as="image">
+  <!-- OWNER: integrator (Bob 25) — v3 "THE OBJECT" shell.
+       RB-V3-DIRECTION-CONTRACT.md is binding. This file rewrites the
+       homepage into the nine spine sections of contract §3, each
+       wrapped as <section id="..." data-slot="NAME"> with a
+       slot:NAME start/end comment pair. See parts/SLOTS.md for what
+       each of the four builder lanes may expect to find here and
+       which classes/hooks are reserved for them. Real copy inside
+       every slot is copied byte for byte from the 70ea6f1 pages
+       (index.html, capabilities.html, work.html, about.html,
+       contact.html) or PRODUCT.md, per slot, as the contract names —
+       never composed. Where no live sentence existed for a slot
+       (the FAQ), contract §8 amendment A5 (Bob, 24 Sep) originally
+       accepted a visible [copy: source needed] placeholder in its
+       place rather than an invented one; the Director's round2 ruling
+       (24 Sep) REVERSES that acceptance — no placeholder copy ships
+       anywhere, on any page, full stop — so the FAQ slot now carries
+       only the real "Planning a gallery?" call and nothing else; see
+       slot:faq below for the record of that reversal. Self-hosted
+       fonts, subset — see assets/fonts/redbanana/OFL-*.txt. -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preload" href="assets/fonts/v3/bricolage-grotesque-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/v3/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- TYPE lane's WIRING.md instruction: preload the two v3 variable webfonts
+       (bricolage-grotesque-var, instrument-sans-var) so the hero H1 never
+       shows a fallback-to-webfont swap; do NOT preload ibm-plex-mono-500 --
+       it's below-the-fold (numbers wall figures only) and should load lazily.
+       Removed the earlier preloads of assets/fonts/redbanana/familjen-grotesk-var
+       and ibm-plex-mono-500: those are v3.css's own no-JS/no-v3-type.css
+       fallback fonts (see the comment below), not what actually renders once
+       assets/css/v3-type.css loads and overrides the --font-display/--font-mono
+       tokens -- preloading them was wasted above-the-fold bandwidth. -->
   <link rel="stylesheet" href="assets/vendor/lenis.css">
-  <link rel="stylesheet" href="assets/vendor/motion.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="lit-plan.css">
-  <link rel="stylesheet" href="assets/kinetic-theme.css">
-  <link rel="stylesheet" href="assets/hero.css">
-  <link rel="stylesheet" href="assets/skeleton.css">
+  <link rel="stylesheet" href="v3.css">
+
+  <!-- A TYPE LANE (not named in contract §7's file table, but implied
+       by §4's "the type lane chooses ONE display grotesk") delivered
+       assets/css/v3-type.css concurrently with this shell: Bricolage
+       Grotesque (display) + Instrument Sans (text) + IBM Plex Mono
+       (figures), with metric-matched fallback @font-face blocks. Its
+       own header says "tokens the integrator's v3.css consumes" — it
+       redefines the SAME --font-display/--font-mono custom property
+       names v3.css's component rules already use, so loading it here,
+       AFTER v3.css, makes it override this file's Familjen Grotesk
+       placeholder automatically, per-property, with no edit to v3.css
+       required. If this file is ever absent, v3.css's own @font-face
+       + token fallback (Familjen Grotesk, already vendored at
+       assets/fonts/redbanana/) still renders a complete, readable
+       page. --><link rel="stylesheet" href="assets/css/v3-type.css">
+
+  <!-- HERO LANE stylesheet, path and content per parts/WIRING.md
+       (its real, tested path is assets/css/v3-hero.css — the
+       contract §7 table's literal "assets/js/v3-hero.css" is
+       superseded by what the lane actually shipped and verified). -->
+  <link rel="stylesheet" href="assets/css/v3-hero.css">
+
+  <!-- HAND-OFF POINT for WALL AND LIST LANE, CHAPTERS LANE: add your
+       own stylesheet link exactly here, in this order, once your file
+       exists. A missing file 404s silently without breaking the page. -->
+  <link rel="stylesheet" href="assets/css/v3-wall.css">
+  <link rel="stylesheet" href="assets/css/v3-chapters.css">
+
+  <!-- Importmap, from parts/WIRING.md's HERO lane block, WITH ONE FIX:
+       WIRING.md's own block omits the leading "./" on each path
+       ("assets/vendor/..."), which is not a valid import-map value —
+       bare specifiers must be an absolute URL or start with ./, ../
+       or / — and Chrome served over plain http (this shell's actual
+       serving mode) rejects the whole entry with "Ignored an import
+       map value... Bare specifier", verified live (see this
+       integrator's note appended to parts/WIRING.md). Restored here.
+       See assets/vendor/three/VERSIONS.md for SHA256s. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./assets/vendor/three/three.module.min.js",
+      "three/addons/loaders/GLTFLoader.js": "./assets/vendor/three/addons/loaders/GLTFLoader.min.js",
+      "three/addons/loaders/DRACOLoader.js": "./assets/vendor/three/addons/loaders/DRACOLoader.min.js",
+      "three/addons/environments/RoomEnvironment.js": "./assets/vendor/three/addons/environments/RoomEnvironment.min.js",
+      "three/addons/objects/Reflector.js": "./assets/vendor/three/addons/objects/Reflector.min.js"
+    }
+  }
+  </script>
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta property="og:type" content="website">
@@ -36,110 +102,170 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://redbananatechsolutions.in/assets/og-image.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Red Banana Tech Solutions Pvt. Ltd.","url":"https://redbananatechsolutions.in/","email":"hello@redbananatechsolutions.in","address":{"@type":"PostalAddress","addressLocality":"Ajmer","addressRegion":"Rajasthan","addressCountry":"IN"}}
+  {"@context":"https://schema.org","@type":"Organization","name":"Red Banana Tech Solutions Pvt. Ltd.","url":"https://redbananatechsolutions.in/","email":"redbananatechsolutions@gmail.com","telephone":"+91-92092-90435","address":{"@type":"PostalAddress","addressLocality":"Ajmer","addressRegion":"Rajasthan","addressCountry":"IN"}}
   </script>
-  <script src="privacy-analytics.js" defer></script>
-  <script>document.documentElement.classList.remove('no-js');</script>
-<link rel="stylesheet" href="portfolio.css">
+  <script src="/privacy-analytics.js" defer></script>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<!-- OWNER: integrator — the hero prototype's own header, approved as part
-     of the hero. Interior pages keep their own header.sheet-bar markup
-     (about.html etc.) restyled by assets/kinetic-theme.css to the same
-     dark ground, fonts and vermilion accent, so the register matches
-     without forcing one literal markup on every page. -->
-<header class="site-header" id="site-header">
-  <a class="wordmark" href="#main">
-    <span class="dot" aria-hidden="true"></span>
-    Red Banana Tech Solutions
+<!-- First-visit loader — sessionStorage flag, 2.1s max, skipped on
+     repeat visits. Wired by v3-core.js's runLoader(). LOGO WIRING (25 Sep
+     2026): the mosaic assembles here (14 tiles + plug, data-order per
+     assets/brand/mark.svg, outlined paths for "RED BANANA" and the
+     tagline from assets/brand/lockup-dark.svg) then hands off to the
+     existing curtain/lighting sequence via window.V3.onArrival exactly
+     as Moment 1 already does — no text here is marketing copy, it is
+     the brand's own name and mark. -->
+<div class="v3-loader" id="v3-loader" aria-hidden="true">
+  <svg class="loader-lockup" viewBox="0 0 1050 360" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <g class="loader-tiles" transform="translate(51.65,45.53) scale(1.9412)">
+        <rect data-order="1" style="--i:1" x="28" y="0" width="15" height="15" fill="#e2422e"/>
+        <rect data-order="2" style="--i:2" x="12" y="14" width="15" height="15" fill="#c2362a"/>
+        <rect data-order="3" style="--i:3" x="2" y="30" width="15" height="15" fill="#e2422e"/>
+        <rect data-order="4" style="--i:4" x="0" y="48" width="15" height="15" fill="#a92f21"/>
+        <rect data-order="5" style="--i:5" x="2" y="66" width="15" height="15" fill="#e2422e"/>
+        <rect data-order="6" style="--i:6" x="10" y="83" width="15" height="15" fill="#c2362a"/>
+        <rect data-order="7" style="--i:7" x="24" y="97" width="15" height="15" fill="#e2422e"/>
+        <rect data-order="8" style="--i:8" x="41" y="107" width="15" height="15" fill="#a92f21"/>
+        <rect data-order="9" style="--i:9" x="44" y="90" width="15" height="15" fill="#7a1f16"/>
+        <rect data-order="10" style="--i:10" x="59" y="112" width="15" height="15" fill="#e2422e"/>
+        <rect data-order="11" style="--i:11" x="77" y="110" width="15" height="15" fill="#c2362a"/>
+        <rect data-order="12" style="--i:12" x="62" y="94" width="15" height="15" fill="#7a1f16"/>
+        <rect data-order="13" style="--i:13" x="94" y="102" width="15" height="15" fill="#e2422e"/>
+        <rect data-order="14" style="--i:14" x="108" y="89" width="15" height="15" fill="#a92f21"/>
+        <g class="loader-plug" data-order="15" fill="#e2422e">
+          <rect x="124" y="80" width="17" height="21" rx="2"/>
+    <rect x="141" y="83.5" width="11" height="4.5"/>
+    <rect x="141" y="92.5" width="11" height="4.5"/>
+        </g>
+      </g>
+      <path class="loader-word1" fill="#E1E5E5" d="M446.7 144.4Q449.9 144.4 452.2 143.6Q454.5 142.8 456 141.3Q457.5 139.9 458.2 138Q458.9 136 458.9 133.7Q458.9 129.2 455.9 126.7Q452.9 124.2 446.8 124.2H439.9V144.4ZM477.6 178H465.7Q462.3 178 460.8 175.4L448.7 155.9Q447.9 154.7 447 154.2Q446.1 153.7 444.4 153.7H439.9V178H426.7V114.2H446.8Q453.4 114.2 458.2 115.5Q462.9 116.9 466 119.4Q469 121.9 470.4 125.3Q471.8 128.7 471.8 132.8Q471.8 135.9 470.9 138.8Q470 141.6 468.3 143.9Q466.6 146.3 464.1 148.1Q461.6 149.9 458.4 151Q459.6 151.7 460.7 152.7Q461.8 153.7 462.7 155Z M498 124.5V140.9H519.3V150.9H498V167.7H525.4V178H484.7V114.2H525.4V124.5Z M593.4 146.1Q593.4 153.1 591 158.9Q588.7 164.8 584.4 169Q580.1 173.2 574 175.6Q568 178 560.7 178H536.1V114.2H560.7Q568 114.2 574 116.5Q580.1 118.9 584.4 123.2Q588.7 127.4 591 133.3Q593.4 139.1 593.4 146.1ZM579.8 146.1Q579.8 141 578.5 137Q577.2 133 574.7 130.3Q572.2 127.5 568.7 126Q565.2 124.5 560.7 124.5H549.4V167.7H560.7Q565.2 167.7 568.7 166.2Q572.2 164.7 574.7 161.9Q577.2 159.1 578.5 155.1Q579.8 151.1 579.8 146.1Z M650.3 167.9Q653.4 167.9 655.5 167.1Q657.5 166.3 658.7 165.1Q660 163.8 660.5 162.1Q660.9 160.5 660.9 158.7Q660.9 156.8 660.4 155.3Q659.8 153.7 658.5 152.6Q657.2 151.6 655.2 151Q653.2 150.4 650.2 150.4H638.9V167.9ZM638.9 124.2V141.4H647.6Q650.4 141.4 652.5 141Q654.7 140.5 656.1 139.5Q657.6 138.5 658.4 136.8Q659.1 135.2 659.1 132.9Q659.1 130.5 658.5 128.8Q657.9 127.1 656.5 126.1Q655.2 125.1 653.2 124.7Q651.2 124.2 648.4 124.2ZM648.4 114.2Q654.8 114.2 659.4 115.4Q663.9 116.6 666.8 118.8Q669.7 121 671 124.2Q672.3 127.4 672.3 131.3Q672.3 133.5 671.7 135.5Q671.1 137.5 669.7 139.3Q668.4 141.1 666.3 142.5Q664.2 144 661.3 145Q667.8 146.5 670.9 150Q674 153.5 674 159Q674 163.1 672.5 166.6Q670.9 170 667.9 172.6Q664.9 175.1 660.5 176.6Q656.1 178 650.5 178H625.7V114.2Z M718.7 153.8 711.8 134.2Q711.2 132.7 710.5 130.6Q709.8 128.5 709.2 126.1Q708.6 128.6 707.9 130.7Q707.2 132.8 706.6 134.3L699.8 153.8ZM740.9 178H730.6Q728.9 178 727.8 177.2Q726.8 176.4 726.2 175.1L721.9 162.9H696.5L692.2 175.1Q691.7 176.2 690.6 177.1Q689.5 178 687.9 178H677.5L702.5 114.2H716Z M802.4 114.2V178H795.5Q794 178 792.9 177.5Q791.9 177 790.9 175.8L759.1 135.3Q759.2 136.8 759.3 138.3Q759.3 139.8 759.3 141.1V178H747.7V114.2H754.6Q755.5 114.2 756 114.2Q756.6 114.3 757.1 114.5Q757.6 114.8 758.1 115.2Q758.5 115.6 759 116.2L791.1 156.9Q790.9 155.2 790.8 153.6Q790.7 152.1 790.7 150.7V114.2Z M850.3 153.8 843.4 134.2Q842.8 132.7 842.1 130.6Q841.4 128.5 840.8 126.1Q840.2 128.6 839.5 130.7Q838.8 132.8 838.2 134.3L831.4 153.8ZM872.5 178H862.2Q860.5 178 859.4 177.2Q858.4 176.4 857.8 175.1L853.5 162.9H828.1L823.8 175.1Q823.3 176.2 822.2 177.1Q821.1 178 819.5 178H809.1L834.1 114.2H847.6Z M934 114.2V178H927.1Q925.6 178 924.5 177.5Q923.5 177 922.5 175.8L890.7 135.3Q890.8 136.8 890.9 138.3Q890.9 139.8 890.9 141.1V178H879.3V114.2H886.2Q887.1 114.2 887.7 114.2Q888.2 114.3 888.7 114.5Q889.2 114.8 889.7 115.2Q890.1 115.6 890.6 116.2L922.7 156.9Q922.5 155.2 922.4 153.6Q922.3 152.1 922.3 150.7V114.2Z M981.9 153.8 975 134.2Q974.4 132.7 973.7 130.6Q973 128.5 972.4 126.1Q971.8 128.6 971.1 130.7Q970.4 132.8 969.8 134.3L963 153.8ZM1004.1 178H993.8Q992.1 178 991.1 177.2Q990 176.4 989.4 175.1L985.1 162.9H959.7L955.4 175.1Q955 176.2 953.9 177.1Q952.8 178 951.1 178H940.7L965.7 114.2H979.2Z"/>
+      <path class="loader-word2" fill="#a92f21" d="M443.4 220.3H436.3L433.6 242H430.4L433.1 220.3H425.9L426.2 217.6H443.8Z M450.8 220.2 449.8 228.5H458.4L458.1 230.9H449.5L448.4 239.4H459.1L458.8 242H444.9L447.9 217.6H461.8L461.5 220.2Z M473.7 239.5Q474.8 239.5 475.7 239.3Q476.6 239.2 477.2 238.9Q477.9 238.6 478.4 238.3Q478.8 238 479.2 237.7Q479.5 237.4 479.8 237.2Q480 237 480.2 237Q480.4 237 480.5 237.1Q480.6 237.2 480.6 237.2L481.7 238.6Q480.1 240.4 478.1 241.3Q476 242.3 473.2 242.3Q471 242.3 469.3 241.5Q467.6 240.7 466.4 239.3Q465.2 237.9 464.5 236Q463.9 234 463.9 231.7Q463.9 228.5 464.9 225.9Q465.9 223.2 467.6 221.4Q469.3 219.5 471.6 218.4Q474 217.4 476.6 217.4Q477.9 217.4 479 217.6Q480 217.8 480.9 218.2Q481.8 218.7 482.5 219.3Q483.2 219.8 483.8 220.6L482.7 221.9Q482.6 222.1 482.4 222.2Q482.2 222.3 482 222.3Q481.7 222.3 481.3 222Q481 221.6 480.4 221.2Q479.8 220.8 478.9 220.5Q478 220.1 476.5 220.1Q474.5 220.1 472.8 220.9Q471.1 221.7 469.8 223.2Q468.6 224.7 467.9 226.8Q467.1 228.8 467.1 231.4Q467.1 233.3 467.6 234.8Q468.1 236.3 469 237.4Q469.9 238.4 471.1 239Q472.3 239.5 473.7 239.5Z M507.1 217.6 504.1 242H500.9L502.2 230.9H490.4L489 242H485.8L488.8 217.6H492L490.6 228.6H502.5L503.9 217.6Z M533.3 221.4Q533.2 221.7 533 221.8Q532.8 221.9 532.6 221.9Q532.3 221.9 532 221.6Q531.6 221.3 531.1 221Q530.6 220.6 529.9 220.3Q529.2 220 528.1 220Q527.1 220 526.2 220.4Q525.4 220.7 524.8 221.3Q524.2 221.9 523.9 222.7Q523.6 223.4 523.6 224.3Q523.6 225.2 524 225.8Q524.4 226.4 525 226.9Q525.7 227.3 526.6 227.6Q527.4 228 528.3 228.3Q529.2 228.7 530.1 229.1Q530.9 229.5 531.6 230.1Q532.2 230.8 532.6 231.6Q533.1 232.5 533.1 233.8Q533.1 235.5 532.5 237.1Q531.9 238.6 530.8 239.8Q529.6 240.9 528.1 241.6Q526.5 242.3 524.5 242.3Q522.3 242.3 520.6 241.4Q518.9 240.6 517.8 239.1L518.9 237.6Q519.1 237.4 519.3 237.3Q519.5 237.2 519.7 237.2Q520 237.2 520.4 237.5Q520.8 237.9 521.4 238.4Q521.9 238.9 522.8 239.2Q523.6 239.6 524.9 239.6Q526.1 239.6 527 239.2Q528 238.9 528.6 238.2Q529.3 237.5 529.6 236.6Q530 235.7 530 234.6Q530 233.6 529.6 233Q529.2 232.4 528.5 232Q527.9 231.5 527 231.2Q526.2 230.9 525.3 230.6Q524.4 230.3 523.5 229.9Q522.7 229.5 522 228.8Q521.4 228.2 521 227.3Q520.5 226.4 520.5 225Q520.5 223.5 521.1 222.1Q521.6 220.8 522.7 219.7Q523.7 218.7 525.1 218Q526.6 217.4 528.4 217.4Q530.3 217.4 531.8 218.1Q533.3 218.8 534.3 220.1Z M559.7 228.1Q559.7 231.2 558.7 233.8Q557.8 236.4 556 238.3Q554.3 240.2 552 241.2Q549.7 242.3 546.9 242.3Q544.7 242.3 542.9 241.5Q541.1 240.7 539.8 239.2Q538.5 237.8 537.9 235.9Q537.2 233.9 537.2 231.6Q537.2 228.5 538.2 225.9Q539.1 223.2 540.9 221.4Q542.6 219.5 544.9 218.4Q547.2 217.4 550 217.4Q552.2 217.4 554 218.2Q555.8 219 557.1 220.4Q558.3 221.8 559 223.8Q559.7 225.8 559.7 228.1ZM556.4 228.2Q556.4 226.3 555.9 224.8Q555.5 223.3 554.6 222.2Q553.7 221.2 552.4 220.6Q551.2 220 549.6 220Q547.6 220 545.9 220.8Q544.2 221.7 543 223.1Q541.8 224.6 541.1 226.8Q540.5 228.9 540.5 231.5Q540.5 233.3 540.9 234.8Q541.4 236.3 542.3 237.4Q543.2 238.4 544.4 239Q545.7 239.6 547.3 239.6Q549.3 239.6 551 238.8Q552.7 238 553.9 236.5Q555.1 235 555.7 232.9Q556.4 230.8 556.4 228.2Z M576.4 239.3 576 242H563.2L566.2 217.6H569.4L566.7 239.3Z M589.1 239.5Q590.5 239.5 591.6 239Q592.7 238.4 593.6 237.5Q594.5 236.6 595 235.3Q595.6 234 595.8 232.5L597.6 217.6H600.8L598.9 232.5Q598.7 234.6 597.8 236.4Q597 238.2 595.7 239.5Q594.3 240.8 592.6 241.5Q590.8 242.3 588.7 242.3Q586.7 242.3 585.1 241.5Q583.5 240.8 582.5 239.5Q581.5 238.2 581.1 236.4Q580.7 234.6 581 232.5L582.8 217.6H586L584.1 232.5Q584 234 584.2 235.3Q584.4 236.6 585.1 237.5Q585.7 238.4 586.7 239Q587.7 239.5 589.1 239.5Z M621.8 220.3H614.7L612 242H608.8L611.5 220.3H604.3L604.6 217.6H622.2Z M626.5 242H623.3L626.3 217.6H629.5Z M655.5 228.1Q655.5 231.2 654.5 233.8Q653.6 236.4 651.9 238.3Q650.2 240.2 647.8 241.2Q645.5 242.3 642.7 242.3Q640.5 242.3 638.7 241.5Q636.9 240.7 635.6 239.2Q634.4 237.8 633.7 235.9Q633 233.9 633 231.6Q633 228.5 634 225.9Q635 223.2 636.7 221.4Q638.4 219.5 640.7 218.4Q643.1 217.4 645.8 217.4Q648.1 217.4 649.9 218.2Q651.6 219 652.9 220.4Q654.2 221.8 654.8 223.8Q655.5 225.8 655.5 228.1ZM652.2 228.2Q652.2 226.3 651.8 224.8Q651.3 223.3 650.4 222.2Q649.5 221.2 648.3 220.6Q647 220 645.4 220Q643.4 220 641.7 220.8Q640.1 221.7 638.9 223.1Q637.6 224.6 637 226.8Q636.3 228.9 636.3 231.5Q636.3 233.3 636.8 234.8Q637.2 236.3 638.1 237.4Q639 238.4 640.3 239Q641.5 239.6 643.1 239.6Q645.1 239.6 646.8 238.8Q648.5 238 649.7 236.5Q650.9 235 651.6 232.9Q652.2 230.8 652.2 228.2Z M680.3 217.6 677.3 242H675.8Q675.4 242 675.1 241.9Q674.9 241.7 674.7 241.4L664.2 222.8Q664.1 223.1 664.1 223.4Q664.1 223.7 664.1 224L661.9 242H659.1L662.1 217.6H663.7Q664.1 217.6 664.3 217.7Q664.5 217.8 664.7 218.2L675.2 236.8Q675.3 236.4 675.3 236.1Q675.3 235.7 675.3 235.4L677.5 217.6Z M698 221.4Q697.8 221.7 697.6 221.8Q697.4 221.9 697.2 221.9Q696.9 221.9 696.6 221.6Q696.3 221.3 695.8 221Q695.3 220.6 694.6 220.3Q693.8 220 692.8 220Q691.7 220 690.8 220.4Q690 220.7 689.4 221.3Q688.8 221.9 688.5 222.7Q688.2 223.4 688.2 224.3Q688.2 225.2 688.6 225.8Q689 226.4 689.7 226.9Q690.3 227.3 691.2 227.6Q692.1 228 692.9 228.3Q693.8 228.7 694.7 229.1Q695.5 229.5 696.2 230.1Q696.9 230.8 697.3 231.6Q697.7 232.5 697.7 233.8Q697.7 235.5 697.1 237.1Q696.5 238.6 695.4 239.8Q694.3 240.9 692.7 241.6Q691.1 242.3 689.1 242.3Q687 242.3 685.2 241.4Q683.5 240.6 682.4 239.1L683.6 237.6Q683.7 237.4 683.9 237.3Q684.1 237.2 684.3 237.2Q684.7 237.2 685 237.5Q685.4 237.9 686 238.4Q686.6 238.9 687.4 239.2Q688.3 239.6 689.5 239.6Q690.7 239.6 691.7 239.2Q692.6 238.9 693.3 238.2Q693.9 237.5 694.3 236.6Q694.6 235.7 694.6 234.6Q694.6 233.6 694.2 233Q693.8 232.4 693.1 232Q692.5 231.5 691.6 231.2Q690.8 230.9 689.9 230.6Q689 230.3 688.2 229.9Q687.3 229.5 686.6 228.8Q686 228.2 685.6 227.3Q685.2 226.4 685.2 225Q685.2 223.5 685.7 222.1Q686.3 220.8 687.3 219.7Q688.3 218.7 689.8 218Q691.2 217.4 693.1 217.4Q694.9 217.4 696.4 218.1Q697.9 218.8 698.9 220.1Z M718.6 230.3Q720 230.3 721.1 229.9Q722.2 229.5 723 228.7Q723.7 227.9 724.1 226.8Q724.5 225.7 724.5 224.4Q724.5 223.4 724.2 222.6Q723.9 221.8 723.4 221.3Q722.8 220.7 721.9 220.4Q721 220.1 719.9 220.1H716.3L715.1 230.3ZM720.2 217.6Q722.1 217.6 723.5 218.1Q725 218.6 725.9 219.4Q726.8 220.3 727.3 221.4Q727.7 222.6 727.7 224.1Q727.7 226 727.1 227.6Q726.5 229.2 725.3 230.4Q724.1 231.5 722.3 232.2Q720.5 232.9 718.3 232.9H714.8L713.6 242H710.5L713.4 217.6Z M751.6 217.6 739.5 242H736.6L730.4 217.6H733Q733.4 217.6 733.7 217.9Q733.9 218.1 734 218.4L738 235.8Q738.2 236.4 738.3 237Q738.4 237.7 738.5 238.4Q738.7 237.7 739 237Q739.2 236.4 739.5 235.8L747.9 218.4Q748 218.1 748.3 217.9Q748.6 217.6 749 217.6Z M770.1 220.3H762.9L760.3 242H757.1L759.8 220.3H752.5L752.8 217.6H770.4Z M770.8 240.1Q770.8 239.7 771 239.3Q771.1 238.9 771.4 238.6Q771.7 238.3 772.1 238.2Q772.5 238 772.9 238Q773.4 238 773.7 238.2Q774.1 238.3 774.4 238.6Q774.7 238.9 774.9 239.3Q775.1 239.7 775.1 240.1Q775.1 240.6 774.9 241Q774.7 241.4 774.4 241.6Q774.1 241.9 773.7 242.1Q773.4 242.3 772.9 242.3Q772.5 242.3 772.1 242.1Q771.7 241.9 771.4 241.6Q771.1 241.4 771 241Q770.8 240.6 770.8 240.1Z M802 239.3 801.7 242H788.9L791.8 217.6H795L792.4 239.3Z M823.5 220.3H816.3L813.6 242H810.5L813.1 220.3H805.9L806.2 217.6H823.8Z M846.1 228.1Q846.1 231.2 845.1 233.8Q844.2 236.3 842.5 238.2Q840.8 240 838.4 241Q836.1 242 833.3 242H824.9L827.9 217.6H836.4Q838.6 217.6 840.4 218.4Q842.2 219.2 843.5 220.6Q844.7 221.9 845.4 223.9Q846.1 225.8 846.1 228.1ZM842.8 228.2Q842.8 226.3 842.4 224.9Q841.9 223.4 841 222.4Q840.1 221.3 838.9 220.8Q837.6 220.2 836 220.2H830.8L828.4 239.4H833.7Q835.7 239.4 837.4 238.7Q839.1 237.9 840.3 236.4Q841.5 235 842.1 232.9Q842.8 230.8 842.8 228.2Z M848.9 240.1Q848.9 239.7 849.1 239.3Q849.2 238.9 849.5 238.6Q849.8 238.3 850.2 238.2Q850.6 238 851 238Q851.4 238 851.8 238.2Q852.2 238.3 852.5 238.6Q852.8 238.9 853 239.3Q853.1 239.7 853.1 240.1Q853.1 240.6 853 241Q852.8 241.4 852.5 241.6Q852.2 241.9 851.8 242.1Q851.4 242.3 851 242.3Q850.6 242.3 850.2 242.1Q849.8 241.9 849.5 241.6Q849.2 241.4 849.1 241Q848.9 240.6 848.9 240.1Z"/>
+    </svg>
+</div>
+
+<header class="v3-nav" id="site-header">
+  <a class="wordmark" href="#main" aria-label="Red Banana Tech Solutions, home">
+    <svg class="wordmark-lockup" viewBox="0 0 1050 325" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <g class="wordmark-tiles" transform="translate(51.65,45.53) scale(1.9412)">
+    <rect data-order="1" style="--i:1" x="28" y="0" width="15" height="15" fill="#e2422e"/>
+    <rect data-order="2" style="--i:2" x="12" y="14" width="15" height="15" fill="#c2362a"/>
+    <rect data-order="3" style="--i:3" x="2" y="30" width="15" height="15" fill="#e2422e"/>
+    <rect data-order="4" style="--i:4" x="0" y="48" width="15" height="15" fill="#a92f21"/>
+    <rect data-order="5" style="--i:5" x="2" y="66" width="15" height="15" fill="#e2422e"/>
+    <rect data-order="6" style="--i:6" x="10" y="83" width="15" height="15" fill="#c2362a"/>
+    <rect data-order="7" style="--i:7" x="24" y="97" width="15" height="15" fill="#e2422e"/>
+    <rect data-order="8" style="--i:8" x="41" y="107" width="15" height="15" fill="#a92f21"/>
+    <rect data-order="9" style="--i:9" x="44" y="90" width="15" height="15" fill="#7a1f16"/>
+    <rect data-order="10" style="--i:10" x="59" y="112" width="15" height="15" fill="#e2422e"/>
+    <rect data-order="11" style="--i:11" x="77" y="110" width="15" height="15" fill="#c2362a"/>
+    <rect data-order="12" style="--i:12" x="62" y="94" width="15" height="15" fill="#7a1f16"/>
+    <rect data-order="13" style="--i:13" x="94" y="102" width="15" height="15" fill="#e2422e"/>
+    <rect data-order="14" style="--i:14" x="108" y="89" width="15" height="15" fill="#a92f21"/>
+      <g class="wordmark-plug" fill="#e2422e">
+        <rect x="124" y="80" width="17" height="21" rx="2"/>
+    <rect x="141" y="83.5" width="11" height="4.5"/>
+    <rect x="141" y="92.5" width="11" height="4.5"/>
+      </g>
+    </g>
+    <g class="wordmark-word-wrap"><path class="wordmark-word" fill="#E1E5E5" d="M446.7 144.4Q449.9 144.4 452.2 143.6Q454.5 142.8 456 141.3Q457.5 139.9 458.2 138Q458.9 136 458.9 133.7Q458.9 129.2 455.9 126.7Q452.9 124.2 446.8 124.2H439.9V144.4ZM477.6 178H465.7Q462.3 178 460.8 175.4L448.7 155.9Q447.9 154.7 447 154.2Q446.1 153.7 444.4 153.7H439.9V178H426.7V114.2H446.8Q453.4 114.2 458.2 115.5Q462.9 116.9 466 119.4Q469 121.9 470.4 125.3Q471.8 128.7 471.8 132.8Q471.8 135.9 470.9 138.8Q470 141.6 468.3 143.9Q466.6 146.3 464.1 148.1Q461.6 149.9 458.4 151Q459.6 151.7 460.7 152.7Q461.8 153.7 462.7 155Z M498 124.5V140.9H519.3V150.9H498V167.7H525.4V178H484.7V114.2H525.4V124.5Z M593.4 146.1Q593.4 153.1 591 158.9Q588.7 164.8 584.4 169Q580.1 173.2 574 175.6Q568 178 560.7 178H536.1V114.2H560.7Q568 114.2 574 116.5Q580.1 118.9 584.4 123.2Q588.7 127.4 591 133.3Q593.4 139.1 593.4 146.1ZM579.8 146.1Q579.8 141 578.5 137Q577.2 133 574.7 130.3Q572.2 127.5 568.7 126Q565.2 124.5 560.7 124.5H549.4V167.7H560.7Q565.2 167.7 568.7 166.2Q572.2 164.7 574.7 161.9Q577.2 159.1 578.5 155.1Q579.8 151.1 579.8 146.1Z M650.3 167.9Q653.4 167.9 655.5 167.1Q657.5 166.3 658.7 165.1Q660 163.8 660.5 162.1Q660.9 160.5 660.9 158.7Q660.9 156.8 660.4 155.3Q659.8 153.7 658.5 152.6Q657.2 151.6 655.2 151Q653.2 150.4 650.2 150.4H638.9V167.9ZM638.9 124.2V141.4H647.6Q650.4 141.4 652.5 141Q654.7 140.5 656.1 139.5Q657.6 138.5 658.4 136.8Q659.1 135.2 659.1 132.9Q659.1 130.5 658.5 128.8Q657.9 127.1 656.5 126.1Q655.2 125.1 653.2 124.7Q651.2 124.2 648.4 124.2ZM648.4 114.2Q654.8 114.2 659.4 115.4Q663.9 116.6 666.8 118.8Q669.7 121 671 124.2Q672.3 127.4 672.3 131.3Q672.3 133.5 671.7 135.5Q671.1 137.5 669.7 139.3Q668.4 141.1 666.3 142.5Q664.2 144 661.3 145Q667.8 146.5 670.9 150Q674 153.5 674 159Q674 163.1 672.5 166.6Q670.9 170 667.9 172.6Q664.9 175.1 660.5 176.6Q656.1 178 650.5 178H625.7V114.2Z M718.7 153.8 711.8 134.2Q711.2 132.7 710.5 130.6Q709.8 128.5 709.2 126.1Q708.6 128.6 707.9 130.7Q707.2 132.8 706.6 134.3L699.8 153.8ZM740.9 178H730.6Q728.9 178 727.8 177.2Q726.8 176.4 726.2 175.1L721.9 162.9H696.5L692.2 175.1Q691.7 176.2 690.6 177.1Q689.5 178 687.9 178H677.5L702.5 114.2H716Z M802.4 114.2V178H795.5Q794 178 792.9 177.5Q791.9 177 790.9 175.8L759.1 135.3Q759.2 136.8 759.3 138.3Q759.3 139.8 759.3 141.1V178H747.7V114.2H754.6Q755.5 114.2 756 114.2Q756.6 114.3 757.1 114.5Q757.6 114.8 758.1 115.2Q758.5 115.6 759 116.2L791.1 156.9Q790.9 155.2 790.8 153.6Q790.7 152.1 790.7 150.7V114.2Z M850.3 153.8 843.4 134.2Q842.8 132.7 842.1 130.6Q841.4 128.5 840.8 126.1Q840.2 128.6 839.5 130.7Q838.8 132.8 838.2 134.3L831.4 153.8ZM872.5 178H862.2Q860.5 178 859.4 177.2Q858.4 176.4 857.8 175.1L853.5 162.9H828.1L823.8 175.1Q823.3 176.2 822.2 177.1Q821.1 178 819.5 178H809.1L834.1 114.2H847.6Z M934 114.2V178H927.1Q925.6 178 924.5 177.5Q923.5 177 922.5 175.8L890.7 135.3Q890.8 136.8 890.9 138.3Q890.9 139.8 890.9 141.1V178H879.3V114.2H886.2Q887.1 114.2 887.7 114.2Q888.2 114.3 888.7 114.5Q889.2 114.8 889.7 115.2Q890.1 115.6 890.6 116.2L922.7 156.9Q922.5 155.2 922.4 153.6Q922.3 152.1 922.3 150.7V114.2Z M981.9 153.8 975 134.2Q974.4 132.7 973.7 130.6Q973 128.5 972.4 126.1Q971.8 128.6 971.1 130.7Q970.4 132.8 969.8 134.3L963 153.8ZM1004.1 178H993.8Q992.1 178 991.1 177.2Q990 176.4 989.4 175.1L985.1 162.9H959.7L955.4 175.1Q955 176.2 953.9 177.1Q952.8 178 951.1 178H940.7L965.7 114.2H979.2Z"/></g>
+  </svg>
   </a>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="#capabilities">Capabilities</a>
-    <a href="#on-view">On View</a>
-    <a href="#about-teaser">About</a>
-    <a href="#contact">Contact</a>
+  <!-- Nav routes unchanged from 70ea6f1: the same four destinations,
+       Capabilities / On View / About / Contact. Hrefs point at the
+       standalone pages rather than in-page anchors, because this
+       rewrite's homepage sections no longer share the old #capabilities
+       /#on-view/#about-teaser/#contact ids the v2 hero's nav anchored
+       to — matching how every OTHER page's own nav already links to
+       these four pages (capabilities.html, work.html, about.html,
+       contact.html), so the destinations are identical everywhere on
+       the site, homepage included. -->
+  <nav class="v3-nav-links" id="primary-nav" aria-label="Primary">
+    <a href="capabilities.html">Capabilities</a>
+    <a href="work.html">On View</a>
+    <a href="about.html">About</a>
+    <a href="founder.html">Founder</a>
+    <a href="contact.html">Contact</a>
   </nav>
+  <button class="v3-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
 </header>
 
 <main id="main">
 
-  <!-- OWNER: integrator — approved hero prototype, verbatim structure
-       from v2-kinetic/redbanana/hero-prototype/index.html. Do not modify
-       without Bob's sign-off; this is what Vivek approved. -->
-  <section class="hero" id="hero" aria-label="Introduction">
-    <div class="hero-pin">
+  <!-- slot:hero start
+       OWNER of interior motion: HERO LANE (canvas scene). OWNER of
+       this shell: integrator. H1 and eyebrow copied byte for byte
+       from the live hero, 70ea6f1 index.html lines 84-92. The old
+       hero's sub-line ("...one walk through the gallery below") names
+       the v2 "walk through the gallery" concept the v3 contract
+       explicitly supersedes (§1 WE DO NOT TAKE: the card, the globe;
+       §2: the walk is now around ONE object). It is still the only
+       live sentence that exists for this slot, so it is copied
+       verbatim rather than composed — flagged in the integrator's
+       report as a line the CONTENT pass should reconsider once a
+       lane owns copy for this slot. CTA hrefs point at #capabilities
+       and #footer-statement (both real ids in this spine) rather than
+       the old #contact, which no longer exists as a homepage id. -->
+  <section class="v3-section hero" id="hero" data-slot="hero" aria-label="Introduction">
+    <div class="inner">
+      <!-- Stage structure (.v3-hero-stage wrapper, .v3-hero-poster
+           class name) matches parts/WIRING.md's HERO lane block
+           exactly, so assets/css/v3-hero.css (once linked) styles it
+           without index.html needing another edit.
+           data-model / data-model-lo: the hero object is the Dancing
+           Girl. WIRING.md's own HERO-lane note (written before this
+           ruling landed) flags these as gated on Vivek; contract §8
+           amendment A1 (Bob, 24 Sep) resolves that gate — Red Banana's
+           own commissioned product, ordinary purpose to show it, Vivek
+           asked and stated no preference. Open, non-blocking item:
+           confirm K&H Design India's terms carry no restriction. The
+           coordinator's own instruction to this lane (24 Sep) is
+           explicit: keep this wired. assets/models/PROVENANCE.md's
+           Part C build record confirms these two files are now built
+           from the real Dancing Girl mesh (the earlier build from the
+           Ram-Sita fallback plate was renamed to ram-sita.glb /
+           ram-sita-lo.glb, so the filenames no longer mislead). Static
+           site, no build step, so no build-time existence check
+           applies; a 404 on either path degrades to v3-hero.js's own
+           torus-knot stand-in. See parts/WIRING.md's "URGENT" HERO
+           block and this integrator's reply appended under it. -->
+      <div class="v3-hero-stage">
+        <img class="v3-hero-poster" src="assets/models/hero-poster.jpg" width="1600" height="1067"
+             alt="A bronze Dancing Girl of Mohenjo-daro replica, standing on a dark plinth, lit from above.">
+        <canvas class="v3-hero-canvas" aria-hidden="true"
+                data-model="assets/models/dancing-girl.glb"
+                data-model-lo="assets/models/dancing-girl-lo.glb"></canvas>
+      </div>
 
-      <div class="hero-fallback" aria-hidden="true"></div>
-
-      <picture>
-        <source media="(max-width: 640px)" srcset="assets/hero-poster-mobile.jpg">
-        <img class="hero-poster" src="assets/hero-poster.png" alt="" aria-hidden="true">
-      </picture>
-
-      <canvas id="gallery-canvas" aria-hidden="true"></canvas>
-
+      <!-- .hero-text wrapper added by the DIRECTOR, 24 Sep, to satisfy
+           Bob's composition ruling (shell-1440x900.png review): the
+           kicker+h1+p group must be centered as one unit in the top
+           third of the hero viewport while .cta-row floats free at
+           the bottom, independently, beneath the object. A pure CSS
+           fix could not split "headline block" vs "cta-row" into two
+           different flex/grid tracks while cta-row stayed nested
+           inside the same flow container as the headline text, so
+           this wrapper div was added (no copy changed, no id/class
+           needed by existing hooks removed) — see v3.css's "1. hero"
+           section for the layout it enables. -->
       <div class="hero-content">
-        <p class="eyebrow">Museum technology, engineered in India</p>
-        <h1 class="hero-h1" id="hero-heading">
-          <span class="line">Technology you don't just see.</span>
-          <span class="line"><em>You experience.</em></span>
-        </h1>
-        <p class="hero-sub">Interactive museums, intelligent installations and AI experiences. Six capabilities, one walk through the gallery below.</p>
+        <div class="hero-text">
+          <p class="kicker" data-reveal>Museum technology, engineered in India</p>
+          <h1 data-reveal>
+            <span class="line">Technology you don't just see.</span>
+            <span class="line"><em>You experience.</em></span>
+          </h1>
+          <p data-reveal>Interactive museums, intelligent installations and AI experiences. Six capabilities, one walk through the gallery below.</p>
+        </div>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#contact">Discuss your project</a>
+          <a class="btn btn-primary" href="#footer-statement">Discuss your project</a>
           <a class="btn btn-ghost" href="#capabilities">Explore an experience</a>
         </div>
-      </div>
-
-      <div class="station-labels" aria-hidden="true">
-        <div class="station-label side-left" data-station="0">
-          <span class="num">01</span>
-          <span class="title">Interactive kiosks &amp; touch software</span>
-        </div>
-        <div class="station-label side-right" data-station="1">
-          <span class="num">02</span>
-          <span class="title">Immersive AV &amp; projection</span>
-        </div>
-        <div class="station-label side-left" data-station="2">
-          <span class="num">03</span>
-          <span class="title">Digital archives &amp; catalogues</span>
-        </div>
-        <div class="station-label side-right" data-station="3">
-          <span class="num">04</span>
-          <span class="title">AI visitor experiences</span>
-        </div>
-        <div class="station-label side-left" data-station="4">
-          <span class="num">05</span>
-          <span class="title">3D scanning &amp; museum replicas</span>
-        </div>
-        <div class="station-label side-right" data-station="5">
-          <span class="num">06</span>
-          <span class="title">Install, harden &amp; maintain</span>
-        </div>
-      </div>
-
-      <ul class="sr-only">
-        <li>01. Interactive kiosks &amp; touch software</li>
-        <li>02. Immersive AV &amp; projection</li>
-        <li>03. Digital archives &amp; catalogues</li>
-        <li>04. AI visitor experiences</li>
-        <li>05. 3D scanning &amp; museum replicas</li>
-        <li>06. Install, harden &amp; maintain</li>
-      </ul>
-
-      <div class="hero-progress" aria-hidden="true">
-        <span class="tick" data-tick="0"></span>
-        <span class="tick" data-tick="1"></span>
-        <span class="tick" data-tick="2"></span>
-        <span class="tick" data-tick="3"></span>
-        <span class="tick" data-tick="4"></span>
-        <span class="tick" data-tick="5"></span>
       </div>
 
       <div class="scroll-cue" aria-hidden="true">
@@ -148,505 +274,530 @@
       </div>
     </div>
   </section>
+  <!-- slot:hero end -->
 
-  <!-- OWNER: builder-capabilities — six items, matching the six
-       installations above exactly (same order, same names). This grid is
-       the hero prototype's own permanent hand-off markup; a builder may
-       deepen the cards (icon, one line of description each) but must not
-       change the count, order or names without also updating the hero's
-       station labels above, so the two stay in lockstep. -->
-  <section class="capabilities" id="capabilities" aria-label="Capabilities">
-    <div class="section-head">
-      <h2>Capabilities</h2>
-      <a class="all-link" href="capabilities.html">All six, in detail →</a>
-    </div>
-    <div class="cap-grid">
-      <article class="cap-card">
-        <span class="num">01</span>
-        <h3 class="cap-name">Interactive kiosks &amp; touch software</h3>
-        <p class="cap-desc">Bilingual touchscreen experiences designed for standing visitors, gallery light and ten thousand taps a week.</p>
-        <a class="cap-link" href="capabilities.html#rb001">Full capability →</a>
-      </article>
-      <article class="cap-card">
-        <span class="num">02</span>
-        <h3 class="cap-name">Immersive AV &amp; projection</h3>
-        <p class="cap-desc">Synchronised film walls, soundscapes and ambient screens that hold a room and recover on their own.</p>
-        <a class="cap-link" href="capabilities.html#rb002">Full capability →</a>
-      </article>
-      <article class="cap-card">
-        <span class="num">03</span>
-        <h3 class="cap-name">Digital archives &amp; catalogues</h3>
-        <p class="cap-desc">Deep-dive browsing for hundreds of objects, films and oral histories, structured so a curator updates content without touching code.</p>
-        <a class="cap-link" href="capabilities.html#rb003">Full capability →</a>
-      </article>
-      <article class="cap-card">
-        <span class="num">04</span>
-        <h3 class="cap-name">AI visitor experiences</h3>
-        <p class="cap-desc">Guided journeys, adaptive interpretation and multilingual delivery powered by on-device intelligence.</p>
-        <a class="cap-link" href="capabilities.html#rb004">Full capability →</a>
-      </article>
-      <article class="cap-card">
-        <span class="num">05</span>
-        <h3 class="cap-name">3D scanning &amp; museum replicas</h3>
-        <p class="cap-desc">Artefacts scanned, remastered and re-materialised: print-ready heritage replicas for handling collections, retail and outreach.</p>
-        <a class="cap-link" href="capabilities.html#rb005">Full capability →</a>
-      </article>
-      <article class="cap-card">
-        <span class="num">06</span>
-        <h3 class="cap-name">Install, harden &amp; maintain</h3>
-        <p class="cap-desc">Panel installation, kiosk lockdown and honest testing: planted-failure verification, not green-light theatre.</p>
-        <a class="cap-link" href="capabilities.html#rb006">Full capability →</a>
-      </article>
-    </div>
-  </section>
+  <!-- slot:engineering start
+       Pinned, 2.5 viewport heights, scrub 1 (contract §3.2). NOT a
+       second canvas: v3-hero.js's own controller exposes
+       .bindScroll() (no argument — WIRING.md "HERO lane, second
+       pass") which creates its own real pin ("#engineering" trigger,
+       "#v3-engineering-pin" pin target) so the ONE hero canvas
+       (slot:hero above) scroll-scrubs across this section's pin range
+       instead of a duplicate WebGL context; a second script near the
+       end of <body> keeps that same canvas's containing box visually
+       in view for the same window (v3.css's .is-engineering-live —
+       see that script's own comment for why this is needed even
+       though v3-hero.js owns the pin itself). This section supplies
+       the pin space (min-height) only.
+       Captions copied byte for byte from capabilities.html's six
+       RB.001-RB.006 headings and their first <p> (the "deep" bullet
+       lists are NOT copied here; capabilities.html/#rbNNN is the full
+       version, linked from slot:capabilities below). Photo ring: the
+       contract calls for a cylinder ring of 40 Canon frames from
+       "Desktop/Data/03 Photos/HH Website Photos/", which is the ASSET
+       LANE's job (assets/hh/ at three widths). Until that lands, the
+       six HH photographs already vendored in this tree stand in as an
+       honest, real (not fabricated) placeholder set, shown as a plain
+       grid so the section is completely readable with no ring and no
+       JS at all. -->
+  <section class="v3-section" id="engineering" data-slot="engineering" aria-label="The engineering underneath">
+    <div class="inner" id="v3-engineering-pin" style="min-height: 250vh;">
+      <p class="kicker" data-reveal>The permanent collection · RB.001 to RB.006</p>
+      <h2 data-reveal>The engineering underneath</h2>
 
-  <!-- OWNER: builder-capabilities — motion wiring for the grid above only
-       (Torque revealOnScroll with a per-card stagger, tilt on pointer,
-       magnetic on the link). Guards for reduced motion and a missing
-       gsap/motion-lib exactly like assets/js/hero-main.js's own pattern,
-       so a script failure still leaves six complete, readable cards. --><script>
-  (function () {
-    "use strict";
-    document.addEventListener("DOMContentLoaded", function () {
-      var cards = Array.prototype.slice.call(document.querySelectorAll("#capabilities .cap-card"));
-      if (!cards.length) return;
+      <!-- No canvas here on purpose (see the slot:engineering comment
+           above): the hero's own canvas persists into this section's
+           pin range via bindScroll(). The six-caption step sequence
+           below is the source of truth for the ring's step captions. -->
 
-      if (typeof gsap === "undefined" || typeof window.motion === "undefined") {
-        // motion-lib or gsap failed to load: force every card fully
-        // visible rather than leaving it stuck at the CSS rest state
-        // (opacity:0, translateY(28px)) with nothing left to ever clear
-        // it. Does not assume hero-main.js's own fallback also ran.
-        cards.forEach(function (card) {
-          card.style.opacity = 1;
-          card.style.transform = "none";
-        });
-        return;
-      }
-
-      cards.forEach(function (card, i) {
-        // A few percent of viewport height apart per card, so the six
-        // cards light up in sequence (01 first) rather than all at once.
-        var start = "top " + (88 - i * 3) + "%";
-
-        // Self-guards reduced motion (finalizes statically) and carries
-        // its own safety net if the trigger never fires.
-        window.motion.revealOnScroll(card, { y: 28, start: start });
-
-        var name = card.querySelector(".cap-name");
-        if (name && !window.motion.reduced) {
-          gsap.fromTo(
-            name,
-            { "--wdth": 75 },
-            {
-              "--wdth": 100,
-              duration: window.motion.timing.enter + 0.2,
-              ease: window.motion.ease.out,
-              scrollTrigger: { trigger: card, start: start, toggleActions: "play none none none", once: true },
-            }
-          );
-        }
-
-        window.motion.tilt(card, { maxDeg: 6 }); // self-guards reduced motion + coarse pointer
-
-        var link = card.querySelector(".cap-link");
-        if (link) window.motion.magnetic(link, { strength: 0.3 }); // self-guards too
-      });
-    });
-  })();
-  </script>
-
-  <!-- OWNER: builder-onview — real Handloom Haat photography. The original
-       two assets (hh-gallery-hero, hh-arch-corridor, shot 20 Sep) plus four
-       more chosen by looking at the 51 shots Vivek cleared at
-       "Desktop/Data/03 Photos/HH Website Photos/" for installations, kiosks
-       or visitors interacting: hh-prakriti-arch (IMG_0299), hh-vishwakarma-
-       entrance (IMG_0312), hh-archive-objects (IMG_0415), hh-opening-arrival
-       (IMG_0398). Each processed the same way as the original two: EXIF
-       orientation baked in and the tag stripped (`magick -auto-orient
-       -strip`), WebP + JPEG, all six under 250KB, explicit width/height,
-       loading="lazy". Facts below are the verified ones only: 301
-       catalogued objects and 6 apps / 2 languages come from
-       L1-CONTENT-AUDIT.md #8-#9 against apps/quiz/content/questions.json
-       and the archive manifest; the earlier "600+ objects" and "3,000+
-       checks" claims on this page did not check out and are not reused
-       here. Do not add a number back without a source. Kinetic treatment:
-       a horizontal scroll-snap strip, native CSS (works with no JS at
-       all), each plate a fixed 3:2 box with object-fit: cover so no image
-       ever distorts. Torque (window.motion) only enhances on top: reveal
-       stagger on scroll, tilt on pointer, glow on hover — wired by the
-       inline script right after this section, scoped to #on-view only. -->
-  <section class="skeleton-section" id="on-view" aria-label="On View">
-    <div class="inner">
-      <p class="kicker">On View</p>
-      <h2>Handloom Haat, Janpath</h2>
-      <p class="facts">
-        Client — Ministry of Textiles, D.C. Handlooms<br>
-        Venue — Vishwakarma Gallery, Handloom Haat, Janpath, New Delhi<br>
-        Opened — 14 August 2026<br>
-        6 kiosk apps · 2 languages · 301 catalogued objects · 0 internet needed
-      </p>
-      <p>Six offline-first kiosk apps run bilingual among the catalogued
-      textiles, and visitors walk through a run of illuminated arch
-      installations to reach them. The photographs below are from the
-      gallery floor itself, install week through opening night.</p>
-
-      <div class="onview-gallery" tabindex="0" role="region" aria-label="Photographs from the Vishwakarma Gallery floor, scroll horizontally">
-        <ul class="onview-track">
-          <li class="onview-card">
-            <figure>
-              <div class="onview-frame">
-                <picture>
-                  <source type="image/webp" srcset="assets/hh-gallery-hero.webp">
-                  <img src="assets/hh-gallery-hero.jpg" width="2000" height="1333" loading="lazy"
-                       alt="A curved gallery corridor at the Vishwakarma Gallery, Handloom Haat: hand-woven textiles lit on dark green and charcoal display walls above a polished stone floor.">
-                </picture>
-              </div>
-              <figcaption>Gallery corridor · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
-            </figure>
-          </li>
-          <li class="onview-card">
-            <figure>
-              <div class="onview-frame">
-                <picture>
-                  <source type="image/webp" srcset="assets/hh-arch-corridor.webp">
-                  <img src="assets/hh-arch-corridor.jpg" width="1400" height="933" loading="lazy"
-                       alt="A darkened corridor at Handloom Haat, Janpath, lined with concentric painted arches in white, yellow and red, suspended thread sculptures visible at the far end.">
-                </picture>
-              </div>
-              <figcaption>Arch corridor · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
-            </figure>
-          </li>
-          <li class="onview-card">
-            <figure>
-              <div class="onview-frame">
-                <picture>
-                  <source type="image/webp" srcset="assets/hh-prakriti-arch.webp">
-                  <img src="assets/hh-prakriti-arch.jpg" width="1600" height="1067" loading="lazy"
-                       alt="A darkened tunnel installation at Handloom Haat, Janpath: illuminated concentric arches in red and teal with lettering across the beams, visitors walking through in motion toward a lit red desk at the far end.">
-                </picture>
-              </div>
-              <figcaption>Arch installation · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
-            </figure>
-          </li>
-          <li class="onview-card">
-            <figure>
-              <div class="onview-frame">
-                <picture>
-                  <source type="image/webp" srcset="assets/hh-vishwakarma-entrance.webp">
-                  <img src="assets/hh-vishwakarma-entrance.jpg" width="1600" height="1067" loading="lazy"
-                       alt="The Vishwakarma Gallery entrance at Handloom Haat, Janpath: a lit red wall reading 'Visvakarma Gallery' beside a wall of framed textile swatches, visitors walking past in motion.">
-                </picture>
-              </div>
-              <figcaption>Gallery entrance · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
-            </figure>
-          </li>
-          <li class="onview-card">
-            <figure>
-              <div class="onview-frame">
-                <picture>
-                  <source type="image/webp" srcset="assets/hh-archive-objects.webp">
-                  <img src="assets/hh-archive-objects.jpg" width="1600" height="1067" loading="lazy"
-                       alt="A display gallery at Handloom Haat, Janpath: raw-fibre and craft objects, baskets, spools and bowls, arranged on woven-mat pedestals beneath a hanging rope sculpture, with bilingual wall signage.">
-                </picture>
-              </div>
-              <figcaption>Archive station · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
-            </figure>
-          </li>
-          <li class="onview-card">
-            <figure>
-              <div class="onview-frame">
-                <picture>
-                  <source type="image/webp" srcset="assets/hh-opening-arrival.webp">
-                  <img src="assets/hh-opening-arrival.jpg" width="1600" height="1067" loading="lazy"
-                       alt="The Handloom Haat, Janpath building at night on opening evening: colourful woven-pattern banners hang from the facade above illuminated patterned lantern pillars, visitors and staff arriving along a red carpet.">
-                </picture>
-              </div>
-              <figcaption>Opening evening · Handloom Haat, Janpath — 14 August 2026</figcaption>
-            </figure>
-          </li>
-        </ul>
-      </div>
-
-      <a class="skeleton-more" href="work.html">Full case study →</a>
-    </div>
-  </section>
-
-  <script>
-  // OWNER: builder-onview — self-contained, scoped to #on-view only.
-  // The gallery above is a plain CSS horizontal scroll-snap strip: it
-  // works with no JS at all, and every card's default CSS state is
-  // already opacity:1 unless this script (or a matching reduced-motion
-  // rule) says otherwise — see the /* on-view */ block in skeleton.css.
-  // This only adds Torque's scroll-in stagger, pointer tilt and hover
-  // glow when gsap and window.motion (motion-lib) both actually loaded.
-  document.addEventListener('DOMContentLoaded', function () {
-    var cards = document.querySelectorAll('#on-view .onview-card');
-    if (!cards.length) return;
-    if (typeof gsap === 'undefined' || typeof window.motion === 'undefined') {
-      cards.forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
-      return;
-    }
-    window.motion.revealOnScroll('#on-view .onview-card', { start: 'top 90%', y: 24 });
-    window.motion.tilt('#on-view .onview-frame', { maxDeg: 6 });
-    window.motion.glow('#on-view .onview-frame', { color: 'rgba(226, 66, 46, 0.32)' });
-  });
-  </script>
-
-  <!-- OWNER: builder-case-study — Handloom Haat ONLY, per
-       RB-CASE-STUDIES-PROPOSAL.md's scorecard (the one project that
-       evidences strongly). The disputed Mumbai fort-museum project named
-       in L1-CONTENT-AUDIT.md §3 must NOT appear here or anywhere on this
-       site: Cultre's own pipeline and win/loss records show it as
-       Cultre's project, not Red Banana's, and a committed grep test in
-       tests/ fails the build if its name appears anywhere in this tree
-       (this comment avoids spelling it out for exactly that reason). No
-       Jain Expositions commercial figures (WO value, invoice amounts):
-       not cleared for publication (proposal's ask #2). Built per the
-       proposal's structure recommendation, "another drawing sheet": a
-       title block of the facts already verified elsewhere on this site
-       (work.html's own tomb, L1-CONTENT-AUDIT.md #8-#9) plus a numbered
-       ledger of the decisions made, in order, rather than a photo essay.
-       Every fact string below is copied verbatim from its cited source;
-       none is composed. Kinetic treatment: window.motion.revealOnScroll
-       (Torque) steps the ledger rows in one at a time on scroll. The
-       script below only enhances: the CSS default state and the
-       no-js/.reduced-motion overrides already render the complete,
-       readable page with nothing hidden. -->
-  <section class="skeleton-section case-study" id="case-study" aria-label="Case study">
-    <div class="inner">
-      <p class="kicker">Case Study</p>
-      <h2>How six kiosks survive a gallery floor</h2>
-
-      <dl class="cs-title-block">
-        <div><dt>Client</dt><dd>Jain Expositions Pvt Ltd</dd></div>
-        <div><dt>Exhibition client</dt><dd>Ministry of Textiles, D.C. Handlooms</dd></div>
-        <div><dt>Venue</dt><dd>Vishwakarma Gallery, Handloom Haat, Janpath, New Delhi</dd></div>
-        <div><dt>Opened</dt><dd>14 August 2026</dd></div>
-      </dl>
-
-      <ol class="cs-ledger">
-        <li class="cs-step">
-          <span class="cs-num">01</span>
-          <div class="cs-step-body">
-            <h3>The deadline</h3>
-            <p>Six kiosk apps, built in parallel to a hard deadline, one per
-            app, to be ready for the gallery floor on 14 August 2026.</p>
-          </div>
+      <ol class="engineering-captions">
+        <li data-station="0"><span class="num mono">01</span>
+          <h3>Interactive kiosks &amp; touch software</h3>
+          <p>Bilingual touchscreen experiences designed for standing visitors, gallery light and ten thousand taps a week.</p>
         </li>
-        <li class="cs-step">
-          <span class="cs-num">02</span>
-          <div class="cs-step-body">
-            <h3>The archive</h3>
-            <p>301 catalogued objects in the archival station: a deep dive a
-            visitor can work through, object by object.</p>
-          </div>
+        <li data-station="1"><span class="num mono">02</span>
+          <h3>Immersive AV &amp; projection</h3>
+          <p>Synchronised film walls, soundscapes and ambient screens that hold a room and recover on their own.</p>
         </li>
-        <li class="cs-step">
-          <span class="cs-num">03</span>
-          <div class="cs-step-body">
-            <h3>The house style</h3>
-            <p>Six apps, one instruction: &ldquo;make the apps homogeneous in
-            all aspects and aesthetically smooth both UI and UX wise.&rdquo;
-            A house-style pass unified them before the floor opened.</p>
-          </div>
+        <li data-station="2"><span class="num mono">03</span>
+          <h3>Digital archives &amp; catalogues</h3>
+          <p>Deep-dive browsing for hundreds of objects, films and oral histories, structured so a curator updates content without touching code.</p>
         </li>
-        <li class="cs-step">
-          <span class="cs-num">04</span>
-          <div class="cs-step-body">
-            <h3>The test</h3>
-            <p>A passing test only means something when failure is possible.
-            Our suites plant deliberate faults and prove the checks catch
-            them before every release.</p>
-          </div>
+        <li data-station="3"><span class="num mono">04</span>
+          <h3>AI visitor experiences</h3>
+          <p>Guided journeys, adaptive interpretation and multilingual delivery powered by on-device intelligence.</p>
+        </li>
+        <li data-station="4"><span class="num mono">05</span>
+          <h3>3D scanning &amp; museum replicas</h3>
+          <p>Artefacts scanned, remastered and re-materialised: print-ready heritage replicas for handling collections, retail and outreach.</p>
+        </li>
+        <li data-station="5"><span class="num mono">06</span>
+          <h3>Install, harden &amp; maintain</h3>
+          <p>Panel installation, kiosk lockdown and honest testing: planted-failure verification, not green-light theatre.</p>
         </li>
       </ol>
 
+      <!-- Fallback / placeholder ring grid — see note above the section.
+           Alt text and figcaptions copied byte for byte from
+           70ea6f1 index.html's #on-view gallery. -->
+      <ul class="ring-fallback" data-photo-source="assets/hh/" data-photo-count-target="40">
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/hh-gallery-hero.webp">
+            <img src="assets/hh-gallery-hero.jpg" width="2000" height="1333" loading="lazy"
+                 alt="A curved gallery corridor at the Vishwakarma Gallery, Handloom Haat, Janpath: hand-woven textiles lit on dark green and charcoal display walls above a polished stone floor.">
+          </picture>
+          <figcaption>Gallery corridor · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/hh-arch-corridor.webp">
+            <img src="assets/hh-arch-corridor.jpg" width="1400" height="933" loading="lazy"
+                 alt="A darkened corridor at Handloom Haat, Janpath, lined with concentric painted arches in white, yellow and red, suspended thread sculptures visible at the far end.">
+          </picture>
+          <figcaption>Arch corridor · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/hh-prakriti-arch.webp">
+            <img src="assets/hh-prakriti-arch.jpg" width="1600" height="1067" loading="lazy"
+                 alt="A darkened tunnel installation at Handloom Haat, Janpath: illuminated concentric arches in red and teal with lettering across the beams, visitors walking through in motion toward a lit red desk at the far end.">
+          </picture>
+          <figcaption>Arch installation · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/hh-vishwakarma-entrance.webp">
+            <img src="assets/hh-vishwakarma-entrance.jpg" width="1600" height="1067" loading="lazy"
+                 alt="The Vishwakarma Gallery entrance at Handloom Haat, Janpath: a lit red wall reading 'Visvakarma Gallery' beside a wall of framed textile swatches, visitors walking past in motion.">
+          </picture>
+          <figcaption>Gallery entrance · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/hh-archive-objects.webp">
+            <img src="assets/hh-archive-objects.jpg" width="1600" height="1067" loading="lazy"
+                 alt="A display gallery at Handloom Haat, Janpath: raw-fibre and craft objects, baskets, spools and bowls, arranged on woven-mat pedestals beneath a hanging rope sculpture, with bilingual wall signage.">
+          </picture>
+          <figcaption>Archive station · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/hh-opening-arrival.webp">
+            <img src="assets/hh-opening-arrival.jpg" width="1600" height="1067" loading="lazy"
+                 alt="The Handloom Haat, Janpath building at night on opening evening: colourful woven-pattern banners hang from the facade above illuminated patterned lantern pillars, visitors and staff arriving along a red carpet.">
+          </picture>
+          <figcaption>Opening evening · Handloom Haat, Janpath — 14 August 2026</figcaption>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <!-- slot:engineering end -->
+
+  <!-- slot:numbers-wall start
+       Inverted section (light ground, dark ink), per contract §3.3.
+       Figures sourced from work.html's own stat-row. Per the
+       coordinator's ruling (contract §8, amendment A4, 24 Sep): the
+       archive/catalogued-object count is disputed on the record (301
+       against 602 pages per Sunday's finding) and appears NOWHERE on
+       this page — not the numbers wall, not the case study below —
+       until confirmed from the Handloom Haat catalogue itself. The
+       other five figures stand as copied. -->
+  <section class="v3-section v3-section--inverted" id="numbers-wall" data-slot="numbers-wall" aria-label="Numbers">
+    <div class="inner">
+      <p class="kicker" data-reveal>In Numbers</p>
+      <h2 data-reveal>The verified numbers</h2>
+      <ul class="wall-grid">
+        <li class="wall-tile"><span class="mono wall-figure" data-figure>6</span><span class="wall-label">kiosk apps</span></li>
+        <li class="wall-tile"><span class="mono wall-figure" data-figure>2</span><span class="wall-label">languages</span></li>
+        <li class="wall-tile"><span class="mono wall-figure" data-figure>51</span><span class="wall-label">quiz questions</span></li>
+        <li class="wall-tile"><span class="mono wall-figure" data-figure>3,000+</span><span class="wall-label">checks in test</span></li>
+        <li class="wall-tile wall-tile--dated">
+          <!-- Block-level (not inline span) on purpose: work.html's own
+               tomb block renders this fact as "OPENED · 14 August 2026"
+               (one line, label · value); this v3 tile is a LAYOUT change
+               only (figure and label as two visually stacked lines
+               instead of one inline sentence), each half still the
+               source's own exact words. -->
+          <p class="mono wall-figure" data-figure>Opened</p>
+          <p class="wall-label">14 August 2026</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <!-- slot:numbers-wall end -->
+
+  <!-- slot:photo-chapters start
+       Three full-bleed HH frames, one line each. The contract's own
+       named source for these lines is work.html's "The engineering
+       underneath" paragraph. A copy-guard bug (fixed 24 Sep, commit
+       3c9fb05) previously fragmented that paragraph's manual
+       mid-sentence line wraps into false sentence boundaries, which
+       made it impossible to validate these lines against the raw
+       source and led to an earlier, wrong sourcing decision (chapter
+       one carrying PRODUCT.md's Voice-style-guide sentence, chapters
+       two and three carrying sentences from about.html instead).
+       With that bug fixed, all three lines below are restored to
+       their correct, named source: the first, third and fourth
+       sentences of work.html's "The engineering underneath"
+       paragraph (offline content, power loss, curator updates),
+       copied byte for byte, none paraphrased or composed. -->
+  <section class="v3-section photo-chapters" id="photo-chapters" data-slot="photo-chapters" aria-label="How the floor survives">
+    <div class="inner">
+      <p class="kicker" data-reveal>On view now</p>
+    </div>
+    <article class="photo-chapter" data-reveal-default>
+      <picture>
+        <source type="image/webp" srcset="assets/hh-arch-corridor.webp">
+        <img src="assets/hh-arch-corridor.jpg" width="1400" height="933" loading="lazy"
+             alt="A darkened corridor at Handloom Haat, Janpath, lined with concentric painted arches in white, yellow and red, suspended thread sculptures visible at the far end.">
+      </picture>
+      <p class="chapter-line" data-reveal>Gallery panels have no internet, so every byte of content ships embedded.</p>
+    </article>
+    <article class="photo-chapter" data-reveal-default>
+      <picture>
+        <source type="image/webp" srcset="assets/hh-vishwakarma-entrance.webp">
+        <img src="assets/hh-vishwakarma-entrance.jpg" width="1600" height="1067" loading="lazy"
+             alt="The Vishwakarma Gallery entrance at Handloom Haat, Janpath: a lit red wall reading 'Visvakarma Gallery' beside a wall of framed textile swatches, visitors walking past in motion.">
+      </picture>
+      <p class="chapter-line" data-reveal>Power fails without warning, so every station boots straight back into its experience.</p>
+    </article>
+    <article class="photo-chapter" data-reveal-default>
+      <picture>
+        <source type="image/webp" srcset="assets/hh-archive-objects.webp">
+        <img src="assets/hh-archive-objects.jpg" width="1600" height="1067" loading="lazy"
+             alt="A display gallery at Handloom Haat, Janpath: raw-fibre and craft objects, baskets, spools and bowls, arranged on woven-mat pedestals beneath a hanging rope sculpture, with bilingual wall signage.">
+      </picture>
+      <p class="chapter-line" data-reveal>Attendants change, so a curator can update content as data, without an engineer.</p>
+    </article>
+  </section>
+  <!-- slot:photo-chapters end -->
+
+  <!-- slot:capabilities start
+       Numbered list; the WALL AND LIST LANE wires hover/scroll swap
+       of the description (v3-wall.js). Names and short descriptions
+       copied byte for byte from capabilities.html's six plaques
+       (h2.h3-like + the first <p> under it); links point at
+       capabilities.html#rbNNN, matching the live pattern exactly. -->
+  <section class="v3-section" id="capabilities" data-slot="capabilities" aria-label="Capabilities">
+    <div class="inner">
+      <p class="kicker" data-reveal>Capabilities</p>
+      <h2 data-reveal>Six capabilities,<br>engineered for the floor.</h2>
+      <a class="all-link mono" href="capabilities.html">All six, in detail →</a>
+
+      <ol class="cap-list">
+        <li class="cap-item" data-cap="rb001">
+          <a href="capabilities.html#rb001">
+            <span class="num mono">01</span>
+            <h3>Interactive kiosks &amp; touch software</h3>
+            <p class="cap-desc">Bilingual touchscreen experiences designed for standing visitors, gallery light and ten thousand taps a week.</p>
+          </a>
+        </li>
+        <li class="cap-item" data-cap="rb002">
+          <a href="capabilities.html#rb002">
+            <span class="num mono">02</span>
+            <h3>Immersive AV &amp; projection</h3>
+            <p class="cap-desc">Synchronised film walls, soundscapes and ambient screens that hold a room and recover on their own.</p>
+          </a>
+        </li>
+        <li class="cap-item" data-cap="rb003">
+          <a href="capabilities.html#rb003">
+            <span class="num mono">03</span>
+            <h3>Digital archives &amp; catalogues</h3>
+            <p class="cap-desc">Deep-dive browsing for hundreds of objects, films and oral histories, structured so a curator updates content without touching code.</p>
+          </a>
+        </li>
+        <li class="cap-item" data-cap="rb004">
+          <a href="capabilities.html#rb004">
+            <span class="num mono">04</span>
+            <h3>AI visitor experiences</h3>
+            <p class="cap-desc">Guided journeys, adaptive interpretation and multilingual delivery powered by on-device intelligence.</p>
+          </a>
+        </li>
+        <li class="cap-item" data-cap="rb005">
+          <a href="capabilities.html#rb005">
+            <span class="num mono">05</span>
+            <h3>3D scanning &amp; museum replicas</h3>
+            <p class="cap-desc">Artefacts scanned, remastered and re-materialised: print-ready heritage replicas for handling collections, retail and outreach.</p>
+          </a>
+        </li>
+        <li class="cap-item" data-cap="rb006">
+          <a href="capabilities.html#rb006">
+            <span class="num mono">06</span>
+            <h3>Install, harden &amp; maintain</h3>
+            <p class="cap-desc">Panel installation, kiosk lockdown and honest testing: planted-failure verification, not green-light theatre.</p>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <!-- slot:capabilities end -->
+
+  <!-- slot:case-study start
+       Handloom Haat, copied from work.html's #handloom-haat section
+       (tomb block, h2, prose paragraph and stat-row all byte for
+       byte), with the archive-objects photograph as the contract
+       names. -->
+  <section class="v3-section" id="case-study" data-slot="case-study" aria-label="Case study">
+    <div class="inner">
+      <p class="kicker" data-reveal>Case Study</p>
+      <h2 data-reveal>Handloom Haat website &amp; interactive galleries</h2>
+      <dl class="cs-tomb">
+        <div><dt>Client</dt><dd>Ministry of Textiles, D.C. Handlooms</dd></div>
+        <div><dt>Venue</dt><dd>Vishwakarma Gallery, Handloom Haat, Janpath, New Delhi</dd></div>
+        <div><dt>Opened</dt><dd>14 August 2026</dd></div>
+        <div><dt>Scope</dt><dd>Website development, software engineering &amp; install</dd></div>
+      </dl>
+      <p data-reveal>Red Banana developed the Handloom Haat website and engineered six touchscreen experiences for a national handloom
+      exhibition. Every station runs sealed (no internet, no keyboard)
+      with generative woven graphics rendered live from each craft
+      tradition's real palette, in English and Hindi.</p>
+      <div class="stat-row mono">
+        <div class="stat"><b>6</b><span>kiosk apps</span></div>
+        <div class="stat"><b>2</b><span>languages</span></div>
+        <div class="stat"><b>51</b><span>quiz questions</span></div>
+        <!-- catalogued-object count dropped per contract §8 amendment
+             A4 (disputed on the record) -- not this stat-row's call to
+             restore without confirmation from the catalogue itself. -->
+        <div class="stat"><b>3,000+</b><span>checks in test</span></div>
+      </div>
       <figure class="cs-figure">
         <picture>
-          <source type="image/webp" srcset="assets/hh-arch-corridor.webp">
-          <img src="assets/hh-arch-corridor.jpg" width="1400" height="933" loading="lazy"
-               alt="A darkened corridor at Handloom Haat, Janpath, lined with concentric painted arches in white, yellow and red, suspended thread sculptures visible at the far end.">
+          <source type="image/webp" srcset="assets/hh-archive-objects.webp">
+          <img src="assets/hh-archive-objects.jpg" width="1600" height="1067" loading="lazy"
+               alt="A display gallery at Handloom Haat, Janpath: raw-fibre and craft objects, baskets, spools and bowls, arranged on woven-mat pedestals beneath a hanging rope sculpture, with bilingual wall signage.">
         </picture>
-        <figcaption>Vishwakarma Gallery, Handloom Haat, Janpath</figcaption>
+        <figcaption>Archive station · Vishwakarma Gallery, Handloom Haat, Janpath — opened 14 August 2026</figcaption>
       </figure>
-
-      <a class="skeleton-more" href="work.html">Read the full case study →</a>
+      <a class="skeleton-more mono" href="work.html">Read the full case study →</a>
     </div>
   </section>
+  <!-- slot:case-study end -->
 
-  <script>
-  // Progressive enhancement only: the CSS default already renders every
-  // ledger row complete and readable. This only adds the scroll-in step
-  // if the shared motion-lib (Torque) and gsap both actually loaded.
-  document.addEventListener('DOMContentLoaded', function () {
-    var rows = document.querySelectorAll('.case-study .cs-step');
-    if (!rows.length) return;
-    if (typeof gsap === 'undefined' || typeof window.motion === 'undefined') {
-      rows.forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
-      return;
-    }
-    window.motion.revealOnScroll('.case-study .cs-step', { start: 'top 85%', y: 24 });
-  });
-  </script>
-
-  <!-- OWNER: builder-about — teaser only; about.html owns the full page
-       and its content, this section must not duplicate or contradict it.
-       The lede below is quoted verbatim from about.html's own <p class="lede">
-       (per the "copy facts, never compose them" rule), not composed fresh. -->
-  <section class="skeleton-section portfolio-ashlin" id="editorial-websites" aria-labelledby="ashlin-project-heading">
-    <div class="inner ashlin-project-grid">
-      <a class="ashlin-preview" href="work.html#ashlin-mathew" aria-label="Explore the Ashlin Mathew website project"><img src="assets/ashlin-working-desk.webp" width="1536" height="1024" alt="The working-desk visual from Ashlin Mathew’s journalism portfolio" loading="lazy"><span>ASHLIN<br>MATHEW</span></a>
-      <div><p class="kicker">On View · Websites</p><h2 id="ashlin-project-heading">The person behind the byline.</h2><p>A mobile-first editorial portfolio for Ashlin Mathew, Senior Associate Editor at Outlook. Searchable reporting, swipeable stories and video interviews, brought together in one place.</p><div class="cta-row"><a class="skeleton-more" href="work.html#ashlin-mathew">Explore the project →</a><a class="skeleton-more" href="https://ashlinmathew.com/" target="_blank" rel="noopener">Visit the website ↗</a></div></div>
-    </div>
-  </section>
-
-  <section class="skeleton-section" id="about-teaser" aria-label="About">
+  <!-- slot:replicas start
+       "Heritage replicas, re-materialised" copied from work.html's
+       #replicas section, byte for byte (tomb block, h2, venue line,
+       paragraph). Second object scene/poster is optional per contract
+       ("a second small object scene or a static poster rendered from
+       the same pipeline") — HERO LANE's call; a poster mount is left
+       here either way so the section is complete without JS. -->
+  <section class="v3-section" id="replicas" data-slot="replicas" aria-label="Replicas">
     <div class="inner">
-      <p class="kicker">About</p>
-      <h2 id="about-teaser-heading">Technology that disappears into the visit.</h2>
-      <p class="lede-quote">A museum-technology studio based in New Delhi, building for
-      the realities of Indian public galleries.</p>
-      <p class="lede-quote">The concept should explain the form. Every screen, sound and
-      interaction we build exists to carry the exhibition's idea, never to perform beside it.</p>
-      <a class="skeleton-more" href="about.html">About the studio →</a>
+      <p class="kicker" data-reveal>Replicas</p>
+      <h2 data-reveal>Heritage replicas, re-materialised</h2>
+      <dl class="cs-tomb">
+        <div><dt>Line</dt><dd>Red Banana Replicas</dd></div>
+        <div><dt>First edition</dt><dd>Dancing Girl, 8 cm</dd></div>
+        <div><dt>Channel</dt><dd>Retail &amp; museum shops</dd></div>
+      </dl>
+      <p class="venue mono">Scan · remaster · print</p>
+      <p data-reveal>Museum-grade replicas of Indian masterworks, engineered from scan
+      to shelf in our own print studio, beginning with the Dancing Girl of
+      Mohenjo-daro, cast at hand scale for the museum-shop counter.</p>
+
+      <!-- HAND-OFF: HERO LANE, optional. A <picture><img
+           class="replicas-poster" src="assets/models/replicas-poster.jpg">
+           stood here, but that file was never delivered (confirmed
+           404 on disk during the Director's round2 pass, 24 Sep) —
+           its alt text was itself a "[copy: source needed]"
+           placeholder, in scope for the same round2 ruling that
+           removed the FAQ's placeholder rows. A broken-image icon on
+           a live page is worse than the gap it was meant to fill, so
+           the element is removed rather than left to render broken;
+           this section is complete without it (contract's own
+           wording: "a second small object scene or a static poster...
+           optional"). Re-add once ASSET LANE actually renders
+           assets/models/replicas-poster.jpg from the same pipeline as
+           the hero poster. -->
     </div>
   </section>
+  <!-- slot:replicas end -->
 
-  <script>
-  // Progressive enhancement only: the CSS default already renders the
-  // teaser complete and readable (see skeleton.css's "About teaser"
-  // block). This only adds motion if the shared motion-lib (Torque) and
-  // gsap both actually loaded — same pattern as the case-study script
-  // above it.
-  document.addEventListener('DOMContentLoaded', function () {
-    var section = document.getElementById('about-teaser');
-    if (!section) return;
-    if (typeof gsap === 'undefined' || typeof window.motion === 'undefined') {
-      return; // CSS rest state is already the complete, legible page
-    }
-
-    window.motion.revealText('#about-teaser .lede-quote', { by: 'lines' });
-
-    // Bricolage Grotesque's wdth axis, same 75 -> 100 beat the hero
-    // heading uses (assets/js/hero-main.js), on the teaser's own H2 only
-    // — the resting CSS value is 100, so reduced-motion/no-JS visitors
-    // see finished letterforms and never a stuck compressed state.
-    var heading = document.getElementById('about-teaser-heading');
-    if (heading) {
-      gsap.fromTo(
-        heading,
-        { '--wdth': 75 },
-        {
-          '--wdth': 100,
-          duration: window.motion.timing.enter + 0.2,
-          ease: window.motion.ease.out,
-          scrollTrigger: { trigger: section, start: 'top 80%' },
-        }
-      );
-    }
-
-    window.motion.magnetic('#about-teaser .skeleton-more', { strength: 0.4 });
-  });
-  </script>
-
-  <!-- OWNER: builder-contact — mailto + link to the full contact page,
-       matching the pattern every interior page already uses. Wave 2:
-       this is the walk's exit, styled as one final lit station in the
-       site's own grammar — the wordmark's lit dot (assets/hero.css
-       .wordmark .dot) reused as a marker, Mono kicker, Bricolage h2,
-       Torque revealText on the heading and magnetic on the mailto CTA
-       (both wired by the small inline script right after this section,
-       scoped to #contact only — hero-main.js and the header/hero markup
-       above are the integrator's and are untouched). The brief form and
-       its Worker endpoint live on contact.html and are not this section's
-       concern; this is a single exit CTA plus a real link to that page. -->
-  <section class="skeleton-section" id="contact" aria-label="Contact">
+  <!-- slot:faq start
+       Contract §8 amendment A5 (ruled by Bob, 24 Sep): no FAQ copy
+       exists on the live pages, so this section is simply the
+       "Planning a gallery?" call as it appears there. A5's ORIGINAL
+       text accepted keeping five [copy: source needed] rows under it
+       as a "structural placeholder... not blocking." The Director's
+       round2 ruling (24 Sep, evidenced by round2-final-section-faq.png
+       — those rows visibly on the live page) REVERSES that half of
+       A5: a real visitor was always going to see five rows of
+       "[copy: source needed]" text, which is exactly the kind of
+       thing no ruling should have called "not blocking." The rows are
+       removed outright, not just hidden by CSS, so the copy-guard
+       assertion in tests/copy-guard.test.mjs has nothing to catch a
+       regression against here — the section is now only the h2, same
+       as A5 already said it functionally was. The site's one
+       SplitText use still moves to the footer statement (slot 9)
+       instead of here, per A5's other half, which stands. -->
+  <section class="v3-section" id="faq" data-slot="faq" aria-label="Frequently asked questions">
     <div class="inner">
-      <p class="kicker"><span class="lit-dot" aria-hidden="true"></span>Contact</p>
-      <h2 id="contact-heading">Discuss your project</h2>
-      <p>Write to us with the gallery, the timeline and what the visitor should
-      walk away remembering.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" id="contact-mailto" href="mailto:hello@redbananatechsolutions.in">Email us</a>
-        <a class="btn btn-ghost" href="contact.html">How to brief us</a>
-      </div>
+      <!-- No kicker here on purpose: "FAQ" does not appear anywhere in
+           the 70ea6f1 pages or PRODUCT.md, and inventing a short label
+           is exactly what the copy rule forbids. The h2 alone (real,
+           from the shared footer) carries the section. -->
+      <h2 data-reveal>Planning a gallery?</h2>
     </div>
   </section>
-
-  <script>
-  // OWNER: builder-contact — self-contained, scoped to #contact only.
-  // No-JS and reduced-motion both leave the section exactly as the HTML
-  // above already renders it (real text, real opacity, no hidden state
-  // set here), matching the rest of this site's reduced-motion contract.
-  (function () {
-    "use strict";
-    var reduced = document.documentElement.classList.contains("reduced-motion") ||
-      (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-    if (reduced) return;
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof window.motion === "undefined") return; // motion-lib missing: stays static and readable
-      window.motion.revealText("#contact-heading", { by: "words" });
-      window.motion.magnetic("#contact-mailto", { strength: 0.35 });
-    });
-  })();
-  </script>
+  <!-- slot:faq end -->
 
 </main>
 
-<!-- OWNER: integrator — shared footer, identical markup to every interior
-     page. The CIN, GSTIN and UDYAM numbers are byte-identical to the rest
-     of the tree and are protected by tests/trust.test.mjs: do not edit
-     them here without also updating every other page and the test. -->
-<footer id="contact-cta">
+<!-- slot:footer-statement start
+     "One line, copied; then the columns." Identical markup to every
+     interior page's footer, byte for byte, including the CIN/GSTIN/
+     UDYAM identifiers protected by tests/trust.test.mjs and the
+     footer wayfinding nav restored per the "Orphaned-page fix" ruling
+     (LANE-BOARD.md). Do not edit the identifiers here without also
+     updating every other page and the test. -->
+<footer id="footer-statement" data-slot="footer-statement">
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <h2>Planning a gallery?<br><em>Bring us the hard part.</em></h2>
+        <img class="foot-lockup" src="assets/brand/lockup-dark.svg" alt="" width="105" height="36" loading="lazy">
         <p>Red Banana Tech Solutions Pvt. Ltd.</p>
         <div class="cta-row">
-          <a class="ctl ctl-live" href="mailto:hello@redbananatechsolutions.in">Write to us</a>
-          <a class="ctl" href="contact.html">How to brief us</a>
+          <a class="btn btn-primary" href="mailto:redbananatechsolutions@gmail.com">Write to us</a>
+          <a class="btn btn-ghost" href="contact.html">How to brief us</a>
         </div>
       </div>
       <div class="foot-meta">
         RED BANANA TECH SOLUTIONS PVT. LTD.<br>
         Studio: New Delhi · Registered office: Ajmer, Rajasthan<br>
-        <a href="mailto:hello@redbananatechsolutions.in">hello@redbananatechsolutions.in</a><br><br>
+        <a href="mailto:redbananatechsolutions@gmail.com">redbananatechsolutions@gmail.com</a><br>
+        <a href="tel:+919209290435">+91 92092 90435</a><br><br>
         REPLICAS · Red Banana Replicas
       </div>
     </div>
-    <!-- OWNER: builder-footer — footer wayfinding nav, restoring the
-         privacy.html link dropped in the Wave 2 kinetic rebuild (it was
-         orphaned before, "Orphaned-page fix" ruling, and must stay linked).
-         Reuses the existing .foot-links class (lit-plan.css) already
-         vendored on every page: mono, underlined, hairline border-top. -->
     <nav class="foot-links" aria-label="Footer navigation">
       <a href="capabilities.html">Capabilities</a>
       <a href="work.html">Work</a>
       <a href="about.html">About</a>
+      <a href="founder.html">Founder</a>
       <a href="contact.html">Contact</a>
       <a href="privacy.html">Privacy</a>
     </nav>
     <div class="legal">
-      <span>© 2026 Red Banana Tech Solutions Pvt. Ltd. <span class="station-close" aria-hidden="true" style="display:inline-block;width:6px;height:6px;margin-left:6px;border-radius:50%;background:var(--red,#e2422e);box-shadow:0 0 8px 1px rgba(226,66,46,.28);vertical-align:middle"></span></span>
-      <span>RED BANANA TECH SOLUTIONS PVT. LTD. · CIN U62099RJ2024PTC096180 · GSTIN 08AANCR8198J1ZE · UDYAM-RJ-01-0133660<br>Registered office: Ajmer, Rajasthan · Studio: New Delhi · Write to hello@redbananatechsolutions.in · We reply within two working days.</span>
+      <span>© 2026 Red Banana Tech Solutions Pvt. Ltd.</span>
+      <span>RED BANANA TECH SOLUTIONS PVT. LTD. · CIN U62099RJ2024PTC096180 · GSTIN 08AANCR8198J1ZE · UDYAM-RJ-01-0133660<br>Registered office: Ajmer, Rajasthan · Studio: New Delhi · Write to redbananatechsolutions@gmail.com · We reply within two working days.</span>
     </div>
   </div>
 </footer>
+<!-- slot:footer-statement end -->
 
-<!-- Shared motion-lib (Torque) — DOM entrances only. -->
+<!-- Motion kit — order matters: gsap before ScrollTrigger before
+     v3-core.js (which registers ScrollTrigger and constructs Lenis
+     synchronously, no defer, matching the load-order every prior
+     wave on this site has used for its own motion-lib bootstrap). -->
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/split-type.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
-<script src="assets/vendor/motion.umd.min.js"></script>
+<script src="assets/js/v3-core.js"></script>
 
-<!-- Three.js r160 UMD, classic script so it sets window.THREE before the
-     ES module below imports it. -->
-<script src="assets/vendor/three.min.js"></script>
-<script type="module" src="assets/js/gallery-init.js"></script>
+<!-- HAND-OFF POINT for the four builder lanes: add your own <script>
+     tag exactly here, in this order. v3-core.js has already run its
+     DOMContentLoaded handler by the time a deferred script executes,
+     so use window.V3.onSlotReady('NAME', fn) (parts/SLOTS.md) rather
+     than assuming DOMContentLoaded will fire again. -->
 
-<script src="assets/js/hero-main.js"></script>
-<script src="reveal.js" defer></script>
+<!-- HERO LANE bootstrap, copied verbatim from parts/WIRING.md ("Tiny
+     bootstrap — dynamic import gated at 400px"), which explicitly
+     replaces this integrator's own earlier provisional version. Sets
+     window.V3.heroController once the scene mounts. -->
+<script type="module">
+  (function () {
+    var canvas = document.querySelector('[data-slot="hero"] canvas.v3-hero-canvas');
+    if (!canvas) return;
+    var section = canvas.closest('[data-slot="hero"]');
+    var loaded = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !loaded) {
+          loaded = true;
+          import('./assets/js/v3-hero.js').then(function (mod) {
+            var hero = mod.initHero({ canvas: canvas });
+            if (!hero) return;
+            window.V3 = window.V3 || {};
+            window.V3.heroController = hero;
+          });
+        }
+      });
+    }, { rootMargin: '400px', threshold: 0 });
+    io.observe(section || canvas);
+  })();
+</script>
+
+<!-- Section 2 (slot:engineering) scroll hook — REWRITTEN by the
+     DIRECTOR, 24 Sep, per parts/WIRING.md's "HERO lane, second pass"
+     block (search that heading): bindScroll() is now called with NO
+     argument. v3-hero.js creates its OWN real GSAP pin internally
+     (trigger "#engineering", pin "#v3-engineering-pin", exact config
+     matching CONFIG.pinTriggerSelector/pinSelector/pinEnd), so this
+     integrator's own earlier manual ScrollTrigger.create({pin:false})
+     call (kept above in git history) is deleted — it never actually
+     pinned anything (pin:false), which is why the section rendered no
+     3D content at all before this fix. Still retries briefly if
+     heroController is not yet set (the hero canvas may not have
+     crossed its own 400px IO gate yet when this runs). Under reduced
+     motion, skips entirely — the controller renders one static
+     composed frame on its own.
+
+     Second job here, NOT covered by v3-hero.js/v3-hero.css (both off
+     limits to this lane, owned by HERO-POLISH): the ONE hero canvas
+     physically lives inside slot:hero's own DOM box (.hero
+     .v3-hero-stage), which is normal-flow and scrolls off-screen
+     above the viewport once the user reaches slot:engineering.
+     v3-hero.js's own pin only fixes #v3-engineering-pin in place; it
+     cannot, by itself, bring a DIFFERENT section's element back into
+     view. So a second, non-pinning ScrollTrigger watching the exact
+     same trigger/start/end toggles .is-engineering-live on
+     .v3-hero-stage (see v3.css, "2. engineering") for
+     position:fixed — same box, same percentages, just no longer
+     scrolled away — for precisely the window the object needs to
+     stay visible and turning behind the caption/ring content. This
+     is layout wiring (this lane's file), not motion code (HERO
+     lane's) — no rendering, geometry or material logic added. -->
+<script>
+(function () {
+  "use strict";
+  var pin = document.getElementById("v3-engineering-pin");
+  var stage = document.querySelector(".hero .v3-hero-stage");
+  if (!pin || !stage) return;
+  var reduced = window.V3 && window.V3.reducedMotion;
+  if (reduced) return;
+
+  var attempts = 0;
+  function tryBind() {
+    attempts += 1;
+    if (window.V3 && window.V3.heroController && typeof window.ScrollTrigger !== "undefined") {
+      window.V3.heroController.bindScroll();
+      window.ScrollTrigger.create({
+        trigger: "#engineering",
+        start: "top top",
+        end: "+=250%", // must match v3-hero.js's CONFIG.pinEnd
+        onEnter: function () { stage.classList.add("is-engineering-live"); },
+        onLeave: function () { stage.classList.remove("is-engineering-live"); },
+        onEnterBack: function () { stage.classList.add("is-engineering-live"); },
+        onLeaveBack: function () { stage.classList.remove("is-engineering-live"); },
+      });
+      return;
+    }
+    if (attempts < 40) window.setTimeout(tryBind, 250); // ~10s ceiling
+  }
+  tryBind();
+})();
+</script>
+
+<script src="assets/js/v3-wall.js" defer></script>
+<script src="assets/js/v3-chapters.js" defer></script>
+
+<!-- Pre-existing safety-net script, kept per tests/reveal.test.mjs
+     (every page on this site carries it). It only ever acts on
+     elements carrying the old ".reveal" class; v3's own DOM uses
+     [data-reveal] instead, so this is an inert no-op here, not a
+     second, competing reveal system. -->
+<script src="/reveal.js" defer></script>
 </body>
 </html>
