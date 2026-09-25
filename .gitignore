@@ -1,5 +1,5 @@
 __pycache__/
 *.pyc
 
+# Local browser-automation debug artifacts, never part of the site
 .playwright-cli/
-.wrangler/
