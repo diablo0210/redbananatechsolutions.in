@@ -215,7 +215,38 @@
       onEnter: showList,
       onLeaveBack: hideList,
     });
+
+    // Bob 47, fix C3 (25 Sep 2026, audit web-eng/rb-audit-20260925):
+    // on phones the last section of work.html (replicas) stayed at
+    // opacity 0 after a full scroll in repeated runs: the ScrollTrigger
+    // above missed its onEnter under Lenis-driven scrolling near the
+    // page end (its start/end maths was correct when inspected, so this
+    // is a timing race, not a geometry bug). An IntersectionObserver is
+    // a second, independent witness: if the trigger element is on
+    // screen, the content is shown. It never hides anything.
+    if ("IntersectionObserver" in window && triggerEl) {
+      var io = new IntersectionObserver(function (entries) {
+        for (var k = 0; k < entries.length; k++) {
+          if (entries[k].isIntersecting) { showList(); io.disconnect(); return; }
+        }
+      }, { threshold: 0.05 });
+      io.observe(triggerEl);
+    }
+    // Third witness, deterministic: at the very bottom of the page every
+    // remaining reveal is shown. Nothing that is scrolled to can stay
+    // hidden, whatever the trigger maths or the smooth-scroll timing did.
+    pendingReveals.push(showList);
   }
+
+  var pendingReveals = [];
+  window.addEventListener("scroll", function () {
+    if (!pendingReveals.length) return;
+    var doc = document.documentElement;
+    if (window.scrollY + window.innerHeight >= doc.scrollHeight - 2) {
+      var fns = pendingReveals; pendingReveals = [];
+      for (var i = 0; i < fns.length; i++) fns[i]();
+    }
+  }, { passive: true });
 
   /* ============================================================
      MOMENT 1 hand-over API — SIGNATURE-MOMENTS.md "First light".
@@ -716,9 +747,13 @@
       return Array.prototype.slice.call(links.querySelectorAll("a"));
     }
 
+    var header = toggle.closest(".v3-nav");
+
     function openMenu() {
       links.classList.add("is-open");
+      if (header) header.classList.add("is-menu-open"); // fix C1, see v3.css
       toggle.setAttribute("aria-expanded", "true");
+      toggle.textContent = "Close";
       if (lenis) lenis.stop();
       document.body.style.overflow = "hidden";
       var first = focusableLinks()[0];
@@ -727,7 +762,9 @@
 
     function closeMenu(restoreFocus) {
       links.classList.remove("is-open");
+      if (header) header.classList.remove("is-menu-open");
       toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = "Menu";
       if (lenis) lenis.start();
       document.body.style.overflow = "";
       if (restoreFocus) toggle.focus();

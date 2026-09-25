@@ -301,7 +301,7 @@
        grid so the section is completely readable with no ring and no
        JS at all. -->
   <section class="v3-section" id="engineering" data-slot="engineering" aria-label="The engineering underneath">
-    <div class="inner" id="v3-engineering-pin" style="min-height: 250vh;">
+    <div class="inner" id="v3-engineering-pin" style="min-height: 100vh;"><!-- Bob 47, fix C2 (25 Sep 2026): was 250vh. GSAP pins this box for +=250% AND adds a spacer of the same distance, so a 250vh box left ~2,000px of empty black after caption 06 on phones (1,500px on laptops). One viewport of box plus the 250% pin distance is the intended scroll. -->
       <p class="kicker" data-reveal>The permanent collection · RB.001 to RB.006</p>
       <h2 data-reveal>The engineering underneath</h2>
 
@@ -613,33 +613,7 @@
   </section>
   <!-- slot:replicas end -->
 
-  <!-- slot:faq start
-       Contract §8 amendment A5 (ruled by Bob, 24 Sep): no FAQ copy
-       exists on the live pages, so this section is simply the
-       "Planning a gallery?" call as it appears there. A5's ORIGINAL
-       text accepted keeping five [copy: source needed] rows under it
-       as a "structural placeholder... not blocking." The Director's
-       round2 ruling (24 Sep, evidenced by round2-final-section-faq.png
-       — those rows visibly on the live page) REVERSES that half of
-       A5: a real visitor was always going to see five rows of
-       "[copy: source needed]" text, which is exactly the kind of
-       thing no ruling should have called "not blocking." The rows are
-       removed outright, not just hidden by CSS, so the copy-guard
-       assertion in tests/copy-guard.test.mjs has nothing to catch a
-       regression against here — the section is now only the h2, same
-       as A5 already said it functionally was. The site's one
-       SplitText use still moves to the footer statement (slot 9)
-       instead of here, per A5's other half, which stands. -->
-  <section class="v3-section" id="faq" data-slot="faq" aria-label="Frequently asked questions">
-    <div class="inner">
-      <!-- No kicker here on purpose: "FAQ" does not appear anywhere in
-           the 70ea6f1 pages or PRODUCT.md, and inventing a short label
-           is exactly what the copy rule forbids. The h2 alone (real,
-           from the shared footer) carries the section. -->
-      <h2 data-reveal>Planning a gallery?</h2>
-    </div>
-  </section>
-  <!-- slot:faq end -->
+  <!-- slot:faq removed by Bob 47, 25 Sep 2026 (audit H2): the empty slot rendered a lone "Planning a gallery?" directly above the footer's identical line. -->
 
 </main>
 

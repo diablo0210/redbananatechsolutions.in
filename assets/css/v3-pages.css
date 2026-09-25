@@ -220,6 +220,19 @@
 .stations td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
 .stations td:nth-child(2) { color: var(--grey-6); white-space: nowrap; }
 .stations td:last-child { color: var(--grey-6); }
+/* Bob 47, fix C4 (25 Sep 2026): below 600px the three-column table clipped
+   its third column and stretched rows to ~500px of empty space. Each row
+   becomes a card: station and panel on one line, description under them.
+   The header row stays in the accessibility tree, visually hidden. */
+@media (max-width: 600px) {
+  .stations thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .stations tr { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; padding: 14px 0; border-top: 1px solid var(--grey-2); }
+  .stations td { display: block; padding: 0; border-top: 0; }
+  .stations td:first-child { white-space: normal; }
+  .stations td:nth-child(2) { white-space: normal; text-align: right; }
+  .stations td:last-child { grid-column: 1 / -1; }
+  .stations td:last-child:empty { display: none; }
+}
 
 /* ------------------------------------------------------------
    MEDIA FIGURE (work.html: the Handloom Haat corridor photograph)
