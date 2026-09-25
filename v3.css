@@ -621,6 +621,11 @@ canvas { background: var(--grey-1); }
   font-family: var(--font-mono); font-size: 0.8125rem;
 }
 .foot-links a { text-decoration: underline; text-underline-offset: 3px; color: var(--grey-6); }
+/* Bob 47, 25 Sep 2026: tap targets. Footer links measured 17-20px tall; padding
+   lifts the hit area to 24px+ (WCAG 2.5.8) without changing the type. */
+.foot-links a, #contact-cta .foot-meta a { display: inline-block; padding: 6px 0; }
+footer a, .all-link, .skeleton-more, .case-link a, .case a { display: inline-block; padding-top: 5px; padding-bottom: 5px; }
+a[href^="tel:"] { white-space: nowrap; }
 .foot-links a:hover, .foot-links a:focus-visible { color: var(--ink); }
 .legal {
   margin-top: 24px;
@@ -1155,7 +1160,8 @@ html.js:not(.reduced-motion) .engineering-captions::before {
   grid-template-columns: repeat(3, 1fr);
 }
 .ring-fallback img { border-radius: var(--radius); aspect-ratio: 3 / 2; object-fit: cover; }
-.ring-fallback figcaption { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--grey-5); margin-top: 6px; }
+.ring-fallback figure { margin: 0; }
+.ring-fallback figcaption { font-family: var(--font-mono); font-size: 0.75rem; /* Bob 47: 11px -> 12px floor */ color: var(--grey-5); margin-top: 6px; }
 /* Scripts-off / no-motion progressive-enhancement fallback (contract's
    own honest-no-JS grid, per the slot:engineering comment in
    index.html) — was rendering UNCONDITIONALLY before this fix, i.e.
@@ -1270,7 +1276,7 @@ html.js:not(.reduced-motion) .ring-fallback { display: none; }
 
 /* ---------- 6/7. case-study, replicas (shared tombstone pattern) ---------- */
 .cs-tomb { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; margin: 24px 0; padding: 20px; border: 1px solid var(--grey-2); border-radius: var(--radius); }
-.cs-tomb dt { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-5); }
+.cs-tomb dt { font-family: var(--font-mono); font-size: 0.75rem; /* Bob 47: 11px -> 12px floor */ letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-5); }
 .cs-tomb dd { margin: 2px 0 0; font-weight: 600; }
 .stat-row { display: flex; flex-wrap: wrap; gap: 28px; margin: 24px 0; }
 .stat-row .stat { display: flex; flex-direction: column; }

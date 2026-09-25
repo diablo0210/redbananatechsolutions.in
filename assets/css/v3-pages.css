@@ -496,6 +496,8 @@
 .founder-story p { color: var(--grey-6); max-width: 62ch; }
 .founder-story p + p { margin-top: 0.9em; }
 .founder-story .founder-close strong { font-weight: inherit; }
+/* Bob 47, 25 Sep 2026: closing line measured 4.4:1 (#767676 on #080808); grey-6 lifts it past 4.5:1. */
+.founder-story .founder-close { color: var(--grey-6); }
 
 /* Section headings -- the source's own ## headings -- read as display
    caps at h3 scale (.h3-like, already used this way on every other
